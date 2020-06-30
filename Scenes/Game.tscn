@@ -1,11 +1,115 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Art/Cob.png" type="Texture" id=2]
+[ext_resource path="res://Art/MiddleHusk.png" type="Texture" id=3]
+[ext_resource path="res://Art/LeftHusk.png" type="Texture" id=4]
+[ext_resource path="res://Art/RightHusk.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Husk.cs" type="Script" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 30.5971
 height = 117.129
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 960, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=16]
+animations = [ {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "peel",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 19.8585
+height = 153.603
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 960, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=23]
+animations = [ {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "peel",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 960, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "peel",
+"speed": 5.0
+} ]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,3 +123,39 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cob"]
 position = Vector2( 1.22176, 1.22176 )
 shape = SubResource( 1 )
+
+[node name="LeftHusk" type="RigidBody2D" parent="Cob"]
+mode = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Cob/LeftHusk"]
+frames = SubResource( 16 )
+animation = "peel"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cob/LeftHusk"]
+position = Vector2( -16.8084, -0.494675 )
+shape = SubResource( 9 )
+
+[node name="RightHusk" type="RigidBody2D" parent="Cob"]
+mode = 1
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Cob/RightHusk"]
+frames = SubResource( 23 )
+animation = "peel"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cob/RightHusk"]
+position = Vector2( 19.1916, -0.494675 )
+shape = SubResource( 9 )
+
+[node name="MiddleHusk" type="RigidBody2D" parent="Cob"]
+input_pickable = true
+mode = 1
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Cob/MiddleHusk"]
+frames = SubResource( 8 )
+animation = "peel"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cob/MiddleHusk"]
+position = Vector2( 2, 0 )
+shape = SubResource( 9 )
+[connection signal="input_event" from="Cob/MiddleHusk" to="Cob/MiddleHusk" method="_OnHuskInputEvent"]
