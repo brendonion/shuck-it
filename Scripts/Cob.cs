@@ -5,8 +5,11 @@ public class Cob : KinematicBody2D {
 
     public bool isDraggable = false;
     public bool isReleased  = false;
-    public float timeSec    = 1f; // How long it takes for the Cob to get to screen center
-    public float timePassed = 0f; // Time passed since initialization
+
+    public float gravity = 100f;
+
+    public Vector2 dragSpeed;
+    public Vector2 velocity;
 
     public Game Game;
     
@@ -20,23 +23,15 @@ public class Cob : KinematicBody2D {
             this.isDraggable = true;
         }
 
-        // TODO: Refactor to be more DRY
         if (this.isReleased) {
-            GD.Print("INTERPOLATING");
-            this.timePassed += delta;
-            this.Position = this.Position.LinearInterpolate(this.Game.screenCenter, this.timePassed / this.timeSec);
+            this.MoveAndSlide(new Vector2(this.dragSpeed.x * 500, this.dragSpeed.y * this.gravity));
         }
 
-        if (this.isReleased && this.Position == this.Game.screenCenter) {
-            GD.Print("IS NOT RELEASED");
+        if (this.Position.x > this.Game.screenSize.x * 2 || this.Position.x < -this.Game.screenSize.x) {
+            this.Position = this.Game.screenCenter;
             this.isReleased = false;
-            this.timePassed = 0;
         }
     }
-
-    // public override void _Input(InputEvent @event) {
-        
-    // }
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (this.isDraggable) {
@@ -47,6 +42,9 @@ public class Cob : KinematicBody2D {
 
             if (@event is InputEventScreenDrag eventDrag) {
                 this.GlobalPosition = eventDrag.Position;
+                this.dragSpeed      = eventDrag.Speed.Normalized();
+                GD.Print("this.dragSpeed: ", this.dragSpeed);
+                GD.Print("this.dragSpeed.Normalized(): ", this.dragSpeed.Normalized());
             }
         }
     }

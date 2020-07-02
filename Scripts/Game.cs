@@ -3,7 +3,7 @@ using System;
 
 public class Game : Node2D {
 
-    public float timeSec    = 2f;    // How long it takes for the Cob to get to screen center
+    public float timeSec    = 3f;    // How long it takes for the Cob to get to screen center
     public float timePassed = 0f;    // Time passed since initialization
     public bool initialized = false; // Cob initialized flag
 
