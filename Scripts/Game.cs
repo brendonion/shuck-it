@@ -3,8 +3,9 @@ using System;
 
 public class Game : Node2D {
 
-    public int speed = 4;
-    public bool initialized = false;
+    public float timeSec    = 2f;    // How long it takes for the Cob to get to screen center
+    public float timePassed = 0f;    // Time passed since initialization
+    public bool initialized = false; // Cob initialized flag
 
     public Vector2 screenSize;
     public Vector2 screenCenter;
@@ -32,10 +33,11 @@ public class Game : Node2D {
 
     public void InitializeCorn(float delta) {
         if (this.Cob.Position != this.screenCenter) {
-            float t = delta * speed;
-            this.Cob.Position = this.Cob.Position.LinearInterpolate(this.screenCenter, t);
+            this.timePassed += delta;
+            this.Cob.Position = this.Cob.Position.LinearInterpolate(this.screenCenter, this.timePassed / this.timeSec);
         } else {
             this.initialized = true;
+            this.timePassed  = 0f;
         }
     }
 }

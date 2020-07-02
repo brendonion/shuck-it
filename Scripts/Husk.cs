@@ -1,10 +1,14 @@
 using Godot;
-using System;
+using System.Threading.Tasks;
 
 public class Husk : RigidBody2D {
 
-    public bool isTopLayer     = false;
-    public bool startedPeeling = false;
+    public bool isTopLayer        = false;
+    public bool startedPeeling    = false;
+    public bool colorIncrementing = false;
+    public float colorDiff        = 1f;
+
+    public SceneTreeTimer modulateTimer;
 
     public Vector2 screenSize;
     public Vector2 screenCenter;
@@ -30,6 +34,7 @@ public class Husk : RigidBody2D {
         var siblings = this.GetParent().GetChildren();
         if (siblings[siblings.Count - 1] == this) {
             this.isTopLayer = true;
+            this.ModulateColor();
         }
 
         // If at the bottom of screen, destroy itself
@@ -76,6 +81,30 @@ public class Husk : RigidBody2D {
                 this.sprite.Frame = 1;
                 this.startedPeeling = true;
             }
+        }
+    }
+
+    public void ModulateColor() {
+        if (this.modulateTimer == null) {
+            this.modulateTimer = GetTree().CreateTimer(0.1f);
+        }
+
+        if (this.modulateTimer != null && this.modulateTimer.TimeLeft <= 0f) {
+            if (this.colorIncrementing) {
+                this.colorDiff += 0.05f;
+                if (this.colorDiff >= 1f) {
+                    this.colorIncrementing = false;
+                }
+            } else {
+                this.colorDiff -= 0.05f;
+                if (this.colorDiff <= 0.75f) {
+                    this.colorIncrementing = true;
+                }
+            }
+
+            // Modulate color to indicate husk is on top
+            this.sprite.Modulate = new Color(this.colorDiff, this.colorDiff, this.colorDiff);
+            this.modulateTimer = null;
         }
     }
 }
