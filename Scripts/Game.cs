@@ -63,7 +63,7 @@ public class Game : Node2D {
             } else if (i == huskCount - 2) {
                 this.Cob.husks.AddChild(huskArr[2].Instance());
             } else {
-                this.Cob.husks.AddChild(huskArr[(int) GD.RandRange(0, 2)].Instance());
+                this.Cob.husks.AddChild(huskArr[(int) GD.RandRange(0, 3)].Instance());
             }
         }
     }

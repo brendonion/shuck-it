@@ -25,6 +25,9 @@ public class Cob : KinematicBody2D {
 
     [Signal]
     public delegate void needs_reinitialization();
+
+    [Signal]
+    public delegate void score_changed(int point);
     
     public override void _Ready() {
         // Randomize seed
@@ -47,34 +50,7 @@ public class Cob : KinematicBody2D {
         // Cob released from drag, can be flung
         if (this.isReleased) {
             this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, this.dragSpeed.y * this.gravity));
-        }
-
-        // Swiped Right, it's a match
-        if (this.Position.x > this.Game.screenSize.x * 2) {
-            // TODO add to score
-
-            this.Position = this.startPos;
-            this.isDraggable = false;
-            this.isReleased  = false;
-            this.isFlickable = false;
-
-            this.SetRandomTexture();
-
-            EmitSignal(nameof(needs_reinitialization));
-        }
-
-        // Swiped Left, not a match
-        if (this.Position.x < -this.Game.screenSize.x) {
-            // TODO add to score
-
-            this.Position = this.startPos;
-            this.isDraggable = false;
-            this.isReleased  = false;
-            this.isFlickable = false;
-
-            this.SetRandomTexture();
-
-            EmitSignal(nameof(needs_reinitialization));
+            this.CheckSwipe();
         }
     }
 
@@ -94,6 +70,31 @@ public class Cob : KinematicBody2D {
                 this.isFlickable    = true;
             }
         }
+    }
+
+    public void CheckSwipe() {
+        // Swiped Right, it's a match
+        if (this.Position.x > this.Game.screenSize.x * 2) {
+            int nextPoint = (this.sprite.Texture == badCob) ? -1 : 1;
+            EmitSignal(nameof(score_changed), nextPoint);
+            EmitSignal(nameof(needs_reinitialization));
+            this.ResetCob();
+
+        // Swiped Left, not a match
+        } else if (this.Position.x < -this.Game.screenSize.x) {
+            int nextPoint = (this.sprite.Texture == goodCob) ? -1 : 1;
+            EmitSignal(nameof(score_changed), nextPoint);
+            EmitSignal(nameof(needs_reinitialization));
+            this.ResetCob();
+        }
+    }
+
+    public void ResetCob() {
+        this.Position    = this.startPos;
+        this.isDraggable = false;
+        this.isReleased  = false;
+        this.isFlickable = false;
+        this.SetRandomTexture();
     }
 
     public void SetRandomTexture() {
