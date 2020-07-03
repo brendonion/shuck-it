@@ -5,16 +5,37 @@ public class Cob : KinematicBody2D {
 
     public bool isDraggable = false;
     public bool isReleased  = false;
+    public bool isFlickable = false;
 
-    public float gravity = 100f;
+    public float gravity = 200f;
+    public float speed   = 500f;
 
     public Vector2 dragSpeed;
     public Vector2 velocity;
+    public Vector2 startPos;
 
     public Game Game;
+
+    public Sprite sprite;
+
+    public Node2D husks;
+
+    public Texture goodCob = (Texture) ResourceLoader.Load("res://Art/GoodCob.png");
+    public Texture badCob  = (Texture) ResourceLoader.Load("res://Art/BadCob.png");
+
+    [Signal]
+    public delegate void needs_reinitialization();
     
     public override void _Ready() {
-        this.Game = (Game) this.GetParent();
+        // Randomize seed
+        GD.Randomize();
+
+        this.Game     = (Game) this.GetParent();
+        this.husks    = (Node2D) FindNode("Husks");
+        this.sprite   = (Sprite) FindNode("Sprite");
+        this.startPos = this.Position;
+
+        this.SetRandomTexture();
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -23,29 +44,60 @@ public class Cob : KinematicBody2D {
             this.isDraggable = true;
         }
 
+        // Cob released from drag, can be flung
         if (this.isReleased) {
-            this.MoveAndSlide(new Vector2(this.dragSpeed.x * 500, this.dragSpeed.y * this.gravity));
+            this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, this.dragSpeed.y * this.gravity));
         }
 
-        if (this.Position.x > this.Game.screenSize.x * 2 || this.Position.x < -this.Game.screenSize.x) {
-            this.Position = this.Game.screenCenter;
-            this.isReleased = false;
+        // Swiped Right, it's a match
+        if (this.Position.x > this.Game.screenSize.x * 2) {
+            // TODO add to score
+
+            this.Position = this.startPos;
+            this.isDraggable = false;
+            this.isReleased  = false;
+            this.isFlickable = false;
+
+            this.SetRandomTexture();
+
+            EmitSignal(nameof(needs_reinitialization));
+        }
+
+        // Swiped Left, not a match
+        if (this.Position.x < -this.Game.screenSize.x) {
+            // TODO add to score
+
+            this.Position = this.startPos;
+            this.isDraggable = false;
+            this.isReleased  = false;
+            this.isFlickable = false;
+
+            this.SetRandomTexture();
+
+            EmitSignal(nameof(needs_reinitialization));
+        }
+    }
+
+    public override void _Input(InputEvent @event) {
+        if (this.isFlickable) {
+            if (@event.IsActionReleased("ui_touch")) {
+                this.isReleased = true;
+            }
         }
     }
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (this.isDraggable) {
-            if (@event.IsActionReleased("ui_touch")) {
-                GD.Print("RELEASED!!");
-                this.isReleased = true;
-            }
-
             if (@event is InputEventScreenDrag eventDrag) {
                 this.GlobalPosition = eventDrag.Position;
                 this.dragSpeed      = eventDrag.Speed.Normalized();
-                GD.Print("this.dragSpeed: ", this.dragSpeed);
-                GD.Print("this.dragSpeed.Normalized(): ", this.dragSpeed.Normalized());
+                this.isFlickable    = true;
             }
         }
+    }
+
+    public void SetRandomTexture() {
+        Texture[] textures = {goodCob, badCob};
+        this.sprite.Texture = textures[(int) GD.RandRange(0, 2)];
     }
 }

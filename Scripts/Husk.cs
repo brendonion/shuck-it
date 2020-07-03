@@ -10,22 +10,19 @@ public class Husk : RigidBody2D {
 
     public SceneTreeTimer modulateTimer;
 
-    public Vector2 screenSize;
-    public Vector2 screenCenter;
-    public Vector2 startPos;
-
     public CollisionShape2D collisionShape;
 
     public AnimatedSprite sprite;
+
+    public Game Game;
 
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
 
-        this.screenSize     = GetViewport().GetVisibleRect().Size;
-        this.screenCenter   = this.screenSize / 2;
         this.collisionShape = (CollisionShape2D) FindNode("CollisionShape2D");
         this.sprite         = (AnimatedSprite) FindNode("AnimatedSprite");
+        this.Game           = (Game) GetTree().Root.GetChild(0);
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -38,7 +35,7 @@ public class Husk : RigidBody2D {
         }
 
         // If at the bottom of screen, destroy itself
-        if (this.sprite.GlobalPosition.y >= this.screenSize.y) {
+        if (this.sprite.GlobalPosition.y >= this.Game.screenSize.y) {
             this.QueueFree();
         }
     }

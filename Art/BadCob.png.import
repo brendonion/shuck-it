@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cob.png-10b9006f0c5a5048dd5451a58a258ec0.stex"
+path="res://.import/BadCob.png-38b5bd54472f4108348a645c0cc4f637.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Cob.png"
-dest_files=[ "res://.import/Cob.png-10b9006f0c5a5048dd5451a58a258ec0.stex" ]
+source_file="res://Art/BadCob.png"
+dest_files=[ "res://.import/BadCob.png-38b5bd54472f4108348a645c0cc4f637.stex" ]
 
 [params]
 

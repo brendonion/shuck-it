@@ -3,41 +3,78 @@ using System;
 
 public class Game : Node2D {
 
+    public int round        = 1;     // Round number
+    public int husks        = 3;     // Husk count
+
+    public bool initialized = false; // Cob initialized flag
+
     public float timeSec    = 3f;    // How long it takes for the Cob to get to screen center
     public float timePassed = 0f;    // Time passed since initialization
-    public bool initialized = false; // Cob initialized flag
 
     public Vector2 screenSize;
     public Vector2 screenCenter;
-    public Vector2 startPos;
 
-    public KinematicBody2D Cob;
+    public Cob Cob;
+
+    public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
+    public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
+    public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
 
     public override void _Ready() {
+        // Randomize seed
+        GD.Randomize();
+
         // Get screen size
         this.screenSize   = GetViewport().GetVisibleRect().Size;
         this.screenCenter = this.screenSize / 2;
 
         // Find Cob
-        this.Cob      = (KinematicBody2D) FindNode("Cob");
-        this.startPos = this.Cob.Position;
+        this.Cob = (Cob) FindNode("Cob");
+
+        // Connect Cob signals
+        this.Cob.Connect("needs_reinitialization", this, "CreateNextRound");
+
+        this.CreateCorn(this.husks);
     }
 
     public override void _PhysicsProcess(float delta) {
         if (!this.initialized) {
-            this.InitializeCorn(delta);
-        } else {
-
+            this.InitializeCornPosition(delta);
         }
     }
 
-    public void InitializeCorn(float delta) {
+    public void InitializeCornPosition(float delta) {
         if (this.Cob.Position != this.screenCenter) {
-            this.timePassed += delta;
+            this.timePassed  += delta;
             this.Cob.Position = this.Cob.Position.LinearInterpolate(this.screenCenter, this.timePassed / this.timeSec);
         } else {
             this.initialized = true;
             this.timePassed  = 0f;
         }
+    }
+
+    public void CreateCorn(int huskCount) {
+        PackedScene[] huskArr = {(PackedScene) MiddleHuskScene, (PackedScene) LeftHuskScene, (PackedScene) RightHuskScene};
+        for (int i = 1; i <= huskCount; i++) {
+            if (i == huskCount) {
+                this.Cob.husks.AddChild(huskArr[0].Instance());
+            } else if (i == huskCount - 1) {
+                this.Cob.husks.AddChild(huskArr[1].Instance());
+            } else if (i == huskCount - 2) {
+                this.Cob.husks.AddChild(huskArr[2].Instance());
+            } else {
+                this.Cob.husks.AddChild(huskArr[(int) GD.RandRange(0, 2)].Instance());
+            }
+        }
+    }
+
+    public void CreateNextRound() {
+        // Determine husk count logic based on round count
+        this.husks += this.round;
+        this.round++;
+
+        this.CreateCorn(this.husks);
+    
+        this.initialized = false;
     }
 }
