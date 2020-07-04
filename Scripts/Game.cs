@@ -16,6 +16,8 @@ public class Game : Node2D {
 
     public Cob Cob;
 
+    public Score Score;
+
     public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
     public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
     public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
@@ -31,14 +33,14 @@ public class Game : Node2D {
         // Find Cob
         this.Cob = (Cob) FindNode("Cob");
 
-        // Connect Cob signals
+        // Connect custom signals
         this.Cob.Connect("needs_reinitialization", this, "CreateNextRound");
 
         this.CreateCorn(this.husks);
     }
 
     public override void _PhysicsProcess(float delta) {
-        if (!this.initialized) {
+        if (!this.initialized && this.HasNode("Cob")) {
             this.InitializeCornPosition(delta);
         }
     }
@@ -69,8 +71,8 @@ public class Game : Node2D {
     }
 
     public void CreateNextRound() {
-        // Determine husk count logic based on round count
-        this.husks += this.round;
+        // Determine husk count based on round count
+        if (this.husks < 10) this.husks += this.round;
         this.round++;
 
         this.CreateCorn(this.husks);

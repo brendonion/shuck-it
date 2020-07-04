@@ -43,8 +43,11 @@ public class Cob : KinematicBody2D {
 
     public override void _PhysicsProcess(float delta) {
         // Cob has no Husks, can be dragged
-        if (!this.isDraggable && this.FindNode("Husks").GetChildCount() == 0) {
-            this.isDraggable = true;
+        if (!this.isDraggable) {
+            int huskCount = this.husks.GetChildCount();
+            if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
+                this.isDraggable = true;
+            }
         }
 
         // Cob released from drag, can be flung
