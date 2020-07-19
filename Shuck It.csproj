@@ -61,6 +61,7 @@
     <Compile Include="Scripts\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Husk.cs" />
+    <Compile Include="Scripts\RhythmBar.cs" />
     <Compile Include="Scripts\Score.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
