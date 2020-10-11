@@ -3,13 +3,13 @@ using System;
 
 public class Game : Node2D {
 
-    public int round        = 1;     // Round number
-    public int husks        = 3;     // Husk count
+    public int round = 1; // Round number
+    public int husks = 3; // Husk count
 
     public bool initialized = false; // Cob initialized flag
 
-    public float timeSec    = 3f;    // How long it takes for the Cob to get to screen center
-    public float timePassed = 0f;    // Time passed since initialization
+    public float timeSec    = 3f; // How long it takes for the Cob to get to screen center
+    public float timePassed = 0f; // Time passed since initialization
 
     public Vector2 screenSize;
     public Vector2 screenCenter;
@@ -35,17 +35,18 @@ public class Game : Node2D {
 
         // Connect custom signals
         this.Cob.Connect("needs_reinitialization", this, "CreateNextRound");
+        this.Cob.Connect("needs_centering", this, "ResetInitialized");
 
         this.CreateCorn(this.husks);
     }
 
     public override void _PhysicsProcess(float delta) {
         if (!this.initialized && this.HasNode("Cob")) {
-            this.InitializeCornPosition(delta);
+            this.InitCornPosition(delta);
         }
     }
 
-    public void InitializeCornPosition(float delta) {
+    public void InitCornPosition(float delta) {
         if (this.Cob.Position != this.screenCenter) {
             this.timePassed  += delta;
             this.Cob.Position = this.Cob.Position.LinearInterpolate(this.screenCenter, this.timePassed / this.timeSec);
@@ -72,11 +73,15 @@ public class Game : Node2D {
 
     public void CreateNextRound() {
         // Determine husk count based on round count
-        if (this.husks < 10) this.husks += this.round;
+        if (this.husks < 5) this.husks += this.round;
         this.round++;
 
         this.CreateCorn(this.husks);
     
+        this.initialized = false;
+    }
+
+    public void ResetInitialized() {
         this.initialized = false;
     }
 }

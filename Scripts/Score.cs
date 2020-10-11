@@ -51,6 +51,7 @@ public class Score : Control {
     }
 
     public void GameOver() {
+        // Emit game_over signal to Game controller?
         this.Cob.QueueFree();
         this.gameOver.Visible = true;
     }

@@ -27,8 +27,11 @@ public class Cob : KinematicBody2D {
     public delegate void needs_reinitialization();
 
     [Signal]
+    public delegate void needs_centering();
+
+    [Signal]
     public delegate void score_changed(int point);
-    
+
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
@@ -52,7 +55,7 @@ public class Cob : KinematicBody2D {
 
         // Cob released from drag, can be flung
         if (this.isReleased) {
-            this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, this.dragSpeed.y * this.gravity));
+            this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, 0), Vector2.Down);
             this.CheckSwipe();
         }
     }
@@ -67,7 +70,13 @@ public class Cob : KinematicBody2D {
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (this.isDraggable) {
-            if (@event is InputEventScreenDrag eventDrag) {
+            // Go back to center if released untimely
+            if (@event.IsActionReleased("ui_touch") && this.dragSpeed != Vector2.Zero) {
+                this.dragSpeed   = Vector2.Zero;
+                this.isFlickable = false;
+                this.isReleased  = false;
+                EmitSignal(nameof(needs_centering));
+            } else if (@event is InputEventScreenDrag eventDrag) {
                 this.GlobalPosition = eventDrag.Position;
                 this.dragSpeed      = eventDrag.Speed.Normalized();
                 this.isFlickable    = true;
