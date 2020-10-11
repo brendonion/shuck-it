@@ -13,6 +13,8 @@ public class Husk : RigidBody2D {
 
     public AnimatedSprite sprite;
 
+    public Particles2D particles;
+
     public Game Game;
 
     public override void _Ready() {
@@ -21,6 +23,7 @@ public class Husk : RigidBody2D {
 
         this.collisionShape = (CollisionShape2D) FindNode("CollisionShape2D");
         this.sprite         = (AnimatedSprite) FindNode("AnimatedSprite");
+        this.particles      = (Particles2D) FindNode("Particles2D");
         this.Game           = (Game) GetTree().Root.GetChild(0);
     }
 
@@ -50,11 +53,18 @@ public class Husk : RigidBody2D {
                 if (this.sprite.Frame < 5) {
                     this.sprite.Play("peel", true);
                 } else if (this.sprite.Frame == 5) {
+                    // Drop Husk
                     this.Mode = ModeEnum.Rigid;
                     this.AngularVelocity = (float) GD.RandRange(-2, 2);
                     this.collisionShape.Disabled = true;
                     this.ZIndex = 100;
                     this.GetParent().MoveChild(this, 0);
+                    
+                    // Display particles
+                    this.particles.SetAsToplevel(true);
+                    this.particles.ZIndex = 100;
+                    this.particles.Position = new Vector2(this.sprite.GlobalPosition.x, this.sprite.GlobalPosition.y * 1.5f);
+                    this.particles.Emitting = true;
                 }
             }
         }
@@ -62,20 +72,20 @@ public class Husk : RigidBody2D {
 
     public void _OnHuskInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (this.isTopLayer && @event is InputEventScreenDrag eventDrag && !this.sprite.Playing) {
-            if (this.startedPeeling) {
-                if (eventDrag.Position.y >= this.sprite.GlobalPosition.y * 1.5f) {
-                    this.sprite.Frame = 5;
-                } else if (eventDrag.Position.y >= this.sprite.GlobalPosition.y * 1.25f) {
-                    this.sprite.Frame = 4;
-                } else if (eventDrag.Position.y >= this.sprite.GlobalPosition.y) {
-                    this.sprite.Frame = 3;
-                } else if (eventDrag.Position.y >= this.sprite.GlobalPosition.y * 0.75f) {
-                    this.sprite.Frame = 2;
-                }
-            // Start peeling from the top
-            } else if (eventDrag.Position.y >= this.sprite.GlobalPosition.y * 0.5f) {
+            int frame        = this.sprite.Frame;
+            float spritePosY = this.sprite.GlobalPosition.y;
+            float dragPosY   = eventDrag.Position.y;
+            if (frame == 4 && dragPosY >= spritePosY * 1.5f) {
+                this.sprite.Frame = 5;
+            } else if ((frame == 3 || frame == 5) && dragPosY >= spritePosY * 1.25f && dragPosY < spritePosY * 1.5f) {
+                this.sprite.Frame = 4;
+            } else if ((frame == 2 || frame == 4) && dragPosY >= spritePosY  && dragPosY < spritePosY * 1.25f) {
+                this.sprite.Frame = 3;
+            } else if ((frame == 1 || frame == 3) && dragPosY >= spritePosY * 0.75f && dragPosY < spritePosY) {
+                this.sprite.Frame = 2;
+            } else if (dragPosY >= spritePosY * 0.5f && dragPosY < spritePosY * 0.75f) {
                 this.sprite.Frame = 1;
-                this.startedPeeling = true;
+                this.startedPeeling = true;    
             }
         }
     }
