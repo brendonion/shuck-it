@@ -16,6 +16,7 @@ script = ExtResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 position = Vector2( 90.9553, -41.7082 )
+input_pickable = true
 __meta__ = {
 "_edit_group_": true
 }
@@ -28,6 +29,8 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2( 13.3422, 15.1356 )
-scale = Vector2( 0.904403, 1 )
+visible = false
+position = Vector2( 31.2414, 16.9307 )
+scale = Vector2( 0.761325, 1 )
 curve = SubResource( 2 )
+[connection signal="input_event" from="KinematicBody2D" to="." method="_OnBodyInputEvent"]

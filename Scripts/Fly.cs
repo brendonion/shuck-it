@@ -1,7 +1,7 @@
 using Godot;
 
 public class Fly : Node2D {
-    
+
     public float speed = 125f;
 
     public int patrolIndex = 0;
@@ -19,7 +19,7 @@ public class Fly : Node2D {
     }
 
     public override void _PhysicsProcess(float delta) {
-        Vector2 target = this.patrolPoints[this.patrolIndex];
+        Vector2 target   = this.patrolPoints[this.patrolIndex];
         Vector2 velocity = (target - this.body.Position).Normalized() * this.speed;
         this.body.MoveAndSlide(velocity);
         if (this.body.Position.DistanceTo(target) <= 2) {
@@ -28,6 +28,13 @@ public class Fly : Node2D {
             } else {
                 this.patrolIndex += 1;
             }
+        }
+    }
+
+    public void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
+        if (@event.IsActionReleased("ui_touch")) {
+            // TODO :: Play fly squashed animation
+            this.QueueFree();
         }
     }
 }

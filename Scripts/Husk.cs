@@ -83,9 +83,9 @@ public class Husk : RigidBody2D {
                 this.sprite.Frame = 3;
             } else if ((frame == 1 || frame == 3) && dragPosY >= spritePosY * 0.75f && dragPosY < spritePosY) {
                 this.sprite.Frame = 2;
-            } else if (dragPosY >= spritePosY * 0.5f && dragPosY < spritePosY * 0.75f) {
+            } else if (dragPosY >= spritePosY * 0.25f && dragPosY < spritePosY * 0.75f) {
                 this.sprite.Frame = 1;
-                this.startedPeeling = true;    
+                this.startedPeeling = true;
             }
         }
     }

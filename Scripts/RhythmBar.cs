@@ -3,7 +3,7 @@ using System;
 
 public class RhythmBar : Node2D {
 
-    public float speed = 200f;
+    public float speed = 100f;
 
     public bool moveRight = false;
 
@@ -22,7 +22,6 @@ public class RhythmBar : Node2D {
         GD.Randomize();
 
         this.Cob = (Cob) this.GetParent().FindNode("Cob");
-        // TODO :: Change call when husk falls
         this.Cob.Connect("score_changed", this, "SetRandomArrowPosition");
 
         this.slider = (KinematicBody2D) FindNode("Slider");
@@ -65,6 +64,7 @@ public class RhythmBar : Node2D {
     }
 
     public void SetRandomArrowPosition(int point = 0) {
+        if (this.speed < 200f) this.speed += 25f;
         this.arrow.Position = new Vector2((float) GD.RandRange(this.barLeft.x, this.barRight.x), this.arrow.Position.y);
     }
 }
