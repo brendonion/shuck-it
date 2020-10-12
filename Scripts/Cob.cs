@@ -18,6 +18,7 @@ public class Cob : KinematicBody2D {
 
     public Sprite sprite;
 
+    public Node2D pivot;
     public Node2D husks;
 
     public Texture goodCob = (Texture) ResourceLoader.Load("res://Art/GoodCob.png");
@@ -37,6 +38,7 @@ public class Cob : KinematicBody2D {
         GD.Randomize();
 
         this.Game     = (Game) this.GetParent();
+        this.pivot    = (Node2D) FindNode("Pivot");
         this.husks    = (Node2D) FindNode("Husks");
         this.sprite   = (Sprite) FindNode("Sprite");
         this.startPos = this.Position;
@@ -58,6 +60,8 @@ public class Cob : KinematicBody2D {
             this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, 0), Vector2.Down);
             this.CheckSwipe();
         }
+
+        this.pivot.Rotation += (float) Math.PI * delta;
     }
 
     public override void _Input(InputEvent @event) {

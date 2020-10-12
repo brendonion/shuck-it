@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/RhythmBar.cs" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.03991, 6.59985 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32.3132, 29.6204 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8.11678, 17.7541 )
+
+[node name="RhythmBar" type="Node2D"]
+position = Vector2( 90.2263, 294.047 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Slider" type="KinematicBody2D" parent="."]
+position = Vector2( -17.4663, 0.317596 )
+
+[node name="Sprite" type="Sprite" parent="Slider"]
+modulate = Color( 0.0980392, 0.541176, 0.0352941, 1 )
+position = Vector2( -0.349609, -11.1056 )
+scale = Vector2( 0.249586, 0.207277 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slider"]
+position = Vector2( -0.368034, -11.1638 )
+shape = SubResource( 1 )
+
+[node name="Bar" type="Area2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Bar"]
+scale = Vector2( 2.04466, 0.128217 )
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 60, 80 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bar"]
+scale = Vector2( 2.04466, 0.128217 )
+shape = SubResource( 2 )
+
+[node name="Arrow" type="Area2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Arrow"]
+modulate = Color( 0.278431, 0.12549, 0.12549, 1 )
+position = Vector2( -0.349609, 11.2063 )
+scale = Vector2( 0.249586, 0.207277 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arrow"]
+modulate = Color( 0.239216, 0.203922, 0.203922, 1 )
+position = Vector2( -0.33342, 0.166718 )
+shape = SubResource( 3 )
+[connection signal="body_entered" from="Arrow" to="." method="OnArrowBodyEntered"]
+[connection signal="body_exited" from="Arrow" to="." method="OnArrowBodyExited"]

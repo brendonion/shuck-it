@@ -17,7 +17,7 @@ public class Score : Control {
         this.missCounter  = (RichTextLabel) FindNode("Misses");
         this.gameOver     = (Control) FindNode("Game Over");
         
-        this.Cob          = (Cob) this.GetParent().FindNode("Cob");
+        this.Cob = (Cob) this.GetParent().FindNode("Cob");
         this.Cob.Connect("score_changed", this, "UpdateScore");
     }
 
