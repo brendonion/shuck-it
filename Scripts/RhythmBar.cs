@@ -3,6 +3,8 @@ using System;
 
 public class RhythmBar : Node2D {
 
+    public float speed = 200f;
+
     public bool moveRight = false;
 
     public Cob Cob;
@@ -38,14 +40,14 @@ public class RhythmBar : Node2D {
 
     public override void _PhysicsProcess(float delta) {
         if (!moveRight) {
-            if (this.slider.Position.x > this.barLeft.x) {
-                this.slider.MoveAndSlide(new Vector2(-100, 0));
+            if (this.slider.Position.x >= this.barLeft.x) {
+                this.slider.MoveAndSlide(new Vector2(-this.speed, 0));
             } else {
                 this.moveRight = true;
             }
         } else if (moveRight) {
-            if (this.slider.Position.x < this.barRight.x) {
-                this.slider.MoveAndSlide(new Vector2(100, 0));
+            if (this.slider.Position.x <= this.barRight.x) {
+                this.slider.MoveAndSlide(new Vector2(this.speed, 0));
             } else {
                 this.moveRight = false;
             }
@@ -53,13 +55,11 @@ public class RhythmBar : Node2D {
     }
 
     public void OnArrowBodyEntered(Node2D body) {
-        GD.Print("body entered: ", body.Name);
         var sliderSprite = (Sprite) body.FindNode("Sprite");
         sliderSprite.Scale = new Vector2(0.5f, 0.5f);
     }
 
     public void OnArrowBodyExited(Node2D body) {
-        GD.Print("body exited: ", body.Name);
         var sliderSprite = (Sprite) body.FindNode("Sprite");
         sliderSprite.Scale = new Vector2(0.25f, 0.25f);
     }

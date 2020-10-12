@@ -38,7 +38,6 @@ public class Cob : KinematicBody2D {
         GD.Randomize();
 
         this.Game     = (Game) this.GetParent();
-        this.pivot    = (Node2D) FindNode("Pivot");
         this.husks    = (Node2D) FindNode("Husks");
         this.sprite   = (Sprite) FindNode("Sprite");
         this.startPos = this.Position;
@@ -60,8 +59,6 @@ public class Cob : KinematicBody2D {
             this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, 0), Vector2.Down);
             this.CheckSwipe();
         }
-
-        this.pivot.Rotation += (float) Math.PI * delta;
     }
 
     public override void _Input(InputEvent @event) {
