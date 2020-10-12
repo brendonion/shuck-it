@@ -33,6 +33,9 @@ public class Cob : KinematicBody2D {
     [Signal]
     public delegate void score_changed(int point);
 
+    [Signal]
+    public delegate void missed();
+
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();

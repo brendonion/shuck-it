@@ -17,6 +17,10 @@ public class Husk : RigidBody2D {
 
     public Game Game;
 
+    public Cob Cob;
+
+    public RhythmBar RhythmBar;
+
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
@@ -25,6 +29,8 @@ public class Husk : RigidBody2D {
         this.sprite         = (AnimatedSprite) FindNode("AnimatedSprite");
         this.particles      = (Particles2D) FindNode("Particles2D");
         this.Game           = (Game) GetTree().Root.GetChild(0);
+        this.Cob            = (Cob) this.Game.FindNode("Cob");
+        this.RhythmBar      = (RhythmBar) this.Game.FindNode("RhythmBar");
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -43,7 +49,7 @@ public class Husk : RigidBody2D {
     }
 
     public override void _Input(InputEvent @event) {
-        if (this.isTopLayer && this.startedPeeling) {
+        if (this.isTopLayer && this.startedPeeling && this.Mode != ModeEnum.Rigid) {
             if (this.sprite.Frame == 0) {
                 this.sprite.Stop();
                 this.startedPeeling = false;
@@ -53,6 +59,12 @@ public class Husk : RigidBody2D {
                 if (this.sprite.Frame < 5) {
                     this.sprite.Play("peel", true);
                 } else if (this.sprite.Frame == 5) {
+                    // Mark as a miss if not on beat
+                    if (!this.RhythmBar.onBeat) {
+                        this.Cob.EmitSignal(nameof(Cob.missed));
+                        this.particles.Modulate = new Color(1f, 0.25f, 0.25f, 1f);
+                    }
+
                     // Drop Husk
                     this.Mode = ModeEnum.Rigid;
                     this.AngularVelocity = (float) GD.RandRange(-2, 2);

@@ -7,6 +7,8 @@ public class RhythmBar : Node2D {
 
     public bool moveRight = false;
 
+    public bool onBeat = false;
+
     public Cob Cob;
 
     public KinematicBody2D slider;
@@ -55,12 +57,18 @@ public class RhythmBar : Node2D {
 
     public void OnArrowBodyEntered(Node2D body) {
         var sliderSprite = (Sprite) body.FindNode("Sprite");
-        sliderSprite.Scale = new Vector2(0.5f, 0.5f);
+        if (sliderSprite != null) {
+            sliderSprite.Scale = new Vector2(0.9f, 0.9f);
+            this.onBeat = true;
+        }
     }
 
     public void OnArrowBodyExited(Node2D body) {
         var sliderSprite = (Sprite) body.FindNode("Sprite");
-        sliderSprite.Scale = new Vector2(0.25f, 0.25f);
+        if (sliderSprite != null) {
+            sliderSprite.Scale = new Vector2(0.5f, 0.5f);
+            this.onBeat = false;
+        }
     }
 
     public void SetRandomArrowPosition(int point = 0) {

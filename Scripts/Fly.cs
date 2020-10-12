@@ -32,7 +32,7 @@ public class Fly : Node2D {
     }
 
     public void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (@event.IsActionReleased("ui_touch")) {
+        if (@event.IsActionPressed("ui_touch")) {
             // TODO :: Play fly squashed animation
             this.QueueFree();
         }
