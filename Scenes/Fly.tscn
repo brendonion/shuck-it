@@ -28,6 +28,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=6]
+radius = 16.8354
 
 [sub_resource type="Curve2D" id=7]
 bake_interval = 10.0

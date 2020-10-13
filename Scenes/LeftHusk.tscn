@@ -45,7 +45,7 @@ height = 153.603
 ]]
 input_pickable = true
 collision_layer = 2
-collision_mask = 0
+collision_mask = 2
 mode = 1
 gravity_scale = 3.0
 script = ExtResource( 2 )
