@@ -28,7 +28,7 @@ public class Game : Node2D {
 
         // Get screen size
         this.screenSize   = GetViewport().GetVisibleRect().Size;
-        this.screenCenter = this.screenSize / 2;
+        this.screenCenter = new Vector2(this.screenSize.x / 2, this.screenSize.y / 1.85f);
 
         // Find Cob
         this.Cob = (Cob) FindNode("Cob");

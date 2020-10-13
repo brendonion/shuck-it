@@ -65,6 +65,7 @@ public class Cob : KinematicBody2D {
     }
 
     public override void _Input(InputEvent @event) {
+        // If released outside of draggable area
         if (this.isFlickable) {
             if (@event.IsActionReleased("ui_touch")) {
                 this.isReleased = true;
@@ -74,16 +75,14 @@ public class Cob : KinematicBody2D {
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (this.isDraggable) {
-            // Go back to center if released untimely
-            if (@event.IsActionReleased("ui_touch") && this.dragSpeed != Vector2.Zero) {
-                this.dragSpeed   = Vector2.Zero;
-                this.isFlickable = false;
-                this.isReleased  = false;
-                EmitSignal(nameof(needs_centering));
-            } else if (@event is InputEventScreenDrag eventDrag) {
+            if (@event is InputEventScreenDrag eventDrag) {
                 this.GlobalPosition = eventDrag.Position;
                 this.dragSpeed      = eventDrag.Speed.Normalized();
                 this.isFlickable    = true;
+            }
+            // If released from drag
+            if (this.isFlickable && @event.IsActionReleased("ui_touch")) {
+                this.isReleased = true;
             }
         }
     }

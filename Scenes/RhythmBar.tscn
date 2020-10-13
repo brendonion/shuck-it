@@ -15,7 +15,6 @@ extents = Vector2( 31.3305, 25.6042 )
 extents = Vector2( 11.2401, 17.7541 )
 
 [node name="RhythmBar" type="Node2D"]
-position = Vector2( 90.2263, 294.047 )
 script = ExtResource( 1 )
 
 [node name="Slider" type="KinematicBody2D" parent="."]

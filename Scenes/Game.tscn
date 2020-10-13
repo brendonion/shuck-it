@@ -40,8 +40,9 @@ __meta__ = {
 }
 
 [node name="Points" type="RichTextLabel" parent="Score"]
+margin_top = -8.0
 margin_right = 180.0
-margin_bottom = 44.0
+margin_bottom = 29.0
 mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "[wave amp=10 freq=2][center]0[/center][/wave]"
@@ -52,8 +53,9 @@ __meta__ = {
 
 [node name="Misses" type="RichTextLabel" parent="Score"]
 margin_left = 2.81293
+margin_top = -7.0
 margin_right = 45.8129
-margin_bottom = 40.0
+margin_bottom = 33.0
 bbcode_enabled = true
 bbcode_text = "[wave amp=10 freq=2][center][/center][/wave]"
 
@@ -96,9 +98,10 @@ __meta__ = {
 }
 
 [node name="Cob" parent="." instance=ExtResource( 2 )]
+position = Vector2( 89.4399, -100 )
 
 [node name="Fly" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0, -0.325668 )
 
 [node name="RhythmBar" parent="." instance=ExtResource( 5 )]
+position = Vector2( 91.8216, 48.8754 )
 [connection signal="pressed" from="Score/Game Over/Button" to="Score" method="_OnPlayAgainPressed"]

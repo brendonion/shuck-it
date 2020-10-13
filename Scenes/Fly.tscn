@@ -39,8 +39,10 @@ _data = {
 script = ExtResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 90.9553, -41.7082 )
+position = Vector2( 89.44, -100 )
 input_pickable = true
+collision_layer = 4
+collision_mask = 4
 __meta__ = {
 "_edit_group_": true
 }
@@ -48,6 +50,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 5 )
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
@@ -56,7 +59,7 @@ shape = SubResource( 6 )
 
 [node name="Path2D" type="Path2D" parent="."]
 visible = false
-position = Vector2( 31.2414, 16.9307 )
-scale = Vector2( 0.761325, 1 )
+position = Vector2( 21.9305, 16.9307 )
+scale = Vector2( 0.769962, 1 )
 curve = SubResource( 7 )
 [connection signal="input_event" from="KinematicBody2D" to="." method="_OnBodyInputEvent"]
