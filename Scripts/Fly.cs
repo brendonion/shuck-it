@@ -6,6 +6,8 @@ public class Fly : Node2D {
 
     public int patrolIndex = 0;
 
+    public Path2D patrolPath;
+
     public Vector2[] patrolPoints;
 
     public Vector2 startPos;
@@ -13,7 +15,17 @@ public class Fly : Node2D {
     public KinematicBody2D body;
 
     public override void _Ready() {
-        this.patrolPoints = ((Path2D) FindNode("Path2D")).Curve.GetBakedPoints();
+        // Randomize seed
+        GD.Randomize();
+
+        Path2D[] paths = {
+            (Path2D) FindNode("FlyPath1"),
+            (Path2D) FindNode("FlyPath2"),
+            (Path2D) FindNode("FlyPath3"),
+        };
+
+        this.patrolPath   = paths[(int) GD.RandRange(0, 3)];
+        this.patrolPoints = this.patrolPath.Curve.GetBakedPoints();
         this.body         = (KinematicBody2D) FindNode("KinematicBody2D");
         this.startPos     = this.body.Position;
     }

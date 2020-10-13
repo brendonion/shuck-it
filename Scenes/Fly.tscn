@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Art/Fly.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Fly.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/FlyPath1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/FlyPath3.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/FlyPath2.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -30,12 +33,6 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=6]
 radius = 16.8354
 
-[sub_resource type="Curve2D" id=7]
-bake_interval = 10.0
-_data = {
-"points": PoolVector2Array( 17.2277, -13.3549, -17.2277, 13.3549, 29.7275, 68.0399, -11.8133, -21.3679, 11.8133, 21.3679, 1.67099, 144.163, 81.7084, -11.1291, -81.7084, 11.1291, 60.7372, 198.918, -37.9009, -4.45164, 37.9009, 4.45164, 101.099, 141.047, -25.1032, -3.56131, 25.1032, 3.56131, 146.876, 201.144, 7.8755, 29.826, -7.8755, -29.826, 170.502, 112.556, -38.8853, -64.1036, 38.8853, 64.1036, 99.1303, 118.343, 37.9009, 15.5807, -37.9009, -15.5807, 116.358, 56.9108, 0, 0, 0, 0, 29.7275, 68.0399 )
-}
-
 [node name="Fly" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -51,16 +48,16 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 5 )
-frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( -0.323738, 1.13309 )
 shape = SubResource( 6 )
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="FlyPath1" parent="." instance=ExtResource( 3 )]
 visible = false
-position = Vector2( 21.9305, 16.9307 )
-scale = Vector2( 0.769962, 1 )
-curve = SubResource( 7 )
+
+[node name="FlyPath2" parent="." instance=ExtResource( 5 )]
+
+[node name="FlyPath3" parent="." instance=ExtResource( 4 )]
 [connection signal="input_event" from="KinematicBody2D" to="." method="_OnBodyInputEvent"]
