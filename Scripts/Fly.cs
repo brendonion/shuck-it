@@ -14,6 +14,8 @@ public class Fly : Node2D {
 
     public KinematicBody2D body;
 
+    public AnimatedSprite animatedSprite;
+
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
@@ -24,10 +26,11 @@ public class Fly : Node2D {
             (Path2D) FindNode("FlyPath3"),
         };
 
-        this.patrolPath   = paths[(int) GD.RandRange(0, 3)];
-        this.patrolPoints = this.patrolPath.Curve.GetBakedPoints();
-        this.body         = (KinematicBody2D) FindNode("KinematicBody2D");
-        this.startPos     = this.body.Position;
+        this.patrolPath     = paths[(int) GD.RandRange(0, 3)];
+        this.patrolPoints   = this.patrolPath.Curve.GetBakedPoints();
+        this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
+        this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
+        this.startPos       = this.body.Position;
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -43,9 +46,11 @@ public class Fly : Node2D {
         }
     }
 
-    public void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
+    public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (@event.IsActionPressed("ui_touch")) {
-            // TODO :: Play fly squashed animation
+            this.speed = 0;
+            this.animatedSprite.Play("squash");
+            await ToSignal(this.animatedSprite, "animation_finished");
             this.QueueFree();
         }
     }
