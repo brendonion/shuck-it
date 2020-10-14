@@ -18,6 +18,7 @@ public class Game : Node2D {
 
     public Score Score;
 
+    public PackedScene FlyScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Fly.tscn");
     public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
     public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
     public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
@@ -71,13 +72,21 @@ public class Game : Node2D {
         }
     }
 
+    public void CreateFly() {
+        int num = (int) GD.RandRange(0, 2);
+        if (num > 0) {
+            AddChild(FlyScene.Instance());
+        }
+    }
+
     public void CreateNextRound() {
         // Determine husk count based on round count
         if (this.husks < 5) this.husks += this.round;
         this.round++;
 
         this.CreateCorn(this.husks);
-    
+        this.CreateFly();
+
         this.initialized = false;
     }
 

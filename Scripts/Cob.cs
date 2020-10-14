@@ -7,7 +7,6 @@ public class Cob : KinematicBody2D {
     public bool isReleased  = false;
     public bool isFlickable = false;
 
-    public float gravity = 200f;
     public float speed   = 500f;
 
     public Vector2 dragSpeed;
@@ -18,7 +17,6 @@ public class Cob : KinematicBody2D {
 
     public Sprite sprite;
 
-    public Node2D pivot;
     public Node2D husks;
 
     public Texture goodCob = (Texture) ResourceLoader.Load("res://Art/GoodCob.png");
@@ -67,7 +65,7 @@ public class Cob : KinematicBody2D {
     public override void _Input(InputEvent @event) {
         // If released outside of draggable area
         if (this.isFlickable) {
-            if (@event.IsActionReleased("ui_touch")) {
+            if (@event.IsActionPressed("ui_touch") || @event.IsActionReleased("ui_touch")) {
                 this.isReleased = true;
             }
         }

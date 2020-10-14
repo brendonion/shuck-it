@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Score.cs" type="Script" id=3]
 [ext_resource path="res://Art/BrickWall.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/RhythmBar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Fly.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -99,8 +98,6 @@ __meta__ = {
 
 [node name="Cob" parent="." instance=ExtResource( 2 )]
 position = Vector2( 89.4399, -100 )
-
-[node name="Fly" parent="." instance=ExtResource( 6 )]
 
 [node name="RhythmBar" parent="." instance=ExtResource( 5 )]
 position = Vector2( 91.8216, 48.8754 )
