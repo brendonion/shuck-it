@@ -71,7 +71,7 @@ public class Cob : KinematicBody2D {
             // If dragging
             if (@event is InputEventScreenDrag eventDrag) {
                 this.GlobalPosition = eventDrag.Position;
-                this.dragSpeed      = eventDrag.Speed.Normalized();
+                this.dragSpeed      = eventDrag.Speed != Vector2.Zero ? eventDrag.Speed.Normalized() : this.dragSpeed;
                 this.isFlickable    = true;
             }
             // If released from drag
