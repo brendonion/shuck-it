@@ -74,10 +74,12 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 10 )
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( -0.323738, 1.13309 )
+scale = Vector2( 1.36, 1.14166 )
 shape = SubResource( 11 )
 
 [node name="FlyPath1" parent="." instance=ExtResource( 3 )]
