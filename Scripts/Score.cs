@@ -23,6 +23,7 @@ public class Score : Control {
 
         this.Cob.Connect("score_changed", this, "UpdateScore");
         this.Cob.Connect("missed", this, "UpdateMisses");
+        this.RhythmBar.Connect("timeout", this, "GameOver");
     }
 
     public void _OnPlayAgainPressed() {
@@ -55,6 +56,7 @@ public class Score : Control {
         }
     }
 
+    // TODO :: Put this in Game controller?
     public void GameOver() {
         this.Cob.QueueFree();
         this.RhythmBar.QueueFree();

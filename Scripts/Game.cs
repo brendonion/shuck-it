@@ -23,6 +23,12 @@ public class Game : Node2D {
     public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
     public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
 
+    [Signal]
+    public delegate void fly_spawned();
+
+    [Signal]
+    public delegate void fly_destroyed();
+
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
@@ -31,12 +37,11 @@ public class Game : Node2D {
         this.screenSize   = GetViewport().GetVisibleRect().Size;
         this.screenCenter = new Vector2(this.screenSize.x / 2, this.screenSize.y / 1.85f);
 
-        // Find Cob
+        // Find scenes
         this.Cob = (Cob) FindNode("Cob");
 
         // Connect custom signals
         this.Cob.Connect("needs_reinitialization", this, "CreateNextRound");
-        this.Cob.Connect("needs_centering", this, "ResetInitialized");
 
         this.CreateCorn(this.husks);
     }
@@ -76,6 +81,7 @@ public class Game : Node2D {
         int num = (int) GD.RandRange(0, 2);
         if (num > 0) {
             AddChild(FlyScene.Instance());
+            EmitSignal(nameof(fly_spawned));
         }
     }
 
@@ -87,10 +93,6 @@ public class Game : Node2D {
         this.CreateCorn(this.husks);
         this.CreateFly();
 
-        this.initialized = false;
-    }
-
-    public void ResetInitialized() {
         this.initialized = false;
     }
 }

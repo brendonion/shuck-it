@@ -26,9 +26,6 @@ public class Cob : KinematicBody2D {
     public delegate void needs_reinitialization();
 
     [Signal]
-    public delegate void needs_centering();
-
-    [Signal]
     public delegate void score_changed(int point);
 
     [Signal]
@@ -62,17 +59,16 @@ public class Cob : KinematicBody2D {
         }
     }
 
-    public override void _Input(InputEvent @event) {
+    public void _OnCobMouseExited() {
         // If released outside of draggable area
         if (this.isFlickable) {
-            if (@event.IsActionPressed("ui_touch") || @event.IsActionReleased("ui_touch")) {
-                this.isReleased = true;
-            }
+            this.isReleased = true;
         }
     }
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (this.isDraggable) {
+            // If dragging
             if (@event is InputEventScreenDrag eventDrag) {
                 this.GlobalPosition = eventDrag.Position;
                 this.dragSpeed      = eventDrag.Speed.Normalized();

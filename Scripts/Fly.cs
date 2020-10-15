@@ -6,6 +6,8 @@ public class Fly : Node2D {
 
     public int patrolIndex = 0;
 
+    public Game Game;
+
     public Path2D patrolPath;
 
     public Vector2[] patrolPoints;
@@ -31,6 +33,8 @@ public class Fly : Node2D {
         this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
         this.startPos       = this.body.Position;
+
+        this.Game = (Game) GetTree().Root.GetChild(0);
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -49,6 +53,7 @@ public class Fly : Node2D {
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (@event.IsActionPressed("ui_touch")) {
             this.speed = 0;
+            this.Game.EmitSignal("fly_destroyed");
             this.animatedSprite.Play("squash");
             await ToSignal(this.animatedSprite, "animation_finished");
             this.QueueFree();
