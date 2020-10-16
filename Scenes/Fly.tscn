@@ -63,7 +63,7 @@ radius = 16.8354
 script = ExtResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 89.44, -100 )
+position = Vector2( 89.44, -50 )
 input_pickable = true
 collision_layer = 4
 collision_mask = 0
@@ -74,7 +74,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 10 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]

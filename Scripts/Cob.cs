@@ -5,9 +5,10 @@ public class Cob : KinematicBody2D {
 
     public bool isDraggable = false;
     public bool isReleased  = false;
-    public bool isFlickable = false;
 
-    public float speed   = 500f;
+    public float speed = 500f;
+
+    public SceneTreeTimer dragTimer;
 
     public Vector2 dragSpeed;
     public Vector2 velocity;
@@ -45,11 +46,18 @@ public class Cob : KinematicBody2D {
 
     public override void _PhysicsProcess(float delta) {
         // Cob has no Husks, can be dragged
-        if (!this.isDraggable) {
+        if (!this.isDraggable && !this.isReleased) {
             int huskCount = this.husks.GetChildCount();
             if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
                 this.isDraggable = true;
             }
+        }
+
+        // Release Cob from drag after dragging for a set amount of time
+        // Alleviates a bug where _Input isn't called if dragging and releasing too quickly
+        if (!this.isReleased && this.dragTimer != null && this.dragTimer.TimeLeft <= 0f) {
+            this.isDraggable = false;
+            this.isReleased  = true;
         }
 
         // Cob released from drag, can be flung
@@ -59,24 +67,22 @@ public class Cob : KinematicBody2D {
         }
     }
 
-    public void _OnCobMouseExited() {
-        // If released outside of draggable area
-        if (this.isFlickable) {
+    public override void _Input(InputEvent @event) {
+        // If "ui_touch" released and dragSpeed.x is not 0, then release
+        if (@event.IsActionReleased("ui_touch") && this.dragSpeed.x != 0) {            
             this.isReleased = true;
         }
     }
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (this.isDraggable) {
-            // If dragging
+            // If dragging, set Position, dragSpeed, and dragTimer
             if (@event is InputEventScreenDrag eventDrag) {
-                this.GlobalPosition = eventDrag.Position;
-                this.dragSpeed      = eventDrag.Speed.Normalized();
-                this.isFlickable    = true;
-            }
-            // If released
-            if (@event.IsActionReleased("ui_touch")) {
-                this.isReleased = true;
+                this.Position  = eventDrag.Position;
+                this.dragSpeed = eventDrag.Speed.x != 0
+                    ? eventDrag.Speed.Normalized()
+                    : (this.Position - this.Game.screenCenter).Normalized();
+                this.dragTimer = GetTree().CreateTimer(0.15f);
             }
         }
     }
@@ -102,7 +108,7 @@ public class Cob : KinematicBody2D {
         this.Position    = this.startPos;
         this.isDraggable = false;
         this.isReleased  = false;
-        this.isFlickable = false;
+        this.dragTimer   = null;
         this.dragSpeed   = new Vector2();
         this.SetRandomTexture();
     }

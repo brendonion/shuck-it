@@ -23,4 +23,3 @@ shape = SubResource( 1 )
 
 [node name="Husks" type="Node2D" parent="."]
 [connection signal="input_event" from="." to="." method="_OnCobInputEvent"]
-[connection signal="mouse_exited" from="." to="." method="_OnCobMouseExited"]
