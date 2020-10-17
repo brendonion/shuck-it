@@ -4,7 +4,7 @@ using System;
 public class Game : Node2D {
 
     public int round = 1; // Round number
-    public int husks = 3; // Husk count
+    public int husks = 0; // Husk count
 
     public bool initialized = false; // Cob initialized flag
 
@@ -87,7 +87,8 @@ public class Game : Node2D {
 
     public void CreateNextRound() {
         // Determine husk count based on round count
-        if (this.husks < 5) this.husks += this.round;
+        // if (this.husks < 5) this.husks += this.round;
+        this.husks = 0;
         this.round++;
 
         this.CreateCorn(this.husks);
