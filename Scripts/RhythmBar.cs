@@ -107,11 +107,13 @@ public class RhythmBar : Node2D {
         }
     }
 
-    public void SetTimer() {
+    public void SetTimer(float duration = 0f) {
+        this.timeLeft = duration > 0f ? duration : this.timeLeft;
         this.barProgress.Value = 100;
         this.timer = GetTree().CreateTimer(this.timeLeft);
     }
 
+    // TODO :: Remove point parameter requirement
     public void ClearTimer(int point = 0) {
         this.barProgress.Value = 100;
         this.timer = null;

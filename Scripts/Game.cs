@@ -113,7 +113,7 @@ public class Game : Node2D {
             await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
             AddChild(FlyScene.Instance());
         }
-        EmitSignal(nameof(fly_spawned));
+        EmitSignal(nameof(fly_spawned), 5f); // TODO :: Remove duration param
     }
 
     public void CreateNextRound(int point = 0) {

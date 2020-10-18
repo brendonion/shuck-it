@@ -52,10 +52,13 @@ public class Fly : Node2D {
 
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (@event.IsActionPressed("ui_touch")) {
-            // Emit signal if last fly
-            if (GetTree().GetNodesInGroup("fly").Count <= 1) {
-                this.Game.EmitSignal("fly_destroyed", 0); // TODO :: Remove point param
+            AddToGroup("dead_fly");
+            Godot.Collections.Array flies     = GetTree().GetNodesInGroup("fly");
+            Godot.Collections.Array deadFlies = GetTree().GetNodesInGroup("dead_fly");
+            if (deadFlies.Count >= flies.Count) {
+                this.Game.EmitSignal("fly_destroyed", 0);
             }
+
             this.speed = 0;
             this.animatedSprite.Play("squash");
             await ToSignal(this.animatedSprite, "animation_finished");

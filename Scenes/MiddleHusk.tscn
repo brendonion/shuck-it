@@ -37,8 +37,8 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=8]
-radius = 19.8585
-height = 190.967
+radius = 21.8599
+height = 228.511
 
 [node name="MiddleHusk" type="RigidBody2D" groups=[
 "Husk",
@@ -55,7 +55,7 @@ frames = SubResource( 7 )
 animation = "peel"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2, 15.505 )
+position = Vector2( 2, 34.0697 )
 shape = SubResource( 8 )
 
 [node name="Particles2D" parent="." instance=ExtResource( 3 )]

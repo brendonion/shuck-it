@@ -28,7 +28,7 @@ public class Cob : KinematicBody2D {
     public delegate void missed();
 
     [Signal]
-    public delegate void shucked();
+    public delegate void shucked(float duration);
 
     public override void _Ready() {
         // Randomize seed
@@ -48,10 +48,15 @@ public class Cob : KinematicBody2D {
             int huskCount = this.husks.GetChildCount();
             if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
                 this.isDraggable = true;
-                // TODO :: Refactor
-                if (this.Game.round >= (int) Game.Events.BAR) {
-                    EmitSignal(nameof(shucked));
+                float duration = 0f;
+                if (this.Game.round >= (int) Game.Events.FLIES) {
+                    duration = 3f;
+                } else if (this.Game.round >= (int) Game.Events.SLIDER) {
+                    duration = 4f;
+                } else if (this.Game.round >= (int) Game.Events.BAR) {
+                    duration = 5f;
                 }
+                EmitSignal(nameof(shucked), duration);
             }
         }
 
