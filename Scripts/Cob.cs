@@ -22,13 +22,13 @@ public class Cob : KinematicBody2D {
     public Texture badCob  = (Texture) ResourceLoader.Load("res://Art/BadCob.png");
 
     [Signal]
-    public delegate void needs_reinitialization();
-
-    [Signal]
-    public delegate void score_changed(int point);
+    public delegate void swiped(int point);
 
     [Signal]
     public delegate void missed();
+
+    [Signal]
+    public delegate void shucked();
 
     public override void _Ready() {
         // Randomize seed
@@ -48,6 +48,10 @@ public class Cob : KinematicBody2D {
             int huskCount = this.husks.GetChildCount();
             if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
                 this.isDraggable = true;
+                // TODO :: Refactor
+                if (this.Game.round >= (int) Game.Events.BAR) {
+                    EmitSignal(nameof(shucked));
+                }
             }
         }
 
@@ -89,15 +93,13 @@ public class Cob : KinematicBody2D {
         // Swiped Right, it's a match
         if (this.Position.x > this.Game.screenSize.x * 2) {
             int nextPoint = (this.sprite.Texture == badCob) ? -1 : 1;
-            EmitSignal(nameof(score_changed), nextPoint);
-            EmitSignal(nameof(needs_reinitialization));
+            EmitSignal(nameof(swiped), nextPoint);
             this.ResetCob();
 
         // Swiped Left, not a match
         } else if (this.Position.x < -this.Game.screenSize.x) {
             int nextPoint = (this.sprite.Texture == goodCob) ? -1 : 1;
-            EmitSignal(nameof(score_changed), nextPoint);
-            EmitSignal(nameof(needs_reinitialization));
+            EmitSignal(nameof(swiped), nextPoint);
             this.ResetCob();
         }
     }

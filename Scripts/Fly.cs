@@ -52,11 +52,14 @@ public class Fly : Node2D {
 
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (@event.IsActionPressed("ui_touch")) {
+            // Emit signal if last fly
+            if (GetTree().GetNodesInGroup("fly").Count <= 1) {
+                this.Game.EmitSignal("fly_destroyed", 0); // TODO :: Remove point param
+            }
             this.speed = 0;
-            this.Game.EmitSignal("fly_destroyed");
             this.animatedSprite.Play("squash");
             await ToSignal(this.animatedSprite, "animation_finished");
-            this.QueueFree();
+            QueueFree();
         }
     }
 }

@@ -100,5 +100,5 @@ __meta__ = {
 position = Vector2( 90, -100 )
 
 [node name="RhythmBar" parent="." instance=ExtResource( 5 )]
-position = Vector2( 91.8216, 48.8754 )
+visible = false
 [connection signal="pressed" from="Score/Game Over/Button" to="Score" method="_OnPlayAgainPressed"]

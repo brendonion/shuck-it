@@ -21,7 +21,7 @@ public class Score : Control {
         this.Cob       = (Cob) this.GetParent().FindNode("Cob");
         this.RhythmBar = (RhythmBar) this.GetParent().FindNode("RhythmBar");
 
-        this.Cob.Connect("score_changed", this, "UpdateScore");
+        this.Cob.Connect("swiped", this, "UpdateScore");
         this.Cob.Connect("missed", this, "UpdateMisses");
         this.RhythmBar.Connect("timeout", this, "GameOver");
     }
