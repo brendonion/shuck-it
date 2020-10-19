@@ -26,9 +26,11 @@ public class Fly : Node2D {
             (Path2D) FindNode("FlyPath1"),
             (Path2D) FindNode("FlyPath2"),
             (Path2D) FindNode("FlyPath3"),
+            (Path2D) FindNode("FlyPath4"),
+            (Path2D) FindNode("FlyPath5"),
         };
 
-        this.patrolPath     = paths[(int) GD.RandRange(0, 3)];
+        this.patrolPath     = paths[(int) GD.RandRange(0, 5)];
         this.patrolPoints   = this.patrolPath.Curve.GetBakedPoints();
         this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");

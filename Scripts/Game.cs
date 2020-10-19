@@ -5,18 +5,18 @@ public class Game : Node2D {
 
     // Round numbers that trigger events
     public enum Events {
-        START  = 1,
+        START  = 0,
         HUSKS  = 3,
         BAR    = 5,
-        SLIDER = 10,
-        FLIES  = 20,
+        SLIDER = 6,
+        FLIES  = 10,
         FACES  = 50,
         FINALE = 100,
     }
 
     public Events currentEvent = Events.START;
 
-    public int round    = 1; // Round number
+    public int round    = 0; // Round number
     public int husks    = 3; // Husk count
     public int maxHusks = 5;
     
@@ -36,6 +36,9 @@ public class Game : Node2D {
     public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
     public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
     public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
+
+    [Signal]
+    public delegate void new_round(float duration);
 
     [Signal]
     public delegate void fly_spawned();
@@ -74,6 +77,7 @@ public class Game : Node2D {
         } else {
             this.initialized = true;
             this.timePassed  = 0f;
+            EmitSignal(nameof(new_round), 10f);
         }
     }
 
@@ -110,10 +114,10 @@ public class Game : Node2D {
         }
         for (int i = 0; i < num; i++) {
             // Space out each fly
-            await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
             AddChild(FlyScene.Instance());
+            await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
         }
-        EmitSignal(nameof(fly_spawned), 5f); // TODO :: Remove duration param
+        // EmitSignal(nameof(fly_spawned), 5f); // TODO :: Remove duration param
     }
 
     public void CreateNextRound(int point = 0) {
@@ -148,8 +152,8 @@ public class Game : Node2D {
                 this.RhythmBar.Visible = true;
                 break;
             case Events.SLIDER:
-                this.RhythmBar.slider.Visible = true;
-                this.RhythmBar.arrow.Visible  = true;
+                // this.RhythmBar.slider.Visible = true;
+                // this.RhythmBar.arrow.Visible  = true;
                 break;
             case Events.FLIES:
                 this.spawnFlies = true;

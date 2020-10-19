@@ -35,9 +35,10 @@ public class Husk : RigidBody2D {
 
     public override void _PhysicsProcess(float delta) {
         // Find parents rigid body children (husks)
-        // If this is the last husk, then it is on top
+        // If this is the last husk and there are no flies, then it is on top
         var siblings = this.GetParent().GetChildren();
-        if (siblings[siblings.Count - 1] == this) {
+        var flies    = GetTree().GetNodesInGroup("fly");
+        if (siblings[siblings.Count - 1] == this && flies.Count == 0) {
             this.isTopLayer = true;
             this.ModulateColor();
         }
@@ -50,6 +51,7 @@ public class Husk : RigidBody2D {
 
     public override void _Input(InputEvent @event) {
         if (this.isTopLayer && this.startedPeeling && this.Mode != ModeEnum.Rigid) {
+
             if (this.sprite.Frame == 0) {
                 this.sprite.Stop();
                 this.startedPeeling = false;
@@ -60,19 +62,19 @@ public class Husk : RigidBody2D {
                     this.sprite.Play("peel", true);
                 } else if (this.sprite.Frame == 5) {
                     // Mark as a miss if not on beat
-                    if (!this.RhythmBar.onBeat) {
-                        this.Cob.EmitSignal(nameof(Cob.missed));
-                        this.particles.Modulate = new Color(1f, 0.25f, 0.25f, 1f);
-                    }
+                    // if (!this.RhythmBar.onBeat) {
+                    //     this.Cob.EmitSignal(nameof(Cob.missed));
+                    //     this.particles.Modulate = new Color(1f, 0.25f, 0.25f, 1f);
+                    // }
 
                     // Drop Husk
                     this.SetAsToplevel(true);
                     this.GetParent().MoveChild(this, 0);
                     this.Position = this.GlobalPosition;
-                    this.Mode = ModeEnum.Rigid;
                     this.AngularVelocity = (float) GD.RandRange(-2, 2);
+                    this.Mode = ModeEnum.Rigid;
+                    this.InputPickable = false;
                     this.collisionShape.Disabled = true;
-                    this.ZIndex = 100;
                     
                     // Display particles
                     this.particles.SetAsToplevel(true);
