@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class Cob : KinematicBody2D {
 
@@ -48,15 +47,6 @@ public class Cob : KinematicBody2D {
             int huskCount = this.husks.GetChildCount();
             if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
                 this.isDraggable = true;
-                float duration = 0f;
-                if (this.Game.round >= (int) Game.Events.FLIES) {
-                    duration = 3f;
-                } else if (this.Game.round >= (int) Game.Events.SLIDER) {
-                    duration = 4f;
-                } else if (this.Game.round >= (int) Game.Events.BAR) {
-                    duration = 5f;
-                }
-                EmitSignal(nameof(shucked), duration);
             }
         }
 
@@ -75,7 +65,9 @@ public class Cob : KinematicBody2D {
     }
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (this.isDraggable) {
+        var flies = GetTree().GetNodesInGroup("fly");
+        // If draggable and there are no flies
+        if (this.isDraggable && flies.Count == 0) {
             // If dragging, set Position and dragSpeed
             if (@event is InputEventScreenDrag eventDrag) {
                 // Offset the sprite to where initially touched

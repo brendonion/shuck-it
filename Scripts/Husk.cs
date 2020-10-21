@@ -19,7 +19,7 @@ public class Husk : RigidBody2D {
 
     public Cob Cob;
 
-    public RhythmBar RhythmBar;
+    public TimerBar TimerBar;
 
     public override void _Ready() {
         // Randomize seed
@@ -30,15 +30,14 @@ public class Husk : RigidBody2D {
         this.particles      = (Particles2D) FindNode("Particles2D");
         this.Game           = (Game) GetTree().Root.GetChild(0);
         this.Cob            = (Cob) this.Game.FindNode("Cob");
-        this.RhythmBar      = (RhythmBar) this.Game.FindNode("RhythmBar");
+        this.TimerBar      = (TimerBar) this.Game.FindNode("TimerBar");
     }
 
     public override void _PhysicsProcess(float delta) {
         // Find parents rigid body children (husks)
         // If this is the last husk and there are no flies, then it is on top
         var siblings = this.GetParent().GetChildren();
-        var flies    = GetTree().GetNodesInGroup("fly");
-        if (siblings[siblings.Count - 1] == this && flies.Count == 0) {
+        if (siblings[siblings.Count - 1] == this) {
             this.isTopLayer = true;
             this.ModulateColor();
         }
@@ -61,12 +60,6 @@ public class Husk : RigidBody2D {
                 if (this.sprite.Frame < 5) {
                     this.sprite.Play("peel", true);
                 } else if (this.sprite.Frame == 5) {
-                    // Mark as a miss if not on beat
-                    // if (!this.RhythmBar.onBeat) {
-                    //     this.Cob.EmitSignal(nameof(Cob.missed));
-                    //     this.particles.Modulate = new Color(1f, 0.25f, 0.25f, 1f);
-                    // }
-
                     // Drop Husk
                     this.SetAsToplevel(true);
                     this.GetParent().MoveChild(this, 0);

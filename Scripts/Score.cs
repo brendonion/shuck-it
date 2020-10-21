@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class Score : Control {
 
@@ -11,7 +10,7 @@ public class Score : Control {
     public Control gameOver;
 
     public Cob Cob;
-    public RhythmBar RhythmBar;
+    public TimerBar TimerBar;
 
     public override void _Ready() {
         this.pointCounter = (RichTextLabel) FindNode("Points");
@@ -19,11 +18,11 @@ public class Score : Control {
         this.gameOver     = (Control) FindNode("Game Over");
         
         this.Cob       = (Cob) this.GetParent().FindNode("Cob");
-        this.RhythmBar = (RhythmBar) this.GetParent().FindNode("RhythmBar");
+        this.TimerBar = (TimerBar) this.GetParent().FindNode("TimerBar");
 
         this.Cob.Connect("swiped", this, "UpdateScore");
         this.Cob.Connect("missed", this, "UpdateMisses");
-        this.RhythmBar.Connect("timeout", this, "GameOver");
+        this.TimerBar.Connect("timeout", this, "GameOver");
     }
 
     public void _OnPlayAgainPressed() {
@@ -59,7 +58,7 @@ public class Score : Control {
     // TODO :: Put this in Game controller?
     public void GameOver() {
         this.Cob.QueueFree();
-        this.RhythmBar.QueueFree();
+        this.TimerBar.QueueFree();
         this.gameOver.Visible = true;
     }
 }

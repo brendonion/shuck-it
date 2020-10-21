@@ -8,7 +8,6 @@ public class Game : Node2D {
         START  = 0,
         HUSKS  = 3,
         BAR    = 5,
-        SLIDER = 6,
         FLIES  = 10,
         FACES  = 50,
         FINALE = 100,
@@ -30,7 +29,7 @@ public class Game : Node2D {
     public Vector2 screenCenter;
 
     public Cob Cob;
-    public RhythmBar RhythmBar;
+    public TimerBar TimerBar;
 
     public PackedScene FlyScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Fly.tscn");
     public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
@@ -55,8 +54,8 @@ public class Game : Node2D {
         this.screenCenter = new Vector2(this.screenSize.x / 2, this.screenSize.y / 1.85f);
 
         // Find scenes
-        this.Cob       = (Cob) FindNode("Cob");
-        this.RhythmBar = (RhythmBar) FindNode("RhythmBar");
+        this.Cob      = (Cob) FindNode("Cob");
+        this.TimerBar = (TimerBar) FindNode("TimerBar");
 
         // Connect custom signals
         this.Cob.Connect("swiped", this, "CreateNextRound");
@@ -109,15 +108,18 @@ public class Game : Node2D {
             num = 1;
         } else if (this.round <= (int) Events.FLIES + 3) {
             num = (int) GD.RandRange(1, 3); // 1 - 2 flies
+        } else if (this.round <= (int) Events.FLIES + 6) {
+            num = (int) GD.RandRange(2, 5); // 2 - 4 flies
+        } else if (this.round <= (int) Events.FLIES + 9) {
+            num = (int) GD.RandRange(3, 6); // 3 - 5 flies
         } else {
-            num = (int) GD.RandRange(1, 4); // 1 - 3 flies
+            num = (int) GD.RandRange(3, 7); // 3 - 6 flies
         }
         for (int i = 0; i < num; i++) {
             // Space out each fly
             AddChild(FlyScene.Instance());
             await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
         }
-        // EmitSignal(nameof(fly_spawned), 5f); // TODO :: Remove duration param
     }
 
     public void CreateNextRound(int point = 0) {
@@ -149,11 +151,7 @@ public class Game : Node2D {
                 }
                 break;
             case Events.BAR:
-                this.RhythmBar.Visible = true;
-                break;
-            case Events.SLIDER:
-                // this.RhythmBar.slider.Visible = true;
-                // this.RhythmBar.arrow.Visible  = true;
+                this.TimerBar.Visible = true;
                 break;
             case Events.FLIES:
                 this.spawnFlies = true;
