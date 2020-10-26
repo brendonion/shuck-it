@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Score.cs" type="Script" id=3]
 [ext_resource path="res://Art/BrickWall.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/TimerBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Pig.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -101,4 +102,7 @@ position = Vector2( 90, -100 )
 
 [node name="TimerBar" parent="." instance=ExtResource( 5 )]
 visible = false
+
+[node name="Pig" parent="." instance=ExtResource( 6 )]
+position = Vector2( 270.604, 261.423 )
 [connection signal="pressed" from="Score/Game Over/Button" to="Score" method="_OnPlayAgainPressed"]

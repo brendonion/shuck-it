@@ -5,22 +5,29 @@ public class Game : Node2D {
 
     // Round numbers that trigger events
     public enum Events {
-        START  = 0,
-        HUSKS  = 3,
-        BAR    = 5,
-        FLIES  = 10,
-        FACES  = 50,
-        FINALE = 100,
+        START      = 0,
+        HUSKS      = 3,
+        BAR        = 5,
+        FLIES      = 10,
+        SPEED_UP   = 25,
+        PIG        = 35,
+        FACES      = 50,
+        SPEED_UP_2 = 75,
+        FINALE     = 100,
     }
 
     public Events currentEvent = Events.START;
 
     public int round    = 0; // Round number
     public int husks    = 3; // Husk count
-    public int maxHusks = 5;
+    public int maxHusks = 5; // Max husks
     
     public bool initialized = false; // Cob initialized flag
-    public bool spawnFlies  = false;
+    public bool spawnFlies  = false; // Fly spawn flag
+    public bool spawnPigs   = false; // Pig spawn flag
+
+    public float flySpeed   = 125f; // Fly speed
+    public float timeOut    = 10f;  // Timer bar duration
 
     public float timeSec    = 1f; // How long it takes for the Cob to get to screen center
     public float timePassed = 0f; // Time passed since initialization
@@ -32,6 +39,7 @@ public class Game : Node2D {
     public TimerBar TimerBar;
 
     public PackedScene FlyScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Fly.tscn");
+    public PackedScene PigScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Pig.tscn");
     public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
     public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
     public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
@@ -76,7 +84,7 @@ public class Game : Node2D {
         } else {
             this.initialized = true;
             this.timePassed  = 0f;
-            EmitSignal(nameof(new_round), 10f);
+            EmitSignal(nameof(new_round), this.timeOut);
         }
     }
 
@@ -116,9 +124,20 @@ public class Game : Node2D {
             num = (int) GD.RandRange(3, 7); // 3 - 6 flies
         }
         for (int i = 0; i < num; i++) {
+            // Spawn fly and set it's speed
+            Fly fly   = (Fly) FlyScene.Instance();
+            fly.speed = this.flySpeed; 
+            AddChild(fly);
             // Space out each fly
-            AddChild(FlyScene.Instance());
             await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+        }
+    }
+
+    public async void CreatePigs() {
+        // 1 in 4 chance to spawn a pig
+        int num = (int) GD.RandRange(0, 4);
+        if (num == 4) {
+            // Pig pig
         }
     }
 
@@ -129,6 +148,7 @@ public class Game : Node2D {
 
         this.CreateCorn();
         if (this.spawnFlies) this.CreateFlies();
+        if (this.spawnPigs)  this.CreatePigs();
 
         this.initialized = false;
     }
@@ -156,13 +176,21 @@ public class Game : Node2D {
             case Events.FLIES:
                 this.spawnFlies = true;
                 break;
+            case Events.SPEED_UP:
+                this.flySpeed = 150f;
+                this.timeOut  = 9f;
+                break;
+            case Events.PIG:
+                this.spawnPigs = true;
+                break;
             case Events.FACES:
                 GD.Print("ADD FACES");
                 break;
             case Events.FINALE:
                 GD.Print("FINALE");
                 break;
-
+            default:
+                break;
         }
     }
 }
