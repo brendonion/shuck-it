@@ -107,7 +107,7 @@ public class Pig : Node2D {
     }
 
     public void SetPath() {
-        this.patrolPath   = this.paths[(int) GD.RandRange(0, this.paths.Count - 1)];
+        this.patrolPath   = this.paths[(int) GD.RandRange(0, this.paths.Count)];
         this.patrolPoints = this.patrolPath.Curve.GetBakedPoints();
         this.paths.Remove(this.patrolPath);
     }

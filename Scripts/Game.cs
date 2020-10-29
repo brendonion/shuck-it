@@ -116,13 +116,13 @@ public class Game : Node2D {
         if (this.round == (int) Events.FLIES) {
             num = 1;
         } else if (this.round <= (int) Events.FLIES + 5) {
-            num = (int) GD.RandRange(1, 2); // 1 - 2 flies
+            num = (int) GD.RandRange(1, 3); // 1 - 2 flies
         } else if (this.round <= (int) Events.FLIES + 10) {
-            num = (int) GD.RandRange(2, 4); // 2 - 4 flies
+            num = (int) GD.RandRange(2, 5); // 2 - 4 flies
         } else if (this.round <= (int) Events.FLIES + 15) {
-            num = (int) GD.RandRange(3, 4); // 3 - 4 flies
+            num = (int) GD.RandRange(3, 5); // 3 - 4 flies
         } else {
-            num = (int) GD.RandRange(3, 5); // 3 - 5 flies
+            num = (int) GD.RandRange(3, 6); // 3 - 5 flies
         }
         for (int i = 0; i < num; i++) {
             // Spawn fly and set it's speed
@@ -136,7 +136,7 @@ public class Game : Node2D {
 
     public void CreatePigs() {
         // 1 in 4 chance to spawn a pig
-        int num = (this.round == (int) Events.PIG) ? 4 : (int) GD.RandRange(1, 4);
+        int num = (this.round == (int) Events.PIG) ? 4 : (int) GD.RandRange(1, 5);
         if (num == 4) {
             // Spawn pig and set it's speed
             Pig pig   = (Pig) PigScene.Instance();
