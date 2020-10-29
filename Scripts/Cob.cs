@@ -66,8 +66,9 @@ public class Cob : KinematicBody2D {
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         var flies = GetTree().GetNodesInGroup("fly");
-        // If draggable and there are no flies
-        if (this.isDraggable && flies.Count == 0) {
+        var pigs  = GetTree().GetNodesInGroup("pig");
+        // If draggable and there are no flies or pigs
+        if (this.isDraggable && flies.Count == 0 && pigs.Count == 0) {
             // If dragging, set Position and dragSpeed
             if (@event is InputEventScreenDrag eventDrag) {
                 // Offset the sprite to where initially touched

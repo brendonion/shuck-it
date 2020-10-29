@@ -1,11 +1,25 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class Pig : Node2D {
 
-    public float speed = 125f;
+    public bool hit               = false;
+    public bool dead              = false;
+    public bool retreating        = false;
+    public bool colorIncrementing = false;
 
+    public float colorDiff    = 1f;
+    public float colorAlpha   = 1f;
+    public float speed        = 125f;
+    public float initialSpeed = 125f;
+    public float retreatSpeed = 175f;
+    public float deathSpeed   = 50f;
+
+    public int health      = 6;
     public int patrolIndex = 0;
+
+    public SceneTreeTimer modulateTimer;
 
     public Game Game;
 
@@ -13,51 +27,124 @@ public class Pig : Node2D {
 
     public AnimatedSprite animatedSprite;
 
-    public Path2D[] paths;
+    public List<Path2D> paths = new List<Path2D>();
 
     public Path2D patrolPath;
 
     public Vector2[] patrolPoints;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
         GD.Randomize();
 
-        Path2D[] paths = {
-            (Path2D) FindNode("PigPath1"), // Bottom Left
-            (Path2D) FindNode("PigPath2"), // Bottom Right
-            (Path2D) FindNode("PigPath3"), // Top Left
-            (Path2D) FindNode("PigPath4"), // Top Right
-        };
+        this.paths.Add((Path2D) FindNode("PigPath1"));
+        this.paths.Add((Path2D) FindNode("PigPath2"));
+        this.paths.Add((Path2D) FindNode("PigPath3"));
+        this.paths.Add((Path2D) FindNode("PigPath4"));
 
-        this.paths          = paths;
-        this.patrolPath     = this.paths[(int) GD.RandRange(0, 4)];
-        this.patrolPoints   = this.patrolPath.Curve.GetBakedPoints();
+        this.initialSpeed   = this.speed;
         this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
 
-        // this.Game = (Game) GetTree().Root.GetChild(0);
+        this.Game = (Game) GetTree().Root.GetChild(0);
 
-        this.DetermineStartPosition();
+        this.SetPath();
+        this.SetStartPosition();
     }
 
     public override void _PhysicsProcess(float delta) {
         Vector2 target   = this.patrolPoints[this.patrolIndex];
         Vector2 velocity = (target - this.body.Position).Normalized() * this.speed;
+
         this.body.MoveAndSlide(velocity);
-        if (this.body.Position.DistanceTo(target) <= 2) {
+
+        if (this.hit || this.dead) {
+            this.ModulateColor();
+        }
+
+        // Not retreating and close to target; set next patrolIndex
+        if (!this.retreating && this.body.Position.DistanceTo(target) <= 2) {
             if (this.patrolIndex == this.patrolPoints.Length - 1) {
                 this.patrolIndex = 0;
             } else {
                 this.patrolIndex += 1;
             }
         }
+
+        // Retreating and at end of path; set next patrolPath
+        if (this.retreating && !this.dead && this.body.Position.DistanceTo(target) <= 2) {
+            this.retreating = false;
+            this.speed      = this.initialSpeed;
+            this.SetPath();
+            this.SetStartPosition();
+        }
     }
 
-    public void DetermineStartPosition() {
-        int index = Array.IndexOf(this.paths, this.patrolPath);
-        this.body.Position = this.patrolPoints[0];
-        this.animatedSprite.FlipH = (index == 0 || index == 2);
-        this.animatedSprite.FlipV = (index == 2 || index == 3);
+    public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
+        if (@event.IsActionPressed("ui_touch")) {
+            // If not hit then set to true and subtract from health
+            if (!this.hit) {
+                this.hit     = true;
+                this.health -= 1;
+            }
+
+            // Retreat after 3 hits
+            if (this.health % 2 == 0) {
+                this.retreating  = true;
+                this.speed       = this.retreatSpeed;
+                this.patrolIndex = 0;
+            }
+
+            // Health reached 0; Pig is dead
+            if (this.health == 0) {
+                RemoveFromGroup("pig");
+                this.dead  = true;
+                this.speed = this.deathSpeed;
+                this.animatedSprite.Play("death");
+                await ToSignal(this.animatedSprite, "animation_finished");
+                QueueFree();
+            }
+        }
+    }
+
+    public void SetPath() {
+        this.patrolPath   = this.paths[(int) GD.RandRange(0, this.paths.Count - 1)];
+        this.patrolPoints = this.patrolPath.Curve.GetBakedPoints();
+        this.paths.Remove(this.patrolPath);
+    }
+
+    public void SetStartPosition() {
+        this.body.Position        = this.patrolPoints[0];
+        this.animatedSprite.FlipH = this.body.Position.x < this.Game.screenSize.x / 2;
+        this.animatedSprite.FlipV = this.body.Position.y < this.Game.screenSize.y / 2;
+    }
+
+    public void ModulateColor() {
+        if (this.modulateTimer == null) {
+            this.modulateTimer = GetTree().CreateTimer(0.025f);
+        }
+
+        if (this.modulateTimer != null && this.modulateTimer.TimeLeft <= 0f) {
+            if (this.colorIncrementing) {
+                this.colorDiff += 0.1f;
+                if (this.colorDiff >= 1f) {
+                    this.colorIncrementing = false;
+                    this.hit = false;
+                }
+            } else {
+                this.colorDiff -= 0.1f;
+                if (this.colorDiff <= 0.5f) {
+                    this.colorIncrementing = true;
+                }
+            }
+
+            // Modulate color to indicate pig being hit
+            if (!this.dead) {
+                this.animatedSprite.Modulate = new Color(1, this.colorDiff, this.colorDiff);
+            } else {
+                this.colorAlpha -= 0.05f;
+                this.animatedSprite.Modulate = new Color(1, this.colorDiff, this.colorDiff, this.colorAlpha);
+            }
+            this.modulateTimer = null;
+        }
     }
 }

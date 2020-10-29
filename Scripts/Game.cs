@@ -10,7 +10,7 @@ public class Game : Node2D {
         BAR        = 5,
         FLIES      = 10,
         SPEED_UP   = 25,
-        PIG        = 35,
+        PIG        = 30,
         FACES      = 50,
         SPEED_UP_2 = 75,
         FINALE     = 100,
@@ -27,6 +27,7 @@ public class Game : Node2D {
     public bool spawnPigs   = false; // Pig spawn flag
 
     public float flySpeed   = 125f; // Fly speed
+    public float pigSpeed   = 125f; // Pig speed
     public float timeOut    = 10f;  // Timer bar duration
 
     public float timeSec    = 1f; // How long it takes for the Cob to get to screen center
@@ -114,14 +115,14 @@ public class Game : Node2D {
         int num;
         if (this.round == (int) Events.FLIES) {
             num = 1;
-        } else if (this.round <= (int) Events.FLIES + 3) {
-            num = (int) GD.RandRange(1, 3); // 1 - 2 flies
-        } else if (this.round <= (int) Events.FLIES + 6) {
-            num = (int) GD.RandRange(2, 5); // 2 - 4 flies
-        } else if (this.round <= (int) Events.FLIES + 9) {
-            num = (int) GD.RandRange(3, 6); // 3 - 5 flies
+        } else if (this.round <= (int) Events.FLIES + 5) {
+            num = (int) GD.RandRange(1, 2); // 1 - 2 flies
+        } else if (this.round <= (int) Events.FLIES + 10) {
+            num = (int) GD.RandRange(2, 4); // 2 - 4 flies
+        } else if (this.round <= (int) Events.FLIES + 15) {
+            num = (int) GD.RandRange(3, 4); // 3 - 4 flies
         } else {
-            num = (int) GD.RandRange(3, 7); // 3 - 6 flies
+            num = (int) GD.RandRange(3, 5); // 3 - 5 flies
         }
         for (int i = 0; i < num; i++) {
             // Spawn fly and set it's speed
@@ -133,11 +134,14 @@ public class Game : Node2D {
         }
     }
 
-    public async void CreatePigs() {
+    public void CreatePigs() {
         // 1 in 4 chance to spawn a pig
-        int num = (int) GD.RandRange(0, 4);
+        int num = (this.round == (int) Events.PIG) ? 4 : (int) GD.RandRange(1, 4);
         if (num == 4) {
-            // Pig pig
+            // Spawn pig and set it's speed
+            Pig pig   = (Pig) PigScene.Instance();
+            pig.speed = this.pigSpeed;
+            AddChild(pig);
         }
     }
 
@@ -178,7 +182,7 @@ public class Game : Node2D {
                 break;
             case Events.SPEED_UP:
                 this.flySpeed = 150f;
-                this.timeOut  = 9f;
+                // this.timeOut  = 9f;
                 break;
             case Events.PIG:
                 this.spawnPigs = true;

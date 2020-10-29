@@ -43,14 +43,14 @@ animations = [ {
 "name": "default",
 "speed": 7.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 7 ), SubResource( 7 ) ],
 "loop": true,
 "name": "death",
-"speed": 10.0
+"speed": 7.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 60.623, 38.7198 )
+[sub_resource type="CircleShape2D" id=10]
+radius = 49.9075
 
 [sub_resource type="Curve2D" id=11]
 _data = {
@@ -72,19 +72,22 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 261.307, 45.2325, 0, 0, 0, 0, 126.845, 45.658 )
 }
 
-[node name="Pig" type="Node2D"]
+[node name="Pig" type="Node2D" groups=[
+"pig",
+]]
 script = ExtResource( 3 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+input_pickable = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+position = Vector2( -0.425507, 0 )
 scale = Vector2( 1.25, 1.25 )
 frames = SubResource( 9 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 0, -8 )
+position = Vector2( -9, -8 )
 shape = SubResource( 10 )
 
 [node name="PigPath1" type="Path2D" parent="."]
@@ -102,3 +105,4 @@ curve = SubResource( 13 )
 [node name="PigPath4" type="Path2D" parent="."]
 visible = false
 curve = SubResource( 14 )
+[connection signal="input_event" from="KinematicBody2D" to="." method="_OnBodyInputEvent"]
