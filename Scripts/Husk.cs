@@ -80,7 +80,7 @@ public class Husk : RigidBody2D {
     }
 
     public void _OnHuskInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (this.isTopLayer && @event is InputEventScreenDrag eventDrag && !this.sprite.Playing) {
+        if (this.isTopLayer && @event is InputEventScreenDrag eventDrag && (!this.sprite.Playing || this.sprite.Frame == 0)) {
             int frame        = this.sprite.Frame;
             float spritePosY = this.sprite.GlobalPosition.y;
             float dragPosY   = eventDrag.Position.y;

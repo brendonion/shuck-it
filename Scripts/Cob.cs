@@ -43,7 +43,7 @@ public class Cob : KinematicBody2D {
 
     public override void _PhysicsProcess(float delta) {
         // Cob has no Husks, can be dragged
-        if (!this.isDraggable) {
+        if (!this.isDraggable && !this.isReleased) {
             int huskCount = this.husks.GetChildCount();
             if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
                 this.isDraggable = true;
@@ -52,6 +52,7 @@ public class Cob : KinematicBody2D {
 
         // Cob released from drag, can be flung
         if (this.isReleased) {
+            this.isDraggable = false;
             this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, 0), Vector2.Down);
             this.CheckSwipe();
         }
@@ -83,7 +84,6 @@ public class Cob : KinematicBody2D {
                     ? eventDrag.Speed.Normalized()
                     : (this.Position - this.Game.screenCenter).Normalized();
             }
-
         }
     }
 

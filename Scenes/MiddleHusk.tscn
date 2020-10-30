@@ -37,8 +37,8 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=8]
-radius = 21.8599
-height = 228.511
+radius = 35.117
+height = 201.153
 
 [node name="MiddleHusk" type="RigidBody2D" groups=[
 "Husk",
