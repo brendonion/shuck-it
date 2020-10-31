@@ -63,11 +63,11 @@ public class Husk : RigidBody2D {
                     // Drop Husk
                     this.SetAsToplevel(true);
                     this.GetParent().MoveChild(this, 0);
+                    this.InputPickable = false;
+                    this.collisionShape.QueueFree();
                     this.Position = this.GlobalPosition;
                     this.AngularVelocity = (float) GD.RandRange(-2, 2);
                     this.Mode = ModeEnum.Rigid;
-                    this.InputPickable = false;
-                    this.collisionShape.Disabled = true;
                     
                     // Display particles
                     this.particles.SetAsToplevel(true);
