@@ -40,9 +40,11 @@ __meta__ = {
 }
 
 [node name="Points" type="RichTextLabel" parent="Score"]
-margin_top = -8.0
-margin_right = 180.0
-margin_bottom = 29.0
+margin_left = -88.0
+margin_top = -23.0
+margin_right = 92.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
 theme = ExtResource( 5 )
 bbcode_enabled = true
@@ -54,9 +56,9 @@ __meta__ = {
 
 [node name="Misses" type="RichTextLabel" parent="Score"]
 margin_left = 8.81293
-margin_top = -8.0
+margin_top = -1.0
 margin_right = 51.8129
-margin_bottom = 32.0
+margin_bottom = 39.0
 theme = ExtResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=10 freq=2][center][/center][/wave]"
@@ -94,10 +96,10 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="Score/Game Over"]
-margin_left = 48.0
+margin_left = 39.0
 margin_top = 189.0
-margin_right = 135.0
-margin_bottom = 212.0
+margin_right = 138.0
+margin_bottom = 218.0
 theme = ExtResource( 5 )
 text = "Play Again"
 __meta__ = {
