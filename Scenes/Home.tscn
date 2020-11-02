@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Art/CornField.png" type="Texture" id=1]
+[ext_resource path="res://Art/ShuckItLogo.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Home.cs" type="Script" id=3]
+[ext_resource path="res://theme.tres" type="Theme" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -26,21 +29,71 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Home" type="Node2D"]
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 256, 256 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 90.173, 229.107 )
-scale = Vector2( 1.41377, 1.41377 )
-frames = SubResource( 5 )
-frame = 2
-playing = true
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 256, 256 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 768, 0, 256, 256 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[node name="Home" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 show_behind_parent = true
+margin_top = -0.3535
 margin_right = 180.0
-margin_bottom = 192.0
+margin_bottom = 191.646
 mouse_filter = 2
 color = Color( 0.956863, 0.921569, 0.8, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 89.9282, 229.107 )
+scale = Vector2( 1.40995, 1.41377 )
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 92.5537, 82.0793 )
+frames = SubResource( 10 )
+frame = 3
+playing = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 51.6308
+margin_top = 152.037
+margin_right = 131.631
+margin_bottom = 199.037
+custom_constants/separation = 7
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_right = 80.0
+margin_bottom = 19.0
+theme = ExtResource( 4 )
+text = "PLAY"
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_OnPlayPressed"]

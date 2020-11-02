@@ -16,6 +16,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scripts\Home.cs" />
     <Compile Include="Scripts\Cob.cs" />
     <Compile Include="Scripts\Fly.cs" />
     <Compile Include="Scripts\Game.cs" />

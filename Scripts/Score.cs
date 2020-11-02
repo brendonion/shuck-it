@@ -26,7 +26,7 @@ public class Score : Control {
     }
 
     public void _OnPlayAgainPressed() {
-        this.GetTree().ReloadCurrentScene();
+        GetTree().ReloadCurrentScene();
     }
 
     public async void UpdateScore(int point) {
