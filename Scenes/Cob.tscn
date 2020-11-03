@@ -164,12 +164,11 @@ position = Vector2( 1.22176, 1.22176 )
 shape = SubResource( 1 )
 
 [node name="Face" type="Node2D" parent="."]
-visible = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Face"]
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 4 )
-animation = "good_face_1"
+animation = "bad_face_1"
 playing = true
 
 [node name="Husks" type="Node2D" parent="."]
