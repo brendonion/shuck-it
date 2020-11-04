@@ -17,6 +17,8 @@ public class Cob : KinematicBody2D {
 
     public Node2D husks;
 
+    public AnimatedSprite face;
+
     public Texture goodCob = (Texture) ResourceLoader.Load("res://Art/GoodCob.png");
     public Texture badCob  = (Texture) ResourceLoader.Load("res://Art/BadCob.png");
 
@@ -36,9 +38,10 @@ public class Cob : KinematicBody2D {
         this.Game     = (Game) this.GetParent();
         this.husks    = (Node2D) FindNode("Husks");
         this.sprite   = (Sprite) FindNode("Sprite");
+        this.face     = (AnimatedSprite) FindNode("Face");
         this.startPos = this.Position;
 
-        this.SetRandomTexture();
+        this.SetCobTexture();
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -77,6 +80,7 @@ public class Cob : KinematicBody2D {
                         this.sprite.GlobalPosition.x - eventDrag.Position.x,
                         this.sprite.GlobalPosition.y - eventDrag.Position.y
                     );
+                    this.face.Position = this.sprite.Position;
                 }
                 this.Position  = eventDrag.Position;
                 this.dragSpeed = eventDrag.Speed.x != 0
@@ -103,15 +107,20 @@ public class Cob : KinematicBody2D {
 
     public void ResetCob() {
         this.sprite.Position = Vector2.Zero;
+        this.face.Position   = Vector2.Zero;
         this.Position        = this.startPos;
         this.dragSpeed       = new Vector2();
         this.isDraggable     = false;
         this.isReleased      = false;
-        this.SetRandomTexture();
+        this.SetCobTexture();
     }
 
-    public void SetRandomTexture() {
+    public void SetCobTexture() {
         Texture[] textures = {goodCob, badCob};
-        this.sprite.Texture = textures[(int) GD.RandRange(0, 2)];
+        if (!this.face.Visible) {
+            this.sprite.Texture = textures[(int) GD.RandRange(0, 2)];
+        } else {
+            this.sprite.Texture = textures[0];
+        }
     }
 }

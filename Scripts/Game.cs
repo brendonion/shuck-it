@@ -25,6 +25,7 @@ public class Game : Node2D {
     public bool initialized = false; // Cob initialized flag
     public bool spawnFlies  = false; // Fly spawn flag
     public bool spawnPigs   = false; // Pig spawn flag
+    public bool spawnFaces  = false; // Cob face spawn flag
 
     public float flySpeed   = 125f; // Fly speed
     public float pigSpeed   = 125f; // Pig speed
@@ -145,6 +146,14 @@ public class Game : Node2D {
         }
     }
 
+    public void CreateFaces() {
+        if (this.round == (int) Events.FACES) this.Cob.face.Visible = true;
+        int rand    = (int) GD.RandRange(0, 2); // 0 - 1
+        int num     = (int) GD.RandRange(1, 6); // 1 - 5
+        string anim = (rand == 1) ? "good_face_" : "bad_face_";
+        this.Cob.face.Play(anim + num);
+    }
+
     public void CreateNextRound(int point = 0) {
         this.round++;
 
@@ -153,6 +162,7 @@ public class Game : Node2D {
         this.CreateCorn();
         if (this.spawnFlies) this.CreateFlies();
         if (this.spawnPigs)  this.CreatePigs();
+        if (this.spawnFaces) this.CreateFaces();
 
         this.initialized = false;
     }
@@ -188,7 +198,7 @@ public class Game : Node2D {
                 this.spawnPigs = true;
                 break;
             case Events.FACES:
-                GD.Print("ADD FACES");
+                this.spawnFaces = true;
                 break;
             case Events.FINALE:
                 GD.Print("FINALE");

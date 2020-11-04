@@ -101,7 +101,7 @@ public class Husk : RigidBody2D {
 
     public void ModulateColor() {
         if (this.modulateTimer == null) {
-            this.modulateTimer = GetTree().CreateTimer(0.1f);
+            this.modulateTimer = GetTree().CreateTimer(0.075f);
         }
 
         if (this.modulateTimer != null && this.modulateTimer.TimeLeft <= 0f) {

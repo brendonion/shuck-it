@@ -18,6 +18,8 @@ public class Fly : Node2D {
 
     public AnimatedSprite animatedSprite;
 
+    public SceneTreeTimer timer;
+
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
@@ -48,6 +50,15 @@ public class Fly : Node2D {
                 this.patrolIndex = 0;
             } else {
                 this.patrolIndex += 1;
+            }
+        }
+        // Fade out the Fly when squashed
+        if (this.speed == 0) {
+            if (this.timer == null) {
+                this.timer = GetTree().CreateTimer(0.25f);
+            } else if (this.timer.TimeLeft <= 0f) {
+                this.timer = GetTree().CreateTimer(0.1f);
+                this.animatedSprite.Modulate = new Color(1, 1, 1, this.animatedSprite.Modulate.a - 0.1f);
             }
         }
     }
