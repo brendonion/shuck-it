@@ -200,6 +200,10 @@ public class Game : Node2D {
             case Events.FACES:
                 this.spawnFaces = true;
                 break;
+             case Events.SPEED_UP_2:
+                this.flySpeed = 175f;
+                // this.timeOut  = 8f;
+                break;
             case Events.FINALE:
                 GD.Print("FINALE");
                 break;

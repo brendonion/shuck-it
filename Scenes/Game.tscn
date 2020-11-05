@@ -7,7 +7,6 @@
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=5]
 [ext_resource path="res://Scenes/TimerBar.tscn" type="PackedScene" id=6]
 
-
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 

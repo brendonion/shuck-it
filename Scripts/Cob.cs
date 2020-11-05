@@ -7,8 +7,7 @@ public class Cob : KinematicBody2D {
 
     public float speed = 500f;
 
-    public Vector2 dragSpeed;
-    public Vector2 velocity;
+    public Vector2 dragDirection;
     public Vector2 startPos;
 
     public Game Game;
@@ -55,14 +54,14 @@ public class Cob : KinematicBody2D {
 
         // Cob released from drag, can be flung
         if (this.isReleased) {
-            this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, 0), Vector2.Down);
+            this.MoveAndSlide(new Vector2(this.dragDirection.x * this.speed, 0), Vector2.Down);
             this.CheckSwipe();
         }
     }
 
     public override void _Input(InputEvent @event) {
-        // If "ui_touch" released and dragSpeed.x is not 0, then release
-        if (@event.IsActionReleased("ui_touch") && this.dragSpeed.x != 0) {
+        // If "ui_touch" released and dragDirection.x is not 0, then release
+        if (@event.IsActionReleased("ui_touch") && this.dragDirection.x != 0) {
             this.isReleased = true;
         }
     }
@@ -72,7 +71,7 @@ public class Cob : KinematicBody2D {
         var pigs  = GetTree().GetNodesInGroup("pig");
         // If draggable and there are no flies or pigs
         if (this.isDraggable && flies.Count == 0 && pigs.Count == 0) {
-            // If dragging, set Position and dragSpeed
+            // If dragging, set Position and dragDirection
             if (@event is InputEventScreenDrag eventDrag) {
                 // Offset the sprite to where initially touched
                 if (this.sprite.Position == Vector2.Zero) {
@@ -83,9 +82,11 @@ public class Cob : KinematicBody2D {
                     this.face.Position = this.sprite.Position;
                 }
                 this.Position  = eventDrag.Position;
-                this.dragSpeed = eventDrag.Speed.x != 0
+                this.dragDirection = eventDrag.Speed.x != 0
                     ? eventDrag.Speed.Normalized()
                     : (this.Position - this.Game.screenCenter).Normalized();
+                // Guarantee a consistent speed
+                this.dragDirection.x = this.dragDirection.x < 0 ? -1 : 1;
             }
         }
     }
@@ -93,13 +94,23 @@ public class Cob : KinematicBody2D {
     public void CheckSwipe() {
         // Swiped Right, it's a match
         if (this.Position.x > this.Game.screenSize.x * 2) {
-            int nextPoint = (this.sprite.Texture == badCob) ? -1 : 1;
+            int nextPoint;
+            if (this.face.Visible) {
+                nextPoint = this.face.Animation.Contains("bad_face") ? -1 : 1;
+            } else {
+                nextPoint = (this.sprite.Texture == badCob) ? -1 : 1;
+            }
             EmitSignal(nameof(swiped), nextPoint);
             this.ResetCob();
 
         // Swiped Left, not a match
         } else if (this.Position.x < -this.Game.screenSize.x) {
-            int nextPoint = (this.sprite.Texture == goodCob) ? -1 : 1;
+            int nextPoint;
+            if (this.face.Visible) {
+                nextPoint = this.face.Animation.Contains("good_face") ? -1 : 1;
+            } else {
+                nextPoint = (this.sprite.Texture == goodCob) ? -1 : 1;
+            }
             EmitSignal(nameof(swiped), nextPoint);
             this.ResetCob();
         }
@@ -109,7 +120,7 @@ public class Cob : KinematicBody2D {
         this.sprite.Position = Vector2.Zero;
         this.face.Position   = Vector2.Zero;
         this.Position        = this.startPos;
-        this.dragSpeed       = new Vector2();
+        this.dragDirection   = new Vector2();
         this.isDraggable     = false;
         this.isReleased      = false;
         this.SetCobTexture();
