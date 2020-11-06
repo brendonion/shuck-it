@@ -27,9 +27,10 @@ public class Game : Node2D {
     public bool spawnPigs   = false; // Pig spawn flag
     public bool spawnFaces  = false; // Cob face spawn flag
 
-    public float flySpeed   = 125f; // Fly speed
-    public float pigSpeed   = 125f; // Pig speed
-    public float timeOut    = 10f;  // Timer bar duration
+    public float flySpeed    = 125f; // Fly speed
+    public float pigSpeed    = 125f; // Pig speed
+    public float kernelSpeed = 150f; // Kernel speed
+    public float timeOut     = 10f;  // Timer bar duration
 
     public float timeSec    = 1f; // How long it takes for the Cob to get to screen center
     public float timePassed = 0f; // Time passed since initialization
@@ -40,6 +41,7 @@ public class Game : Node2D {
     public Cob Cob;
     public TimerBar TimerBar;
 
+    public PackedScene KernelScene     = (PackedScene) ResourceLoader.Load("res://Scenes/Kernel.tscn");
     public PackedScene FlyScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Fly.tscn");
     public PackedScene PigScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Pig.tscn");
     public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
@@ -112,6 +114,20 @@ public class Game : Node2D {
         }
     }
 
+    public async void CreateKernel() {
+        // 1 in 10 chance to spawn a kernel
+        int num = (int) GD.RandRange(1, 11);
+        if (num == 10) {
+            // Wait 1 - 3 seconds before spawning
+            float waitTime = (float) GD.RandRange(1, 4);
+            await ToSignal(GetTree().CreateTimer(waitTime), "timeout");
+            // Spawn kernel and set it's speed
+            Kernel kernel = (Kernel) KernelScene.Instance();
+            kernel.speed  = this.kernelSpeed;
+            AddChild(kernel);
+        }
+    }
+
     public async void CreateFlies() {
         int num;
         if (this.round == (int) Events.FLIES) {
@@ -160,6 +176,7 @@ public class Game : Node2D {
         this.HandleEvent();
 
         this.CreateCorn();
+        this.CreateKernel();
         if (this.spawnFlies) this.CreateFlies();
         if (this.spawnPigs)  this.CreatePigs();
         if (this.spawnFaces) this.CreateFaces();
@@ -191,7 +208,8 @@ public class Game : Node2D {
                 this.spawnFlies = true;
                 break;
             case Events.SPEED_UP:
-                this.flySpeed = 150f;
+                this.kernelSpeed = 175f;
+                this.flySpeed    = 150f;
                 // this.timeOut  = 9f;
                 break;
             case Events.PIG:
@@ -201,7 +219,9 @@ public class Game : Node2D {
                 this.spawnFaces = true;
                 break;
              case Events.SPEED_UP_2:
-                this.flySpeed = 175f;
+                this.kernelSpeed = 200f;
+                this.flySpeed    = 175f;
+                this.pigSpeed    = 150f;
                 // this.timeOut  = 8f;
                 break;
             case Events.FINALE:

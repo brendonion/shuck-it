@@ -106,9 +106,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cob" parent="." instance=ExtResource( 2 )]
-position = Vector2( 90, -100 )
-
 [node name="TimerBar" parent="." instance=ExtResource( 6 )]
 visible = false
+
+[node name="Cob" parent="." instance=ExtResource( 2 )]
+position = Vector2( 90, -100 )
 [connection signal="pressed" from="Score/Game Over/Button" to="Score" method="_OnPlayAgainPressed"]

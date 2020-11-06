@@ -14,13 +14,10 @@ angle_random = 1.0
 scale = 1.75
 
 [node name="Particles2D" type="Particles2D"]
-modulate = Color( 0, 0.647059, 0.054902, 1 )
+modulate = Color( 0.992157, 0.913725, 0.0980392, 1 )
 z_as_relative = false
-emitting = false
-amount = 15
-lifetime = 0.5
-one_shot = true
-explosiveness = 0.25
+amount = 10
+explosiveness = 0.05
 randomness = 1.0
 draw_order = 1
 process_material = SubResource( 1 )
