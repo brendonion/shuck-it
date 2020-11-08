@@ -8,7 +8,6 @@ public class Kernel : Node2D {
 
     public int patrolIndex = 0;
 
-
     public Path2D patrolPath;
 
     public Vector2[] patrolPoints;

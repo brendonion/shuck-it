@@ -115,6 +115,8 @@ public class Game : Node2D {
     }
 
     public async void CreateKernel() {
+        if (this.round == (int) Events.FINALE) return;
+
         // 1 in 10 chance to spawn a kernel
         int num = (int) GD.RandRange(1, 11);
         if (num == 10) {
@@ -163,11 +165,17 @@ public class Game : Node2D {
     }
 
     public void CreateFaces() {
-        if (this.round == (int) Events.FACES) this.Cob.face.Visible = true;
-        int rand    = (int) GD.RandRange(0, 2); // 0 - 1
-        int num     = (int) GD.RandRange(1, 6); // 1 - 5
-        string anim = (rand == 1) ? "good_face_" : "bad_face_";
-        this.Cob.face.Play(anim + num);
+        if (this.round == (int) Events.FINALE) {
+            this.Cob.face.Play("finale_face");
+            this.Cob.face.Stop();
+            this.Cob.face.Frame = 0;
+            this.Cob.isFinale   = true;
+        } else {
+            int rand    = (int) GD.RandRange(0, 2); // 0 - 1
+            int num     = (int) GD.RandRange(1, 6); // 1 - 5
+            string anim = (rand == 1) ? "good_face_" : "bad_face_";
+            this.Cob.face.Play(anim + num);
+        }
     }
 
     public void CreateNextRound(int point = 0) {
@@ -216,7 +224,8 @@ public class Game : Node2D {
                 this.spawnPigs = true;
                 break;
             case Events.FACES:
-                this.spawnFaces = true;
+                this.spawnFaces       = true;
+                this.Cob.face.Visible = true;
                 break;
              case Events.SPEED_UP_2:
                 this.kernelSpeed = 200f;
@@ -225,7 +234,10 @@ public class Game : Node2D {
                 // this.timeOut  = 8f;
                 break;
             case Events.FINALE:
-                GD.Print("FINALE");
+                this.maxHusks   = 10;
+                this.husks      = 10;
+                this.spawnFlies = false;
+                this.spawnPigs  = false;
                 break;
             default:
                 break;

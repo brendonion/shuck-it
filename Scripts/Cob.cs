@@ -4,6 +4,7 @@ public class Cob : KinematicBody2D {
 
     public bool isDraggable = false;
     public bool isReleased  = false;
+    public bool isFinale    = false; // External boolean to be set on final round
 
     public float speed = 500f;
 
@@ -48,7 +49,8 @@ public class Cob : KinematicBody2D {
         if (!this.isDraggable) {
             int huskCount = this.husks.GetChildCount();
             if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
-                this.isDraggable = true;
+                this.isDraggable = !this.isFinale;
+                if (this.isFinale) this.HandleFinale();
             }
         }
 
@@ -87,6 +89,11 @@ public class Cob : KinematicBody2D {
                     : (this.Position - this.Game.screenCenter).Normalized();
                 // Guarantee a consistent speed
                 this.dragDirection.x = this.dragDirection.x < 0 ? -1 : 1;
+                
+                // Guarantee right direction if isFinale
+                if (this.isFinale) {
+                    this.dragDirection.x = 1;
+                }
             }
         }
     }
@@ -95,7 +102,10 @@ public class Cob : KinematicBody2D {
         // Swiped Right, it's a match
         if (this.Position.x > this.Game.screenSize.x * 2) {
             int nextPoint;
-            if (this.face.Visible) {
+            if (this.isFinale) {
+                GetTree().ChangeScene("res://Scenes/Finale.tscn");
+                return;
+            } else if (this.face.Visible) {
                 nextPoint = this.face.Animation.Contains("bad_face") ? -1 : 1;
             } else {
                 nextPoint = (this.sprite.Texture == badCob) ? -1 : 1;
@@ -133,5 +143,11 @@ public class Cob : KinematicBody2D {
         } else {
             this.sprite.Texture = textures[0];
         }
+    }
+
+    public async void HandleFinale() {
+        this.face.Play(); // final_face
+        await ToSignal(this.face, "animation_finished");
+        this.isDraggable = true;
     }
 }

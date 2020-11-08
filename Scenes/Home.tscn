@@ -71,13 +71,13 @@ __meta__ = {
 position = Vector2( 89.9282, 229.107 )
 scale = Vector2( 1.40995, 1.41377 )
 frames = SubResource( 5 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( 92.5537, 82.0793 )
 frames = SubResource( 10 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -96,4 +96,13 @@ margin_right = 80.0
 margin_bottom = 29.0
 theme = ExtResource( 4 )
 text = "PLAY"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 36.0
+margin_right = 80.0
+margin_bottom = 65.0
+theme = ExtResource( 4 )
+text = "FINALE"
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_OnPlayPressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_OnFinalePressed"]

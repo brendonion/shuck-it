@@ -17,6 +17,7 @@
     <Reference Include="netstandard" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scripts\Finale.cs" />
     <Compile Include="Scripts\Home.cs" />
     <Compile Include="Scripts\Cob.cs" />
     <Compile Include="Scripts\Fly.cs" />
