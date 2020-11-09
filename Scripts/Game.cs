@@ -234,10 +234,11 @@ public class Game : Node2D {
                 // this.timeOut  = 8f;
                 break;
             case Events.FINALE:
-                this.maxHusks   = 10;
-                this.husks      = 10;
-                this.spawnFlies = false;
-                this.spawnPigs  = false;
+                this.maxHusks         = 10;
+                this.husks            = 10;
+                this.spawnFlies       = false;
+                this.spawnPigs        = false;
+                this.TimerBar.Visible = false;
                 break;
             default:
                 break;

@@ -53,11 +53,10 @@ public class TimerBar : Node2D {
         }
     }
 
-    // TODO :: Remove point parameter requirement
     public void ClearTimer(int point = 0) {
         if (this.Visible) {
             this.barProgress.Value = 100;
-            this.timer = null;
         }
+        this.timer = null;
     }
 }
