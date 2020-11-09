@@ -30,7 +30,7 @@ public class Husk : RigidBody2D {
         this.particles      = (Particles2D) FindNode("Particles2D");
         this.Game           = (Game) GetTree().Root.GetChild(0);
         this.Cob            = (Cob) this.Game.FindNode("Cob");
-        this.TimerBar      = (TimerBar) this.Game.FindNode("TimerBar");
+        this.TimerBar       = (TimerBar) this.Game.FindNode("TimerBar");
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -61,10 +61,11 @@ public class Husk : RigidBody2D {
                     this.sprite.Play("peel", true);
                 } else if (this.sprite.Frame == 5) {
                     // Drop Husk
+                    RemoveFromGroup("husk");
                     this.SetAsToplevel(true);
                     this.GetParent().MoveChild(this, 0);
-                    this.InputPickable = false;
                     this.collisionShape.QueueFree();
+                    this.InputPickable = false;
                     this.Position = this.GlobalPosition;
                     this.AngularVelocity = (float) GD.RandRange(-2, 2);
                     this.Mode = ModeEnum.Rigid;

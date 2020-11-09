@@ -47,8 +47,8 @@ public class Cob : KinematicBody2D {
     public override void _PhysicsProcess(float delta) {
         // Cob has no Husks, can be dragged
         if (!this.isDraggable) {
-            int huskCount = this.husks.GetChildCount();
-            if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
+            int huskCount = GetTree().GetNodesInGroup("husk").Count;
+            if (huskCount == 0) {
                 this.isDraggable = !this.isFinale;
                 if (this.isFinale) this.HandleFinale();
             }
@@ -83,7 +83,7 @@ public class Cob : KinematicBody2D {
                     );
                     this.face.Position = this.sprite.Position;
                 }
-                this.Position  = eventDrag.Position;
+                this.Position      = eventDrag.Position;
                 this.dragDirection = eventDrag.Speed.x != 0
                     ? eventDrag.Speed.Normalized()
                     : (this.Position - this.Game.screenCenter).Normalized();

@@ -41,7 +41,7 @@ radius = 36.0655
 height = 198.367
 
 [node name="RightHusk" type="RigidBody2D" groups=[
-"Husk",
+"husk",
 ]]
 input_pickable = true
 collision_layer = 2

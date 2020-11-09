@@ -18,7 +18,7 @@ public class Score : Control {
         this.gameOver     = (Control) FindNode("Game Over");
         
         this.Cob       = (Cob) this.GetParent().FindNode("Cob");
-        this.TimerBar = (TimerBar) this.GetParent().FindNode("TimerBar");
+        this.TimerBar  = (TimerBar) this.GetParent().FindNode("TimerBar");
 
         this.Cob.Connect("swiped", this, "UpdateScore");
         this.Cob.Connect("missed", this, "UpdateMisses");
