@@ -5,7 +5,7 @@
 [ext_resource path="res://Scripts/Finale.cs" type="Script" id=3]
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=4]
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=1]
 resource_name = "default"
 length = 9.0
 tracks/0/type = "bezier"
@@ -77,65 +77,65 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 180, 0, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 360, 0, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 540, 0, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 320, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
 region = Rect2( 180, 320, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 360, 320, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
 region = Rect2( 540, 320, 180, 320 )
 
-[sub_resource type="SpriteFrames" id=16]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": false,
 "name": "default",
 "speed": 1.0
 } ]
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
 region = Rect2( 180, 0, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
 region = Rect2( 360, 0, 180, 320 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
 region = Rect2( 540, 0, 180, 320 )
 
-[sub_resource type="SpriteFrames" id=21]
+[sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "default",
 "speed": 3.0
@@ -145,22 +145,19 @@ animations = [ {
 script = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 15 )
+anims/default = SubResource( 1 )
 
 [node name="Background" type="AnimatedSprite" parent="AnimationPlayer"]
 position = Vector2( 89.7531, 159.781 )
-frames = SubResource( 16 )
-frame = 7
+frames = SubResource( 10 )
 
 [node name="CobAndPlayer" type="AnimatedSprite" parent="AnimationPlayer"]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 91.112, 295 )
-scale = Vector2( 1e-05, 1e-05 )
-frames = SubResource( 21 )
-frame = 3
+position = Vector2( 92.7383, 164.855 )
+frames = SubResource( 15 )
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="AnimationPlayer"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 40.1639
 margin_top = 111.702
 margin_right = 93.1639

@@ -40,6 +40,8 @@ public class Game : Node2D {
 
     public Cob Cob;
     public TimerBar TimerBar;
+    public Score Score;
+    public DialogScreen DialogScreen;
 
     public PackedScene KernelScene     = (PackedScene) ResourceLoader.Load("res://Scenes/Kernel.tscn");
     public PackedScene FlyScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Fly.tscn");
@@ -66,8 +68,10 @@ public class Game : Node2D {
         this.screenCenter = new Vector2(this.screenSize.x / 2, this.screenSize.y / 1.85f);
 
         // Find scenes
-        this.Cob      = (Cob) FindNode("Cob");
-        this.TimerBar = (TimerBar) FindNode("TimerBar");
+        this.Cob          = (Cob) FindNode("Cob");
+        this.TimerBar     = (TimerBar) FindNode("TimerBar");
+        this.Score        = (Score) FindNode("Score");
+        this.DialogScreen = (DialogScreen) FindNode("DialogScreen");
 
         // Connect custom signals
         this.Cob.Connect("swiped", this, "CreateNextRound");
@@ -76,7 +80,7 @@ public class Game : Node2D {
     }
 
     public override void _PhysicsProcess(float delta) {
-        if (!this.initialized && HasNode("Cob")) {
+        if (!this.initialized && HasNode("Cob") && !this.DialogScreen.Visible) {
             this.InitCornPosition(delta);
         }
     }
@@ -234,11 +238,13 @@ public class Game : Node2D {
                 // this.timeOut  = 8f;
                 break;
             case Events.FINALE:
-                this.maxHusks         = 10;
-                this.husks            = 10;
-                this.spawnFlies       = false;
-                this.spawnPigs        = false;
-                this.TimerBar.Visible = false;
+                this.maxHusks             = 10;
+                this.husks                = 10;
+                this.spawnFlies           = false;
+                this.spawnPigs            = false;
+                this.TimerBar.Visible     = false;
+                this.Score.Visible        = false;
+                this.DialogScreen.Visible = true;
                 break;
             default:
                 break;

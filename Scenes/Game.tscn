@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Art/BrickWall.png" type="Texture" id=4]
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=5]
 [ext_resource path="res://Scenes/TimerBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Dialog.cs" type="Script" id=7]
+[ext_resource path="res://Scripts/DialogScreen.cs" type="Script" id=8]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -111,4 +113,74 @@ visible = false
 
 [node name="Cob" parent="." instance=ExtResource( 2 )]
 position = Vector2( 90, -100 )
+
+[node name="DialogScreen" type="Control" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 180.0
+margin_bottom = 321.0
+theme = ExtResource( 5 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="DialogScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text1" type="RichTextLabel" parent="DialogScreen"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -89.0
+margin_top = -70.5
+margin_right = 91.0
+margin_bottom = 117.5
+bbcode_enabled = true
+text = "You realize something. You get to know these corn as people. You see the beauty in all corn. Each individually embodying their own story. Each equally worthy of love."
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text2" type="RichTextLabel" parent="DialogScreen"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -89.0
+margin_top = -70.5
+margin_right = 91.0
+margin_bottom = 117.5
+bbcode_enabled = true
+text = "..."
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text3" type="RichTextLabel" parent="DialogScreen"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -89.0
+margin_top = -70.5
+margin_right = 91.0
+margin_bottom = 117.5
+bbcode_enabled = true
+text = "\"It was me you were looking for this whole time\""
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Score/Game Over/Button" to="Score" method="_OnPlayAgainPressed"]
