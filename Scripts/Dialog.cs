@@ -6,11 +6,15 @@ public class Dialog : RichTextLabel {
     public string presetText;
     public string newText = "";
 
+    public AudioStreamPlayer2D audioPlayer;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
         this.presetText    = this.Text;
         this.Text          = null;
         this.BbcodeEnabled = true;
+
+        this.audioPlayer = (AudioStreamPlayer2D) GetParent().FindNode("AudioStreamPlayer2D");
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -28,7 +32,8 @@ public class Dialog : RichTextLabel {
             if (character == '.') {
                 await ToSignal(GetTree().CreateTimer(1f), "timeout");
             } else {
-                await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
+                this.audioPlayer.Play();
+                await ToSignal(GetTree().CreateTimer(0.075f), "timeout");
             }
         }
         await ToSignal(GetTree().CreateTimer(2f), "timeout");
