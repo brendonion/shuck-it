@@ -18,6 +18,8 @@ public class Kernel : Node2D {
 
     public AnimatedSprite animatedSprite;
 
+    public AudioStreamPlayer2D audioPlayer;
+
     public SceneTreeTimer timer;
 
     public override void _Ready() {
@@ -33,6 +35,7 @@ public class Kernel : Node2D {
         this.patrolPoints   = this.patrolPath.Curve.GetBakedPoints();
         this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
+        this.audioPlayer    = (AudioStreamPlayer2D) FindNode("AudioStreamPlayer2D");
         this.body.Position  = this.patrolPoints[0];
     }
 
@@ -65,9 +68,10 @@ public class Kernel : Node2D {
     }
 
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (@event.IsActionPressed("ui_touch")) {
+        if (@event.IsActionPressed("ui_touch") && this.speed != 0) {
             this.speed = 0;
             this.animatedSprite.Play("collected");
+            this.audioPlayer.Play();
             await ToSignal(this.animatedSprite, "animation_finished");
             QueueFree();
         }

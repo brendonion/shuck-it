@@ -15,6 +15,8 @@ public class Husk : RigidBody2D {
 
     public Particles2D particles;
 
+    public AudioStreamPlayer2D audioPlayer;
+
     public Game Game;
 
     public Cob Cob;
@@ -28,6 +30,7 @@ public class Husk : RigidBody2D {
         this.collisionShape = (CollisionShape2D) FindNode("CollisionShape2D");
         this.sprite         = (AnimatedSprite) FindNode("AnimatedSprite");
         this.particles      = (Particles2D) FindNode("Particles2D");
+        this.audioPlayer    = (AudioStreamPlayer2D) FindNode("AudioStreamPlayer2D");
         this.Game           = (Game) GetTree().Root.GetChild(0);
         this.Cob            = (Cob) this.Game.FindNode("Cob");
         this.TimerBar       = (TimerBar) this.Game.FindNode("TimerBar");
@@ -64,6 +67,7 @@ public class Husk : RigidBody2D {
                     RemoveFromGroup("husk");
                     this.SetAsToplevel(true);
                     this.GetParent().MoveChild(this, 0);
+                    this.audioPlayer.Play();
                     this.collisionShape.QueueFree();
                     this.InputPickable = false;
                     this.Position = this.GlobalPosition;

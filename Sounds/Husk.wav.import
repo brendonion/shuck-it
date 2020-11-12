@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Husk.wav-cb4b331b3071a65e4e73f7a8ebf2ef90.sample"
+
+[deps]
+
+source_file="res://Sounds/Husk.wav"
+dest_files=[ "res://.import/Husk.wav-cb4b331b3071a65e4e73f7a8ebf2ef90.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

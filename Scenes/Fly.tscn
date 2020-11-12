@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Art/Fly.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Fly.cs" type="Script" id=2]
+[ext_resource path="res://Sounds/Squash.wav" type="AudioStream" id=3]
 [ext_resource path="res://Art/FlySquash.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -97,6 +98,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 10 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D" groups=[
@@ -133,4 +135,7 @@ curve = SubResource( 15 )
 visible = false
 position = Vector2( -1.7843, 1.18951 )
 curve = SubResource( 16 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 [connection signal="input_event" from="KinematicBody2D" to="." method="_OnBodyInputEvent"]

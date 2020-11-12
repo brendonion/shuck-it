@@ -8,6 +8,8 @@ public class Score : Control {
     public RichTextLabel pointCounter;
     public RichTextLabel missCounter;
     public Control gameOver;
+    public AudioStreamPlayer2D pointSound;
+    public AudioStreamPlayer2D missSound;
 
     public Cob Cob;
     public TimerBar TimerBar;
@@ -16,6 +18,8 @@ public class Score : Control {
         this.pointCounter = (RichTextLabel) FindNode("Points");
         this.missCounter  = (RichTextLabel) FindNode("Misses");
         this.gameOver     = (Control) FindNode("Game Over");
+        this.pointSound   = (AudioStreamPlayer2D) FindNode("PointSound");
+        this.missSound    = (AudioStreamPlayer2D) FindNode("MissSound");
         
         this.Cob       = (Cob) this.GetParent().FindNode("Cob");
         this.TimerBar  = (TimerBar) this.GetParent().FindNode("TimerBar");
@@ -38,6 +42,7 @@ public class Score : Control {
             await ToSignal(GetTree().CreateTimer(1f), "timeout");
         } else {
             this.pointCounter.BbcodeText = $"[wave amp=20 freq=20][center]{this.points}[/center][/wave]";
+            this.pointSound.Play();
             await ToSignal(GetTree().CreateTimer(1f), "timeout");
         }
 
@@ -46,6 +51,7 @@ public class Score : Control {
 
     public void UpdateMisses() {
         this.misses += 1;
+        this.missSound.Play();
         string missText = "";
         for (int i = 0; i < this.misses; i++) missText += "X ";
         this.missCounter.BbcodeText  = $"[shake level={2 * this.misses}][center]{missText}[/center][/shake]";

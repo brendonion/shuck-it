@@ -27,6 +27,9 @@ public class Pig : Node2D {
 
     public AnimatedSprite animatedSprite;
 
+    public AudioStreamPlayer2D squealSound;
+    public AudioStreamPlayer2D deathSound;
+
     public List<Path2D> paths = new List<Path2D>();
 
     public Path2D patrolPath;
@@ -44,6 +47,8 @@ public class Pig : Node2D {
         this.initialSpeed   = this.speed;
         this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
+        this.squealSound    = (AudioStreamPlayer2D) FindNode("SquealSound");
+        this.deathSound    = (AudioStreamPlayer2D) FindNode("DeathSound");
 
         this.Game = (Game) GetTree().Root.GetChild(0);
 
@@ -85,6 +90,7 @@ public class Pig : Node2D {
             if (!this.hit) {
                 this.hit     = true;
                 this.health -= 1;
+                this.squealSound.Play();
             }
 
             // Retreat after 3 hits
@@ -100,6 +106,7 @@ public class Pig : Node2D {
                 this.dead  = true;
                 this.speed = this.deathSpeed;
                 this.animatedSprite.Play("death");
+                this.deathSound.Play();
                 await ToSignal(this.animatedSprite, "animation_finished");
                 QueueFree();
             }
