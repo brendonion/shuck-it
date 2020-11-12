@@ -72,7 +72,7 @@ __meta__ = {
 position = Vector2( 89.9282, 229.107 )
 scale = Vector2( 1.40995, 1.41377 )
 frames = SubResource( 5 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
