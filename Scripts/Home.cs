@@ -6,7 +6,7 @@ public class Home : Node2D {
         GetTree().ChangeScene("res://Scenes/Game.tscn");
     }
 
-    public void _OnFinalePressed() {
-        GetTree().ChangeScene("res://Scenes/Finale.tscn");
+    public void _OnTutorialPressed() {
+        GetTree().ChangeScene("res://Scenes/Tutorial.tscn");
     }
 }

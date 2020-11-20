@@ -19,7 +19,7 @@
 [ext_resource path="res://Art/Bar.png" type="Texture" id=17]
 [ext_resource path="res://Scripts/Tutorial.cs" type="Script" id=18]
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=1]
 resource_name = "Page1"
 length = 5.0
 tracks/0/type = "value"
@@ -53,13 +53,25 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 108.905, 76.2101 ), Vector2( 109.581, 104.919 ), Vector2( 109.581, 126.119 ), Vector2( 109.581, 152.119 ), Vector2( 109.243, 184.119 ), Vector2( 108.905, 218.118 ) ]
+"values": [ Vector2( 108.905, 76.2101 ), Vector2( 109.581, 104.919 ), Vector2( 109.581, 126.119 ), Vector2( 109.581, 152.119 ), Vector2( 109.243, 184.119 ), Vector2( 108.905, 218.118 ), Vector2( 108.905, 218.118 ), Vector2( 122.905, 202.772 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimationPlayer/Page1/Corn/MiddleHusk:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 90.8886, 139.296 ), Vector2( 90.8886, 139.296 ), Vector2( 90.8886, 291.296 ) ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=2]
 resource_name = "Page2"
 length = 2.5
 tracks/0/type = "value"
@@ -87,7 +99,7 @@ tracks/1/keys = {
 "values": [ Vector2( 111.703, 155.963 ), Vector2( 160.703, 155.963 ) ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=3]
 resource_name = "Page3"
 length = 2.5
 tracks/0/type = "value"
@@ -115,7 +127,7 @@ tracks/1/keys = {
 "values": [ Vector2( 111.703, 155.963 ), Vector2( 55.7034, 155.963 ) ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=4]
 resource_name = "Page4"
 length = 2.5
 tracks/0/type = "value"
@@ -125,10 +137,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.6, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 110.655, 142.355 ), Vector2( 50.1092, 126.257 ) ]
+"values": [ Vector2( 110.655, 142.355 ), Vector2( 110.655, 142.355 ), Vector2( 50.1092, 126.257 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimationPlayer/Page4/Fly:position")
@@ -154,10 +166,22 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimationPlayer/Page4/Pointer:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=5]
 resource_name = "Page5"
-length = 2.5
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimationPlayer/Page5/Pig:position")
 tracks/0/interp = 1
@@ -177,10 +201,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 110.655, 142.355 ), Vector2( 62.9948, 45.0241 ) ]
+"values": [ Vector2( 110.655, 142.355 ), Vector2( 110.655, 142.355 ), Vector2( 62.9948, 45.0241 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimationPlayer/Page5/Pointer:playing")
@@ -189,13 +213,25 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimationPlayer/Page5/Pointer:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=6]
 resource_name = "Page6"
 length = 2.5
 tracks/0/type = "value"
@@ -234,8 +270,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimationPlayer/Page6/Pointer:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
-[sub_resource type="Animation" id=52]
+[sub_resource type="Animation" id=7]
 resource_name = "Page7"
 length = 2.5
 tracks/0/type = "value"
@@ -322,61 +370,41 @@ tracks/6/keys = {
 "update": 1,
 "values": [ false, true ]
 }
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 192, 192 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
-region = Rect2( 192, 0, 192, 192 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 192, 192 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
-region = Rect2( 576, 0, 192, 192 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 3 )
-region = Rect2( 768, 0, 192, 192 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 3 )
-region = Rect2( 960, 0, 192, 192 )
-
-[sub_resource type="SpriteFrames" id=7]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+tracks/7/type = "value"
+tracks/7/path = NodePath("AnimationPlayer/Page7/Corn/MiddleHusk:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.745098, 0.745098, 0.745098, 1 ), Color( 1, 1, 1, 1 ), Color( 0.788235, 0.788235, 0.788235, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 192, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 384, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 576, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 768, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 960, 0, 192, 192 )
 
 [sub_resource type="SpriteFrames" id=14]
@@ -388,27 +416,27 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 2 )
 region = Rect2( 192, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 2 )
 region = Rect2( 384, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 2 )
 region = Rect2( 576, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 2 )
 region = Rect2( 768, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 2 )
 region = Rect2( 960, 0, 192, 192 )
 
 [sub_resource type="SpriteFrames" id=21]
@@ -419,33 +447,65 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 192, 192 )
+
 [sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 5 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 5 )
+region = Rect2( 960, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=28]
+animations = [ {
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 9 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=27]
+[sub_resource type="SpriteFrames" id=31]
 animations = [ {
-"frames": [ SubResource( 25 ), SubResource( 26 ) ],
+"frames": [ SubResource( 29 ), SubResource( 30 ) ],
 "loop": true,
 "name": "default",
 "speed": 3.0
 } ]
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 8 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=30]
+[sub_resource type="SpriteFrames" id=34]
 animations = [ {
-"frames": [ SubResource( 28 ), SubResource( 29 ) ],
+"frames": [ SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "default",
 "speed": 3.0
@@ -483,7 +543,7 @@ region = Rect2( 0, 0, 64, 64 )
 atlas = ExtResource( 13 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=32]
+[sub_resource type="SpriteFrames" id=42]
 animations = [ {
 "frames": [ SubResource( 40 ), SubResource( 41 ) ],
 "loop": true,
@@ -491,49 +551,49 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[sub_resource type="AtlasTexture" id=42]
+[sub_resource type="AtlasTexture" id=43]
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 110, 80 )
 
-[sub_resource type="AtlasTexture" id=43]
+[sub_resource type="AtlasTexture" id=44]
 atlas = ExtResource( 15 )
 region = Rect2( 110, 0, 110, 80 )
 
-[sub_resource type="AtlasTexture" id=44]
+[sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 15 )
 region = Rect2( 220, 0, 110, 80 )
 
-[sub_resource type="AtlasTexture" id=45]
+[sub_resource type="AtlasTexture" id=46]
 atlas = ExtResource( 15 )
 region = Rect2( 330, 0, 110, 80 )
 
-[sub_resource type="SpriteFrames" id=46]
+[sub_resource type="SpriteFrames" id=47]
 animations = [ {
-"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ],
+"frames": [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=47]
+[sub_resource type="AtlasTexture" id=48]
 atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=48]
+[sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 14 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=49]
+[sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 14 )
 region = Rect2( 128, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=50]
+[sub_resource type="AtlasTexture" id=51]
 atlas = ExtResource( 14 )
 region = Rect2( 192, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=51]
+[sub_resource type="SpriteFrames" id=52]
 animations = [ {
-"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
+"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
 "loop": true,
 "name": "default",
 "speed": 7.0
@@ -561,13 +621,13 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Page1 = SubResource( 22 )
-anims/Page2 = SubResource( 23 )
-anims/Page3 = SubResource( 24 )
-anims/Page4 = SubResource( 31 )
-anims/Page5 = SubResource( 33 )
-anims/Page6 = SubResource( 34 )
-anims/Page7 = SubResource( 52 )
+anims/Page1 = SubResource( 1 )
+anims/Page2 = SubResource( 2 )
+anims/Page3 = SubResource( 3 )
+anims/Page4 = SubResource( 4 )
+anims/Page5 = SubResource( 5 )
+anims/Page6 = SubResource( 6 )
+anims/Page7 = SubResource( 7 )
 
 [node name="Page1" type="Node2D" parent="AnimationPlayer"]
 visible = false
@@ -584,15 +644,15 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 7 )
+frames = SubResource( 14 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 14 )
+frames = SubResource( 21 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 21 )
+frames = SubResource( 28 )
 
 [node name="Pointer" type="Sprite" parent="AnimationPlayer/Page1"]
 position = Vector2( 108.905, 76.2101 )
@@ -604,7 +664,7 @@ visible = false
 
 [node name="Good" type="AnimatedSprite" parent="AnimationPlayer/Page2"]
 position = Vector2( 148.5, 106.937 )
-frames = SubResource( 27 )
+frames = SubResource( 31 )
 frame = 1
 playing = true
 
@@ -632,7 +692,7 @@ visible = false
 
 [node name="Bad" type="AnimatedSprite" parent="AnimationPlayer/Page3"]
 position = Vector2( 28.1227, 106.707 )
-frames = SubResource( 30 )
+frames = SubResource( 34 )
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page3"]
@@ -670,27 +730,29 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 7 )
+frames = SubResource( 14 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 14 )
+frames = SubResource( 21 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 21 )
+frames = SubResource( 28 )
 
 [node name="Fly" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
-position = Vector2( 91.3436, -18.8987 )
+position = Vector2( 31.4978, 114.792 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 39 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
-position = Vector2( 110.655, 142.355 )
+position = Vector2( 50.1092, 126.257 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 32 )
+frames = SubResource( 42 )
+frame = 1
+playing = true
 
 [node name="Page5" type="Node2D" parent="AnimationPlayer"]
 visible = false
@@ -707,20 +769,20 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 7 )
+frames = SubResource( 14 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 14 )
+frames = SubResource( 21 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 21 )
+frames = SubResource( 28 )
 
 [node name="Pig" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
 position = Vector2( -60.7482, 40.5941 )
-frames = SubResource( 46 )
-frame = 2
+frames = SubResource( 47 )
+frame = 1
 playing = true
 flip_h = true
 flip_v = true
@@ -728,7 +790,7 @@ flip_v = true
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
 position = Vector2( 110.655, 142.355 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 32 )
+frames = SubResource( 42 )
 
 [node name="Page6" type="Node2D" parent="AnimationPlayer"]
 visible = false
@@ -745,26 +807,26 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 7 )
+frames = SubResource( 14 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 14 )
+frames = SubResource( 21 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 21 )
+frames = SubResource( 28 )
 
 [node name="Kernel" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( -37.4543, 144.823 )
-frames = SubResource( 51 )
+frames = SubResource( 52 )
 frame = 2
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( 110.655, 142.355 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 32 )
+frames = SubResource( 42 )
 
 [node name="Page7" type="Node2D" parent="AnimationPlayer"]
 visible = false
@@ -781,15 +843,15 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 7 )
+frames = SubResource( 14 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 14 )
+frames = SubResource( 21 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 21 )
+frames = SubResource( 28 )
 
 [node name="TextureProgress" type="TextureProgress" parent="AnimationPlayer/Page7"]
 margin_left = 25.0
@@ -824,7 +886,6 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -0.341766
@@ -845,37 +906,40 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_right = 180.0
+margin_right = 179.0
 margin_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
-margin_left = 17.0
-margin_right = 103.0
+[node name="PrevButton" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+margin_left = 16.0
+margin_right = 102.0
 margin_bottom = 29.0
 theme = ExtResource( 7 )
 text = "Previous"
 
-[node name="Button2" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
-margin_left = 107.0
-margin_right = 163.0
+[node name="NextButton" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+margin_left = 106.0
+margin_right = 162.0
 margin_bottom = 29.0
 theme = ExtResource( 7 )
 text = "Next"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
 margin_top = 33.0
-margin_right = 180.0
+margin_right = 179.0
 margin_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="Control/VBoxContainer/HBoxContainer2"]
-margin_left = 63.0
-margin_right = 117.0
+[node name="ExitButton" type="Button" parent="Control/VBoxContainer/HBoxContainer2"]
+margin_left = 62.0
+margin_right = 116.0
 margin_bottom = 29.0
 theme = ExtResource( 7 )
 text = "Exit"
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/PrevButton" to="." method="_OnPreviousPressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/NextButton" to="." method="_OnNextPressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer2/ExitButton" to="." method="_OnExitPressed"]

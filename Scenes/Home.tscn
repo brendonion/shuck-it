@@ -57,6 +57,11 @@ animations = [ {
 [node name="Home" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -5.0
+autoplay = true
+
 [node name="ColorRect" type="ColorRect" parent="."]
 show_behind_parent = true
 margin_top = -0.3535
@@ -72,41 +77,51 @@ __meta__ = {
 position = Vector2( 89.9282, 229.107 )
 scale = Vector2( 1.40995, 1.41377 )
 frames = SubResource( 5 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( 92.5537, 82.0793 )
 frames = SubResource( 10 )
+frame = 1
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 51.6308
-margin_top = 152.037
-margin_right = 131.631
-margin_bottom = 199.037
+margin_left = 48.6417
+margin_top = 152.0
+margin_right = 134.642
+margin_bottom = 217.0
 custom_constants/separation = 7
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-margin_right = 80.0
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+margin_right = 86.0
 margin_bottom = 29.0
 theme = ExtResource( 4 )
 text = "PLAY"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="TutorialButton" type="Button" parent="VBoxContainer"]
 margin_top = 36.0
-margin_right = 80.0
+margin_right = 86.0
 margin_bottom = 65.0
 theme = ExtResource( 4 )
-text = "FINALE"
+text = "TUTORIAL"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 5 )
-volume_db = -5.0
-autoplay = true
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_OnPlayPressed"]
-[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_OnFinalePressed"]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 302.0
+margin_right = 208.0
+margin_bottom = 320.0
+rect_scale = Vector2( 0.75, 0.75 )
+theme = ExtResource( 4 )
+text = "Created by Brendan Walker"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_OnPlayPressed"]
+[connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_OnTutorialPressed"]
