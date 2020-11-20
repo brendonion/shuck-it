@@ -29,10 +29,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 1, 1.5, 2, 2.5, 3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
+"values": [ 0, 0, 1, 2, 3, 4, 5 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimationPlayer/Page1/Corn/MiddleHusk:modulate")
@@ -41,7 +41,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( -0.1, 1, 2, 3, 4, 5 ),
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.729412, 0.729412, 0.729412, 1 ), Color( 1, 1, 1, 1 ), Color( 0.788235, 0.788235, 0.788235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.827451, 0.827451, 0.827451, 1 ) ]
@@ -651,10 +651,8 @@ position = Vector2( 90.8654, 139.323 )
 frames = SubResource( 21 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
-modulate = Color( 0.975401, 0.975401, 0.975401, 1 )
 position = Vector2( 90.8886, 139.296 )
 frames = SubResource( 28 )
-frame = 5
 
 [node name="Pointer" type="Sprite" parent="AnimationPlayer/Page1"]
 position = Vector2( 108.905, 76.2101 )
@@ -667,7 +665,6 @@ visible = false
 [node name="Good" type="AnimatedSprite" parent="AnimationPlayer/Page2"]
 position = Vector2( 148.5, 106.937 )
 frames = SubResource( 31 )
-frame = 1
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page2"]
@@ -675,7 +672,7 @@ position = Vector2( 148.833, 129.347 )
 texture = ExtResource( 10 )
 
 [node name="Corn" type="Node2D" parent="AnimationPlayer/Page2"]
-position = Vector2( 139.89, 3.50052 )
+position = Vector2( -3.11157, 3.50052 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -685,7 +682,7 @@ position = Vector2( 90.8588, 139.338 )
 texture = ExtResource( 6 )
 
 [node name="Pointer" type="Sprite" parent="AnimationPlayer/Page2"]
-position = Vector2( 160.703, 155.963 )
+position = Vector2( 111.703, 155.963 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
@@ -695,6 +692,7 @@ visible = false
 [node name="Bad" type="AnimatedSprite" parent="AnimationPlayer/Page3"]
 position = Vector2( 28.1227, 106.707 )
 frames = SubResource( 34 )
+frame = 1
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page3"]
@@ -703,7 +701,7 @@ rotation = 3.14159
 texture = ExtResource( 10 )
 
 [node name="Corn" type="Node2D" parent="AnimationPlayer/Page3"]
-position = Vector2( -150.083, 3.50052 )
+position = Vector2( -3.11157, 3.50052 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -713,7 +711,7 @@ position = Vector2( 90.8588, 139.338 )
 texture = ExtResource( 11 )
 
 [node name="Pointer" type="Sprite" parent="AnimationPlayer/Page3"]
-position = Vector2( 55.7034, 155.963 )
+position = Vector2( 111.703, 155.963 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
@@ -746,7 +744,6 @@ frames = SubResource( 28 )
 position = Vector2( 91.3436, -18.8987 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 39 )
-frame = 3
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
@@ -820,7 +817,7 @@ frames = SubResource( 28 )
 [node name="Kernel" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( -37.4543, 144.823 )
 frames = SubResource( 52 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
@@ -886,7 +883,6 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.06174
