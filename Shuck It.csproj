@@ -30,5 +30,6 @@
     <Compile Include="Scripts\Pig.cs" />
     <Compile Include="Scripts\TimerBar.cs" />
     <Compile Include="Scripts\Score.cs" />
+    <Compile Include="Scripts\Tutorial.cs" />
   </ItemGroup>
 </Project>

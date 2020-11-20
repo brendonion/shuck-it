@@ -1,6 +1,542 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://Art/BrickWall.png" type="Texture" id=1]
+[ext_resource path="res://Art/RightHusk.png" type="Texture" id=2]
+[ext_resource path="res://Art/LeftHusk.png" type="Texture" id=3]
+[ext_resource path="res://Art/Pointer.png" type="Texture" id=4]
+[ext_resource path="res://Art/MiddleHusk.png" type="Texture" id=5]
+[ext_resource path="res://Art/GoodCob.png" type="Texture" id=6]
+[ext_resource path="res://Theme/theme.tres" type="Theme" id=7]
+[ext_resource path="res://Art/Bad.png" type="Texture" id=8]
+[ext_resource path="res://Art/Good.png" type="Texture" id=9]
+[ext_resource path="res://Art/Arrow.png" type="Texture" id=10]
+[ext_resource path="res://Art/BadCob.png" type="Texture" id=11]
+[ext_resource path="res://Art/Fly.png" type="Texture" id=12]
+[ext_resource path="res://Art/Tap.png" type="Texture" id=13]
+[ext_resource path="res://Art/Kernel.png" type="Texture" id=14]
+[ext_resource path="res://Art/Pig.png" type="Texture" id=15]
+[ext_resource path="res://Art/BarBackground.png" type="Texture" id=16]
+[ext_resource path="res://Art/Bar.png" type="Texture" id=17]
+
+[sub_resource type="Animation" id=22]
+resource_name = "Page1"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page1/Corn/MiddleHusk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page1/Corn/MiddleHusk:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.729412, 0.729412, 0.729412, 1 ), Color( 1, 1, 1, 1 ), Color( 0.788235, 0.788235, 0.788235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.827451, 0.827451, 0.827451, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/Page1/Pointer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 108.905, 76.2101 ), Vector2( 109.581, 104.919 ), Vector2( 109.581, 126.119 ), Vector2( 109.581, 152.119 ), Vector2( 109.243, 184.119 ), Vector2( 108.905, 218.118 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "Page2"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page2/Corn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -3.11157, 3.50052 ), Vector2( 50.057, 3.50052 ), Vector2( 139.89, 3.50052 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page2/Pointer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 111.703, 155.963 ), Vector2( 160.703, 155.963 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "Page3"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page3/Corn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -3.11157, 3.50052 ), Vector2( -54.1116, 3.50052 ), Vector2( -150.083, 3.50052 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page3/Pointer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 111.703, 155.963 ), Vector2( 55.7034, 155.963 ) ]
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "Page4"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page4/Pointer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 110.655, 142.355 ), Vector2( 50.1092, 126.257 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page4/Fly:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 91.3436, -18.8987 ), Vector2( 31.4978, 114.792 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/Page4/Pointer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=33]
+resource_name = "Page5"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page5/Pig:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -60.7482, 40.5941 ), Vector2( 52.8713, 39.1561 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page5/Pointer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 110.655, 142.355 ), Vector2( 62.9948, 45.0241 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/Page5/Pointer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "Page6"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page6/Kernel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -37.4543, 144.823 ), Vector2( 132.569, 83.6479 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page6/Pointer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 110.655, 142.355 ), Vector2( 154.352, 94.0811 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/Page6/Pointer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=52]
+resource_name = "Page7"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page7/TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 100.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page7/Pointer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 108.952, 82.4167 ), Vector2( 108.64, 148.6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/Page7/Corn/MiddleHusk:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimationPlayer/Page7/Corn:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimationPlayer/Page7/TextureProgress:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimationPlayer/Page7/Pointer:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AnimationPlayer/Page7/RichTextLabel:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 960, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 960, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 5 )
+region = Rect2( 576, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 5 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 960, 0, 192, 192 )
+
+[sub_resource type="SpriteFrames" id=21]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 9 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=27]
+animations = [ {
+"frames": [ SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 8 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=30]
+animations = [ {
+"frames": [ SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 12 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 12 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 12 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=39]
+animations = [ {
+"frames": [ SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 13 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=32]
+animations = [ {
+"frames": [ SubResource( 40 ), SubResource( 41 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 110, 80 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 15 )
+region = Rect2( 110, 0, 110, 80 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 15 )
+region = Rect2( 220, 0, 110, 80 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 15 )
+region = Rect2( 330, 0, 110, 80 )
+
+[sub_resource type="SpriteFrames" id=46]
+animations = [ {
+"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 14 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 14 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 14 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=51]
+animations = [ {
+"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
 
 [node name="Tutorial" type="Node2D"]
 
@@ -22,14 +558,322 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Page1" type="Node2D" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Page1 = SubResource( 22 )
+anims/Page2 = SubResource( 23 )
+anims/Page3 = SubResource( 24 )
+anims/Page4 = SubResource( 31 )
+anims/Page5 = SubResource( 33 )
+anims/Page6 = SubResource( 34 )
+anims/Page7 = SubResource( 52 )
 
-[node name="Page2" type="Node2D" parent="."]
+[node name="Page1" type="Node2D" parent="AnimationPlayer"]
+visible = false
 
-[node name="Page3" type="Node2D" parent="."]
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page1"]
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Page4" type="Node2D" parent="."]
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page1/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 6 )
 
-[node name="Page5" type="Node2D" parent="."]
+[node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
+position = Vector2( 90.8588, 139.375 )
+frames = SubResource( 7 )
 
-[node name="Controls" type="Node2D" parent="."]
+[node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
+position = Vector2( 90.8654, 139.323 )
+frames = SubResource( 14 )
+
+[node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
+position = Vector2( 90.8886, 139.296 )
+frames = SubResource( 21 )
+
+[node name="Pointer" type="Sprite" parent="AnimationPlayer/Page1"]
+position = Vector2( 108.905, 76.2101 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="Page2" type="Node2D" parent="AnimationPlayer"]
+visible = false
+
+[node name="Good" type="AnimatedSprite" parent="AnimationPlayer/Page2"]
+position = Vector2( 148.5, 106.937 )
+frames = SubResource( 27 )
+frame = 1
+playing = true
+
+[node name="Arrow" type="Sprite" parent="AnimationPlayer/Page2"]
+position = Vector2( 148.833, 129.347 )
+texture = ExtResource( 10 )
+
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page2"]
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page2/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 6 )
+
+[node name="Pointer" type="Sprite" parent="AnimationPlayer/Page2"]
+position = Vector2( 111.703, 155.963 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="Page3" type="Node2D" parent="AnimationPlayer"]
+visible = false
+
+[node name="Bad" type="AnimatedSprite" parent="AnimationPlayer/Page3"]
+position = Vector2( 28.1227, 106.707 )
+frames = SubResource( 30 )
+playing = true
+
+[node name="Arrow" type="Sprite" parent="AnimationPlayer/Page3"]
+position = Vector2( 26.9352, 128.343 )
+rotation = 3.14159
+texture = ExtResource( 10 )
+
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page3"]
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page3/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 11 )
+
+[node name="Pointer" type="Sprite" parent="AnimationPlayer/Page3"]
+position = Vector2( 111.703, 155.963 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="Page4" type="Node2D" parent="AnimationPlayer"]
+visible = false
+
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page4"]
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page4/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 6 )
+
+[node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
+position = Vector2( 90.8588, 139.375 )
+frames = SubResource( 7 )
+
+[node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
+position = Vector2( 90.8654, 139.323 )
+frames = SubResource( 14 )
+
+[node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
+position = Vector2( 90.8886, 139.296 )
+frames = SubResource( 21 )
+
+[node name="Fly" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
+position = Vector2( 91.3436, -18.8987 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 39 )
+frame = 3
+playing = true
+
+[node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
+position = Vector2( 110.655, 142.355 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 32 )
+
+[node name="Page5" type="Node2D" parent="AnimationPlayer"]
+visible = false
+
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page5"]
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page5/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 6 )
+
+[node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
+position = Vector2( 90.8588, 139.375 )
+frames = SubResource( 7 )
+
+[node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
+position = Vector2( 90.8654, 139.323 )
+frames = SubResource( 14 )
+
+[node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
+position = Vector2( 90.8886, 139.296 )
+frames = SubResource( 21 )
+
+[node name="Pig" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
+position = Vector2( -60.7482, 40.5941 )
+frames = SubResource( 46 )
+frame = 3
+playing = true
+flip_h = true
+flip_v = true
+
+[node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
+position = Vector2( 110.655, 142.355 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 32 )
+
+[node name="Page6" type="Node2D" parent="AnimationPlayer"]
+visible = false
+
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page6"]
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page6/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 6 )
+
+[node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
+position = Vector2( 90.8588, 139.375 )
+frames = SubResource( 7 )
+
+[node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
+position = Vector2( 90.8654, 139.323 )
+frames = SubResource( 14 )
+
+[node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
+position = Vector2( 90.8886, 139.296 )
+frames = SubResource( 21 )
+
+[node name="Kernel" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
+position = Vector2( -37.4543, 144.823 )
+frames = SubResource( 51 )
+frame = 2
+playing = true
+
+[node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
+position = Vector2( 110.655, 142.355 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 32 )
+
+[node name="Page7" type="Node2D" parent="AnimationPlayer"]
+visible = false
+
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page7"]
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page7/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 6 )
+
+[node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
+position = Vector2( 90.8588, 139.375 )
+frames = SubResource( 7 )
+
+[node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
+position = Vector2( 90.8654, 139.323 )
+frames = SubResource( 14 )
+
+[node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
+position = Vector2( 90.8886, 139.296 )
+frames = SubResource( 21 )
+
+[node name="TextureProgress" type="TextureProgress" parent="AnimationPlayer/Page7"]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 153.0
+margin_bottom = 37.0
+value = 100.0
+texture_under = ExtResource( 16 )
+texture_progress = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pointer" type="Sprite" parent="AnimationPlayer/Page7"]
+position = Vector2( 108.952, 82.4167 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AnimationPlayer/Page7"]
+visible = false
+margin_left = 1.0
+margin_top = 78.0
+margin_right = 90.0
+margin_bottom = 125.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=20 freq=2][center]Game Over[/center][/wave]"
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.341766
+margin_right = 180.0
+margin_bottom = 319.658
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -69.0
+margin_right = -1.52588e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_right = 180.0
+margin_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+margin_left = 17.0
+margin_right = 103.0
+margin_bottom = 29.0
+theme = ExtResource( 7 )
+text = "Previous"
+
+[node name="Button2" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+margin_left = 107.0
+margin_right = 163.0
+margin_bottom = 29.0
+theme = ExtResource( 7 )
+text = "Next"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+margin_top = 33.0
+margin_right = 180.0
+margin_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="Control/VBoxContainer/HBoxContainer2"]
+margin_left = 63.0
+margin_right = 117.0
+margin_bottom = 29.0
+theme = ExtResource( 7 )
+text = "Exit"
