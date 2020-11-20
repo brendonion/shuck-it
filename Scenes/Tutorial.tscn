@@ -241,7 +241,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( -37.4543, 144.823 ), Vector2( 132.569, 83.6479 ) ]
@@ -253,10 +253,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 110.655, 142.355 ), Vector2( 154.352, 94.0811 ) ]
+"values": [ Vector2( 110.655, 142.355 ), Vector2( 110.655, 142.355 ), Vector2( 154.352, 94.0811 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimationPlayer/Page6/Pointer:playing")
@@ -665,7 +665,6 @@ visible = false
 [node name="Good" type="AnimatedSprite" parent="AnimationPlayer/Page2"]
 position = Vector2( 148.5, 106.937 )
 frames = SubResource( 31 )
-frame = 1
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page2"]
@@ -693,6 +692,7 @@ visible = false
 [node name="Bad" type="AnimatedSprite" parent="AnimationPlayer/Page3"]
 position = Vector2( 28.1227, 106.707 )
 frames = SubResource( 34 )
+frame = 1
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page3"]
@@ -751,7 +751,6 @@ playing = true
 position = Vector2( 50.1092, 126.257 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 42 )
-frame = 1
 playing = true
 
 [node name="Page5" type="Node2D" parent="AnimationPlayer"]
@@ -782,7 +781,7 @@ frames = SubResource( 28 )
 [node name="Pig" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
 position = Vector2( -60.7482, 40.5941 )
 frames = SubResource( 47 )
-frame = 1
+frame = 3
 playing = true
 flip_h = true
 flip_v = true
@@ -820,7 +819,7 @@ frames = SubResource( 28 )
 [node name="Kernel" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( -37.4543, 144.823 )
 frames = SubResource( 52 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page6"]

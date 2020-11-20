@@ -77,13 +77,12 @@ __meta__ = {
 position = Vector2( 89.9282, 229.107 )
 scale = Vector2( 1.40995, 1.41377 )
 frames = SubResource( 5 )
-frame = 3
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( 92.5537, 82.0793 )
 frames = SubResource( 10 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -113,13 +112,13 @@ text = "TUTORIAL"
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
+margin_left = 27.0
 margin_top = 302.0
-margin_right = 208.0
+margin_right = 195.0
 margin_bottom = 320.0
 rect_scale = Vector2( 0.75, 0.75 )
 theme = ExtResource( 4 )
-text = "Created by Brendan Walker"
+text = "Made by Brendan Walker"
 __meta__ = {
 "_edit_use_anchors_": false
 }

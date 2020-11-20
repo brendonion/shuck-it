@@ -26,9 +26,6 @@ public class Cob : KinematicBody2D {
     public delegate void swiped(int point);
 
     [Signal]
-    public delegate void missed();
-
-    [Signal]
     public delegate void shucked(float duration);
 
     public override void _Ready() {

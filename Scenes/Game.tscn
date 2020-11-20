@@ -75,6 +75,8 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 0.241943
+margin_right = 0.241943
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -100,13 +102,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="Score/Game Over"]
-margin_left = 39.0
+[node name="PlayAgainButton" type="Button" parent="Score/Game Over"]
+margin_left = 40.0
 margin_top = 189.0
-margin_right = 138.0
+margin_right = 139.0
 margin_bottom = 218.0
 theme = ExtResource( 5 )
 text = "Play Again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" type="Button" parent="Score/Game Over"]
+margin_left = 40.0
+margin_top = 224.0
+margin_right = 139.0
+margin_bottom = 253.0
+theme = ExtResource( 5 )
+text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -195,4 +208,5 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="Score/Game Over/Button" to="Score" method="_OnPlayAgainPressed"]
+[connection signal="pressed" from="Score/Game Over/PlayAgainButton" to="Score" method="_OnPlayAgainPressed"]
+[connection signal="pressed" from="Score/Game Over/ExitButton" to="Score" method="_OnExitPressed"]

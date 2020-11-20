@@ -13,6 +13,7 @@ public class Score : Control {
 
     public Cob Cob;
     public TimerBar TimerBar;
+    public DialogScreen DialogScreen;
 
     public override void _Ready() {
         this.pointCounter = (RichTextLabel) FindNode("Points");
@@ -21,16 +22,20 @@ public class Score : Control {
         this.pointSound   = (AudioStreamPlayer2D) FindNode("PointSound");
         this.missSound    = (AudioStreamPlayer2D) FindNode("MissSound");
         
-        this.Cob       = (Cob) this.GetParent().FindNode("Cob");
-        this.TimerBar  = (TimerBar) this.GetParent().FindNode("TimerBar");
+        this.Cob          = (Cob) this.GetParent().FindNode("Cob");
+        this.TimerBar     = (TimerBar) this.GetParent().FindNode("TimerBar");
+        this.DialogScreen = (DialogScreen) this.GetParent().FindNode("DialogScreen");
 
         this.Cob.Connect("swiped", this, "UpdateScore");
-        this.Cob.Connect("missed", this, "UpdateMisses");
         this.TimerBar.Connect("timeout", this, "GameOver");
     }
 
     public void _OnPlayAgainPressed() {
         GetTree().ReloadCurrentScene();
+    }
+
+    public void _OnExitPressed() {
+        GetTree().ChangeScene("res://Scenes/Home.tscn");
     }
 
     public async void UpdateScore(int point) {
@@ -63,8 +68,10 @@ public class Score : Control {
 
     // TODO :: Put this in Game controller?
     public void GameOver() {
+        this.DialogScreen.QueueFree();
         this.Cob.QueueFree();
         this.TimerBar.QueueFree();
+        this.Visible = true;
         this.gameOver.Visible = true;
     }
 }
