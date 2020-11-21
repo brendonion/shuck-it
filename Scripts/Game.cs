@@ -126,7 +126,7 @@ public class Game : Node2D {
         if (num == 10) {
             // Wait 1 - 3 seconds before spawning
             float waitTime = (float) GD.RandRange(1, 4);
-            await ToSignal(GetTree().CreateTimer(waitTime), "timeout");
+            await ToSignal(GetTree().CreateTimer(waitTime, false), "timeout");
             // Spawn kernel and set it's speed
             Kernel kernel = (Kernel) KernelScene.Instance();
             kernel.speed  = this.kernelSpeed;
@@ -153,7 +153,7 @@ public class Game : Node2D {
             fly.speed = this.flySpeed; 
             AddChild(fly);
             // Space out each fly
-            await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+            await ToSignal(GetTree().CreateTimer(0.5f, false), "timeout");
         }
     }
 

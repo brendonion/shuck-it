@@ -66,11 +66,11 @@ public class Score : Control {
         if (point < 0) {
             this.UpdateMisses();
             this.pointCounter.BbcodeText = $"[shake level=7][center]{this.points}[/center][/shake]";
-            await ToSignal(GetTree().CreateTimer(1f), "timeout");
+            await ToSignal(GetTree().CreateTimer(1f, false), "timeout");
         } else {
             this.pointCounter.BbcodeText = $"[wave amp=20 freq=20][center]{this.points}[/center][/wave]";
             this.pointSound.Play();
-            await ToSignal(GetTree().CreateTimer(1f), "timeout");
+            await ToSignal(GetTree().CreateTimer(1f, false), "timeout");
         }
 
         this.pointCounter.BbcodeText = $"[wave amp=10 freq=2][center]{this.points}[/center][/wave]";

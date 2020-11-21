@@ -127,7 +127,7 @@ public class Pig : Node2D {
 
     public void ModulateColor() {
         if (this.modulateTimer == null) {
-            this.modulateTimer = GetTree().CreateTimer(0.025f);
+            this.modulateTimer = GetTree().CreateTimer(0.025f, false);
         }
 
         if (this.modulateTimer != null && this.modulateTimer.TimeLeft <= 0f) {
