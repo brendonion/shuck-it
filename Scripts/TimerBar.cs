@@ -49,7 +49,7 @@ public class TimerBar : Node2D {
         if (this.Visible) {
             this.timeLeft = duration > 0f ? duration : this.timeLeft;
             this.barProgress.Value = 100;
-            this.timer = GetTree().CreateTimer(this.timeLeft);
+            this.timer = GetTree().CreateTimer(this.timeLeft, false);
         }
     }
 

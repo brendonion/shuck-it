@@ -7,23 +7,34 @@ public class Score : Control {
 
     public RichTextLabel pointCounter;
     public RichTextLabel missCounter;
+    public RichTextLabel finalScore;
+    public RichTextLabel bestScore;
+    public Button pauseButton;
     public Control gameOver;
     public AudioStreamPlayer2D pointSound;
     public AudioStreamPlayer2D missSound;
 
     public Cob Cob;
     public TimerBar TimerBar;
+    public Control PauseScreen;
     public DialogScreen DialogScreen;
 
     public override void _Ready() {
+        // Score tracking nodes
         this.pointCounter = (RichTextLabel) FindNode("Points");
         this.missCounter  = (RichTextLabel) FindNode("Misses");
-        this.gameOver     = (Control) FindNode("Game Over");
+        this.pauseButton  = (Button) FindNode("PauseButton");
         this.pointSound   = (AudioStreamPlayer2D) FindNode("PointSound");
         this.missSound    = (AudioStreamPlayer2D) FindNode("MissSound");
         
+        // Game over nodes
+        this.gameOver     = (Control) FindNode("Game Over");
+        this.finalScore   = (RichTextLabel) this.gameOver.FindNode("FinalScore");
+        this.bestScore    = (RichTextLabel) this.gameOver.FindNode("BestScore");
+        
         this.Cob          = (Cob) this.GetParent().FindNode("Cob");
         this.TimerBar     = (TimerBar) this.GetParent().FindNode("TimerBar");
+        this.PauseScreen  = (Control) this.GetParent().FindNode("PauseScreen");
         this.DialogScreen = (DialogScreen) this.GetParent().FindNode("DialogScreen");
 
         this.Cob.Connect("swiped", this, "UpdateScore");
@@ -36,6 +47,17 @@ public class Score : Control {
 
     public void _OnExitPressed() {
         GetTree().ChangeScene("res://Scenes/Home.tscn");
+    }
+
+    public void _OnPausePressed() {
+        GetTree().Paused         = true;
+        this.PauseScreen.Visible = true;
+        this.PauseScreen.SetAsToplevel(true);
+    }
+
+    public void _OnResumePressed() {
+        GetTree().Paused         = false;
+        this.PauseScreen.Visible = false;
     }
 
     public async void UpdateScore(int point) {
@@ -68,10 +90,20 @@ public class Score : Control {
 
     // TODO :: Put this in Game controller?
     public void GameOver() {
+        // Remove gameplay nodes
         this.DialogScreen.QueueFree();
         this.Cob.QueueFree();
         this.TimerBar.QueueFree();
+
+        // Hide score tracking nodes
+        this.missCounter.Visible = false;
+        this.pointCounter.Visible = false;
+        this.pauseButton.Visible = false;
+
+        // Display game over content
         this.Visible = true;
         this.gameOver.Visible = true;
+        this.finalScore.BbcodeText = $"[center]Score: {this.points}[/center]";
+        this.bestScore.BbcodeText  = $"[center]Best: {this.points}[/center]";
     }
 }

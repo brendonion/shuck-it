@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
@@ -11,6 +11,41 @@
 [ext_resource path="res://Sounds/VoiceSans.wav" type="AudioStream" id=9]
 [ext_resource path="res://Sounds/Point.wav" type="AudioStream" id=10]
 [ext_resource path="res://Sounds/Miss.wav" type="AudioStream" id=11]
+[ext_resource path="res://Art/Play.png" type="Texture" id=12]
+[ext_resource path="res://Art/Pause.png" type="Texture" id=13]
+[ext_resource path="res://Art/Trophy.png" type="Texture" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=2]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=3]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=8]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=4]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=5]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=6]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=7]
+content_margin_left = 12.0
+content_margin_right = 12.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -71,6 +106,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PauseButton" type="Button" parent="Score"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 140.0
+margin_top = 2.0
+margin_right = 176.0
+margin_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 8 )
+custom_constants/hseparation = 0
+icon = ExtResource( 13 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Game Over" type="Control" parent="Score"]
 visible = false
 anchor_right = 1.0
@@ -82,14 +136,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Trophy" type="Sprite" parent="Score/Game Over"]
+position = Vector2( 87.1874, 115.884 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 14 )
+
 [node name="RichTextLabel" type="RichTextLabel" parent="Score/Game Over"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -89.0
-margin_top = -62.5
-margin_bottom = -20.5
+margin_top = -126.5
+margin_bottom = -84.5
 rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
 size_flags_horizontal = 2
@@ -98,6 +157,36 @@ theme = ExtResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=20 freq=2][center]GAME OVER[/center][/wave]"
 text = "GAME OVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FinalScore" type="RichTextLabel" parent="Score/Game Over"]
+margin_left = -24.0
+margin_top = 140.0
+margin_right = 130.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 80, 0 )
+rect_scale = Vector2( 1.5, 1.5 )
+theme = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Score: 0[/center]"
+text = "Score: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BestScore" type="RichTextLabel" parent="Score/Game Over"]
+margin_left = -30.0
+margin_top = 158.0
+margin_right = 124.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 80, 0 )
+rect_scale = Vector2( 1.5, 1.5 )
+theme = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Best: 0[/center]"
+text = "Best: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -132,6 +221,7 @@ stream = ExtResource( 11 )
 
 [node name="TimerBar" parent="." instance=ExtResource( 6 )]
 visible = false
+position = Vector2( 90.2875, 48.875 )
 
 [node name="Cob" parent="." instance=ExtResource( 2 )]
 position = Vector2( 90, -100 )
@@ -208,5 +298,59 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PauseScreen" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 180.0
+margin_bottom = 320.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PauseScreen"]
+modulate = Color( 1, 1, 1, 0.490196 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1.52588e-05
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseScreen"]
+margin_left = 2.0
+margin_top = 87.0
+margin_right = 91.0
+margin_bottom = 131.0
+rect_scale = Vector2( 2, 2 )
+theme = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=10 freq=2][center]Pause[/center][/wave]"
+text = "Pause"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton" type="Button" parent="PauseScreen"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 67.0
+margin_top = 143.0
+margin_right = 103.0
+margin_bottom = 172.0
+rect_scale = Vector2( 1.25, 1.25 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+icon = ExtResource( 12 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Score/PauseButton" to="Score" method="_OnPausePressed"]
 [connection signal="pressed" from="Score/Game Over/PlayAgainButton" to="Score" method="_OnPlayAgainPressed"]
 [connection signal="pressed" from="Score/Game Over/ExitButton" to="Score" method="_OnExitPressed"]
+[connection signal="pressed" from="PauseScreen/ResumeButton" to="Score" method="_OnResumePressed"]
