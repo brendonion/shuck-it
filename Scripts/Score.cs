@@ -4,6 +4,7 @@ public class Score : Control {
 
     public int points = 0;
     public int misses = 0;
+    public int best   = 0;
 
     public RichTextLabel pointCounter;
     public RichTextLabel missCounter;
@@ -11,6 +12,7 @@ public class Score : Control {
     public RichTextLabel bestScore;
     public Button pauseButton;
     public Control gameOver;
+    public Sprite trophy;
     public AudioStreamPlayer2D pointSound;
     public AudioStreamPlayer2D missSound;
 
@@ -18,6 +20,9 @@ public class Score : Control {
     public TimerBar TimerBar;
     public Control PauseScreen;
     public DialogScreen DialogScreen;
+
+    public Texture trophyTexture      = (Texture) ResourceLoader.Load("res://Art/Trophy.png");
+    public Texture emptyTrophyTexture = (Texture) ResourceLoader.Load("res://Art/EmptyTrophy.png");
 
     public override void _Ready() {
         // Score tracking nodes
@@ -29,6 +34,7 @@ public class Score : Control {
         
         // Game over nodes
         this.gameOver     = (Control) FindNode("Game Over");
+        this.trophy       = (Sprite) this.gameOver.FindNode("Trophy");
         this.finalScore   = (RichTextLabel) this.gameOver.FindNode("FinalScore");
         this.bestScore    = (RichTextLabel) this.gameOver.FindNode("BestScore");
         
@@ -39,6 +45,8 @@ public class Score : Control {
 
         this.Cob.Connect("swiped", this, "UpdateScore");
         this.TimerBar.Connect("timeout", this, "GameOver");
+
+        this.Load();
     }
 
     public void _OnPlayAgainPressed() {
@@ -106,6 +114,41 @@ public class Score : Control {
         this.Visible = true;
         this.gameOver.Visible = true;
         this.finalScore.BbcodeText = $"[center]Score: {this.points}[/center]";
-        this.bestScore.BbcodeText  = $"[center]Best: {this.points}[/center]";
+        if (this.best > this.points) {
+            this.bestScore.BbcodeText = $"[center]Best: {this.best}[/center]";
+            this.trophy.Texture = emptyTrophyTexture;
+        } else {
+            this.bestScore.BbcodeText = $"[center]New Best![/center]";
+            this.trophy.Texture = trophyTexture;
+            this.Save();
+        }
+    }
+
+    public void Load() {
+        var saveGame = new File();
+        if (!saveGame.FileExists("user://savegame.save"))
+            return; // Error!  We don't have a save to load.
+        
+        saveGame.Open("user://savegame.save", File.ModeFlags.Read);
+
+        while (saveGame.GetPosition() < saveGame.GetLen()) {
+            var saveData = new Godot.Collections.Dictionary<string, object>((Godot.Collections.Dictionary) JSON.Parse(saveGame.GetLine()).Result);
+            Set("best", saveData["BestScore"]);
+        }
+
+        saveGame.Close();
+    }
+
+    public void Save() {
+        var saveGame = new File();
+        saveGame.Open("user://savegame.save", File.ModeFlags.Write);
+
+        var dict = new Godot.Collections.Dictionary<string, object>() {
+            { "BestScore", this.points },
+            { "NoAds", false }
+        };
+
+        saveGame.StoreLine(JSON.Print(dict));
+        saveGame.Close();
     }
 }
