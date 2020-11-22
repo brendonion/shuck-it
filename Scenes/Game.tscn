@@ -27,10 +27,6 @@ content_margin_right = 12.0
 content_margin_left = 12.0
 content_margin_right = 12.0
 
-[sub_resource type="StyleBoxEmpty" id=8]
-content_margin_left = 12.0
-content_margin_right = 12.0
-
 [sub_resource type="StyleBoxEmpty" id=4]
 content_margin_left = 12.0
 content_margin_right = 12.0
@@ -44,6 +40,10 @@ content_margin_left = 12.0
 content_margin_right = 12.0
 
 [sub_resource type="StyleBoxEmpty" id=7]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=8]
 content_margin_left = 12.0
 content_margin_right = 12.0
 
@@ -117,7 +117,7 @@ grow_vertical = 2
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 8 )
+custom_styles/normal = SubResource( 4 )
 custom_constants/hseparation = 0
 icon = ExtResource( 13 )
 flat = true
@@ -341,10 +341,10 @@ margin_top = 143.0
 margin_right = 103.0
 margin_bottom = 172.0
 rect_scale = Vector2( 1.25, 1.25 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 icon = ExtResource( 12 )
 flat = true
 __meta__ = {

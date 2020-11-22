@@ -51,12 +51,14 @@ public class Score : Control {
 
     public void _OnPausePressed() {
         GetTree().Paused         = true;
+        this.Cob.Visible         = false;
         this.PauseScreen.Visible = true;
         this.PauseScreen.SetAsToplevel(true);
     }
 
     public void _OnResumePressed() {
         GetTree().Paused         = false;
+        this.Cob.Visible         = true;
         this.PauseScreen.Visible = false;
     }
 
