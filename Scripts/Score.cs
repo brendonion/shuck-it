@@ -17,14 +17,16 @@ public class Score : Control {
     public Sprite trophy;
     public AudioStreamPlayer2D pointSound;
     public AudioStreamPlayer2D missSound;
+    public AudioStreamPlayer2D gameOverSound;
 
     public Cob Cob;
     public TimerBar TimerBar;
     public Control PauseScreen;
     public DialogScreen DialogScreen;
 
-    public Texture trophyTexture      = (Texture) ResourceLoader.Load("res://Art/Trophy.png");
-    public Texture emptyTrophyTexture = (Texture) ResourceLoader.Load("res://Art/EmptyTrophy.png");
+    public Texture trophyTexture       = (Texture) ResourceLoader.Load("res://Art/Trophy.png");
+    public Texture silverTrophyTexture = (Texture) ResourceLoader.Load("res://Art/SilverTrophy.png");
+    public Texture emptyTrophyTexture  = (Texture) ResourceLoader.Load("res://Art/EmptyTrophy.png");
 
     public override void _Ready() {
         // Score tracking nodes
@@ -35,10 +37,11 @@ public class Score : Control {
         this.missSound    = (AudioStreamPlayer2D) FindNode("MissSound");
         
         // Game over nodes
-        this.gameOver     = (Control) FindNode("Game Over");
-        this.trophy       = (Sprite) this.gameOver.FindNode("Trophy");
-        this.finalScore   = (RichTextLabel) this.gameOver.FindNode("FinalScore");
-        this.bestScore    = (RichTextLabel) this.gameOver.FindNode("BestScore");
+        this.gameOver      = (Control) FindNode("Game Over");
+        this.gameOverSound = (AudioStreamPlayer2D) this.gameOver.FindNode("GameOverSound");
+        this.trophy        = (Sprite) this.gameOver.FindNode("Trophy");
+        this.finalScore    = (RichTextLabel) this.gameOver.FindNode("FinalScore");
+        this.bestScore     = (RichTextLabel) this.gameOver.FindNode("BestScore");
         
         this.Cob          = (Cob) this.GetParent().FindNode("Cob");
         this.TimerBar     = (TimerBar) this.GetParent().FindNode("TimerBar");
@@ -90,7 +93,7 @@ public class Score : Control {
 
     public void UpdateMisses() {
         this.misses += 1;
-        this.missSound.Play();
+        if (this.misses < 3) this.missSound.Play();
         string missText = "";
         for (int i = 0; i < this.misses; i++) missText += "X ";
         this.missCounter.BbcodeText  = $"[shake level={2 * this.misses}][center]{missText}[/center][/shake]";
@@ -102,6 +105,8 @@ public class Score : Control {
 
     // TODO :: Put this in Game controller?
     public void GameOver() {
+        this.gameOverSound.Play();
+
         // Remove gameplay nodes
         this.DialogScreen.QueueFree();
         this.Cob.QueueFree();
@@ -116,13 +121,18 @@ public class Score : Control {
         this.Visible = true;
         this.gameOver.Visible = true;
         this.finalScore.BbcodeText = $"[center]Score: {this.points}[/center]";
-        if (this.best > this.points) {
-            this.bestScore.BbcodeText = $"[center]Best: {this.best}[/center]";
-            this.trophy.Texture = emptyTrophyTexture;
-        } else {
+        
+        // Determine trophy and save high score
+        if (this.points > this.best) {
             this.bestScore.BbcodeText = $"[center]New Best![/center]";
-            this.trophy.Texture = trophyTexture;
+            this.trophy.Texture = this.trophyTexture;
             this.Save();
+        } else if (this.points > this.best / 2 && this.points <= this.best) {
+            this.bestScore.BbcodeText = $"[center]Best: {this.best}[/center]";
+            this.trophy.Texture = this.silverTrophyTexture;
+        } else {
+            this.bestScore.BbcodeText = $"[center]Best: {this.best}[/center]";
+            this.trophy.Texture = this.emptyTrophyTexture;
         }
     }
 

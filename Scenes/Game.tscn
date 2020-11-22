@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Art/Play.png" type="Texture" id=12]
 [ext_resource path="res://Art/Pause.png" type="Texture" id=13]
 [ext_resource path="res://Art/Trophy.png" type="Texture" id=14]
+[ext_resource path="res://Sounds/GameOver.wav" type="AudioStream" id=15]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 8.0
@@ -81,9 +82,11 @@ __meta__ = {
 
 [node name="PointSound" type="AudioStreamPlayer2D" parent="Score"]
 stream = ExtResource( 10 )
+volume_db = -5.0
 
 [node name="MissSound" type="AudioStreamPlayer2D" parent="Score"]
 stream = ExtResource( 11 )
+volume_db = -5.0
 
 [node name="Points" type="RichTextLabel" parent="Score"]
 margin_left = -88.0
@@ -141,6 +144,10 @@ mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="Score/Game Over"]
+stream = ExtResource( 15 )
+volume_db = -5.0
 
 [node name="Trophy" type="Sprite" parent="Score/Game Over"]
 position = Vector2( 87.1874, 115.884 )

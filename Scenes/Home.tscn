@@ -80,13 +80,12 @@ __meta__ = {
 position = Vector2( 89.9282, 229.107 )
 scale = Vector2( 1.40995, 1.41377 )
 frames = SubResource( 5 )
-frame = 2
 playing = true
 
 [node name="Logo" type="AnimatedSprite" parent="."]
 position = Vector2( 92.5537, 82.0793 )
 frames = SubResource( 10 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -114,9 +113,9 @@ text = "TUTORIAL"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 42.0
-margin_top = 224.0
+margin_top = 223.0
 margin_right = 235.0
-margin_bottom = 272.0
+margin_bottom = 271.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_constants/separation = 4
 alignment = 1
@@ -125,14 +124,14 @@ __meta__ = {
 }
 
 [node name="AdsButton" type="Button" parent="HBoxContainer"]
-margin_left = 11.0
-margin_right = 67.0
+margin_left = 10.0
+margin_right = 66.0
 margin_bottom = 48.0
 theme = ExtResource( 4 )
 icon = ExtResource( 6 )
 
 [node name="SoundButton" type="Button" parent="HBoxContainer"]
-margin_left = 71.0
+margin_left = 70.0
 margin_right = 122.0
 margin_bottom = 48.0
 icon = ExtResource( 8 )

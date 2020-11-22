@@ -7,47 +7,47 @@
 [ext_resource path="res://Sounds/PigDeath.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 110, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 220, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 330, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 110, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 220, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 330, 0, 110, 80 )
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 3 ), SubResource( 3 ) ],
-"loop": true,
-"name": "death",
-"speed": 7.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "default",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 7 ), SubResource( 7 ) ],
+"loop": true,
+"name": "death",
 "speed": 7.0
 } ]
 
@@ -110,7 +110,9 @@ curve = SubResource( 14 )
 
 [node name="SquealSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+volume_db = -5.0
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+volume_db = -5.0
 [connection signal="input_event" from="KinematicBody2D" to="." method="_OnBodyInputEvent"]
