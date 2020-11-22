@@ -6,6 +6,8 @@ public class Score : Control {
     public int misses = 0;
     public int best   = 0;
 
+    public string saveFile = "user://savegame.save";
+
     public RichTextLabel pointCounter;
     public RichTextLabel missCounter;
     public RichTextLabel finalScore;
@@ -126,10 +128,10 @@ public class Score : Control {
 
     public void Load() {
         var saveGame = new File();
-        if (!saveGame.FileExists("user://savegame.save"))
+        if (!saveGame.FileExists(this.saveFile))
             return; // Error!  We don't have a save to load.
         
-        saveGame.Open("user://savegame.save", File.ModeFlags.Read);
+        saveGame.Open(this.saveFile, File.ModeFlags.Read);
 
         while (saveGame.GetPosition() < saveGame.GetLen()) {
             var saveData = new Godot.Collections.Dictionary<string, object>((Godot.Collections.Dictionary) JSON.Parse(saveGame.GetLine()).Result);
@@ -141,11 +143,10 @@ public class Score : Control {
 
     public void Save() {
         var saveGame = new File();
-        saveGame.Open("user://savegame.save", File.ModeFlags.Write);
+        saveGame.Open(this.saveFile, File.ModeFlags.Write);
 
         var dict = new Godot.Collections.Dictionary<string, object>() {
             { "BestScore", this.points },
-            { "NoAds", false }
         };
 
         saveGame.StoreLine(JSON.Print(dict));
