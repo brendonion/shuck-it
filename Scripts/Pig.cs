@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public class Pig : Node2D {
@@ -93,7 +92,7 @@ public class Pig : Node2D {
                 this.squealSound.Play();
             }
 
-            // Retreat after 3 hits
+            // Retreat after 2 hits
             if (this.health % 2 == 0) {
                 this.retreating  = true;
                 this.speed       = this.retreatSpeed;
@@ -101,7 +100,7 @@ public class Pig : Node2D {
             }
 
             // Health reached 0; Pig is dead
-            if (this.health == 0) {
+            if (this.health == 0 && !this.dead) {
                 RemoveFromGroup("pig");
                 this.dead  = true;
                 this.speed = this.deathSpeed;

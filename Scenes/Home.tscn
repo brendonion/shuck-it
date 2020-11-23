@@ -80,7 +80,6 @@ __meta__ = {
 position = Vector2( 89.9282, 229.107 )
 scale = Vector2( 1.40995, 1.41377 )
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="Logo" type="AnimatedSprite" parent="."]

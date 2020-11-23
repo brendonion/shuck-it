@@ -31,6 +31,8 @@ public class Score : Control {
     public Godot.Object admob;
 
     public override void _Ready() {
+        GD.Randomize();
+
         // Score tracking nodes
         this.pointCounter = (RichTextLabel) FindNode("Points");
         this.missCounter  = (RichTextLabel) FindNode("Misses");
@@ -55,7 +57,6 @@ public class Score : Control {
 
         if (OS.GetName() == "Android") {
             this.admob = (Godot.Object) this.GetParent().FindNode("AdMob");
-            this.admob.Call("load_banner");
             this.admob.Call("load_interstitial");
         }
 
@@ -63,14 +64,17 @@ public class Score : Control {
     }
 
     public void _OnPlayAgainPressed() {
+        if (OS.GetName() == "Android") this.admob.Call("hide_banner");
         GetTree().ReloadCurrentScene();
     }
 
     public void _OnExitPressed() {
+        if (OS.GetName() == "Android") this.admob.Call("hide_banner");
         GetTree().ChangeScene("res://Scenes/Home.tscn");
     }
 
     public void _OnPausePressed() {
+        if (OS.GetName() == "Android") this.admob.Call("load_banner");
         GetTree().Paused         = true;
         this.Cob.Visible         = false;
         this.PauseScreen.Visible = true;
@@ -78,6 +82,7 @@ public class Score : Control {
     }
 
     public void _OnResumePressed() {
+        if (OS.GetName() == "Android") this.admob.Call("hide_banner");
         GetTree().Paused         = false;
         this.Cob.Visible         = true;
         this.PauseScreen.Visible = false;
@@ -114,7 +119,10 @@ public class Score : Control {
     // TODO :: Put this in Game controller?
     public void GameOver() {
         if (OS.GetName() == "Android") {
-            this.admob.Call("show_banner");
+            this.admob.Call("load_banner");
+            if (((int) GD.RandRange(1, 5)) == 4) {
+                this.admob.Call("show_interstitial");
+            }
         }
 
         this.gameOverSound.Play();

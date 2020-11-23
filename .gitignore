@@ -4,3 +4,5 @@
 .mono/
 logs/
 *.apk
+android/.gradle
+android/build
