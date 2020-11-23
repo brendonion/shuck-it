@@ -28,6 +28,8 @@ public class Score : Control {
     public Texture silverTrophyTexture = (Texture) ResourceLoader.Load("res://Art/SilverTrophy.png");
     public Texture emptyTrophyTexture  = (Texture) ResourceLoader.Load("res://Art/EmptyTrophy.png");
 
+    public Godot.Object admob;
+
     public override void _Ready() {
         // Score tracking nodes
         this.pointCounter = (RichTextLabel) FindNode("Points");
@@ -50,6 +52,12 @@ public class Score : Control {
 
         this.Cob.Connect("swiped", this, "UpdateScore");
         this.TimerBar.Connect("timeout", this, "GameOver");
+
+        if (OS.GetName() == "Android") {
+            this.admob = (Godot.Object) this.GetParent().FindNode("AdMob");
+            this.admob.Call("load_banner");
+            this.admob.Call("load_interstitial");
+        }
 
         this.Load();
     }
@@ -105,6 +113,10 @@ public class Score : Control {
 
     // TODO :: Put this in Game controller?
     public void GameOver() {
+        if (OS.GetName() == "Android") {
+            this.admob.Call("show_banner");
+        }
+
         this.gameOverSound.Play();
 
         // Remove gameplay nodes

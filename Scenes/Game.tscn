@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Art/Pause.png" type="Texture" id=13]
 [ext_resource path="res://Art/Trophy.png" type="Texture" id=14]
 [ext_resource path="res://Sounds/GameOver.wav" type="AudioStream" id=15]
+[ext_resource path="res://admob-lib/admob.gd" type="Script" id=16]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 8.0
@@ -357,6 +358,12 @@ flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource( 16 )
+is_real = true
+banner_id = "ca-app-pub-1794508493895269/3851480488"
+interstitial_id = "ca-app-pub-1794508493895269/5079983438"
 [connection signal="pressed" from="Score/PauseButton" to="Score" method="_OnPausePressed"]
 [connection signal="pressed" from="Score/Game Over/PlayAgainButton" to="Score" method="_OnPlayAgainPressed"]
 [connection signal="pressed" from="Score/Game Over/ExitButton" to="Score" method="_OnExitPressed"]
