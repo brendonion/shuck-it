@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Art/CornField.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/ShuckItLogo.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Home.cs" type="Script" id=3]
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=4]
@@ -10,48 +10,24 @@
 [ext_resource path="res://Art/SoundOn.png" type="Texture" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 128, 128 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 128, 128 )
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 128, 128 )
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 384, 0, 128, 128 )
+atlas = ExtResource( 2 )
+region = Rect2( 768, 0, 256, 256 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 256, 256 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 256, 256 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 512, 0, 256, 256 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 768, 0, 256, 256 )
-
-[sub_resource type="SpriteFrames" id=10]
-animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
 "name": "default",
 "speed": 2.0
@@ -65,26 +41,12 @@ stream = ExtResource( 5 )
 volume_db = -5.0
 autoplay = true
 
-[node name="Sky" type="ColorRect" parent="."]
-show_behind_parent = true
-margin_top = -0.3535
-margin_right = 180.0
-margin_bottom = 191.646
-mouse_filter = 2
-color = Color( 0.956863, 0.921569, 0.8, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Background" type="AnimatedSprite" parent="."]
-position = Vector2( 89.9282, 229.107 )
-scale = Vector2( 1.40995, 1.41377 )
-frames = SubResource( 5 )
-playing = true
+[node name="Background" parent="." instance=ExtResource( 1 )]
 
 [node name="Logo" type="AnimatedSprite" parent="."]
 position = Vector2( 92.5537, 82.0793 )
-frames = SubResource( 10 )
+frames = SubResource( 5 )
+frame = 2
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
