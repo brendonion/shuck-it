@@ -671,7 +671,6 @@ visible = false
 [node name="Good" type="AnimatedSprite" parent="AnimationPlayer/Page2"]
 position = Vector2( 148.5, 106.937 )
 frames = SubResource( 31 )
-frame = 1
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page2"]
@@ -699,6 +698,7 @@ visible = false
 [node name="Bad" type="AnimatedSprite" parent="AnimationPlayer/Page3"]
 position = Vector2( 28.1227, 106.707 )
 frames = SubResource( 34 )
+frame = 1
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page3"]
@@ -750,7 +750,7 @@ frames = SubResource( 28 )
 position = Vector2( 91.3436, -18.8987 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 39 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
@@ -786,6 +786,7 @@ frames = SubResource( 28 )
 [node name="Pig" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
 position = Vector2( -60.7482, 40.5941 )
 frames = SubResource( 47 )
+frame = 1
 playing = true
 flip_h = true
 flip_v = true
@@ -823,7 +824,7 @@ frames = SubResource( 28 )
 [node name="Kernel" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( -37.4543, 144.823 )
 frames = SubResource( 52 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page6"]

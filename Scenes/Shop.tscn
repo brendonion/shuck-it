@@ -34,8 +34,8 @@ volume_db = -5.0
 autoplay = true
 
 [node name="Background" parent="." instance=ExtResource( 1 )]
-margin_left = 90.2604
-margin_right = 130.26
+margin_left = 90.0569
+margin_right = 130.057
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 margin_left = -29.4207
@@ -548,7 +548,7 @@ theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 500[/center]"
-text = "Price: 999"
+text = "Price: 500"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -566,4 +566,28 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_left = 9.89542
+margin_top = 112.407
+margin_right = 169.895
+margin_bottom = 252.407
+rect_min_size = Vector2( 160, 140 )
+mouse_filter = 1
+theme = ExtResource( 2 )
+popup_exclusive = true
+window_title = "Confirm"
+dialog_text = "Purchase new backdrop for 250 kernels?"
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Button" to="." method="_OnBackPressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton" to="." method="_OnItemPressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton2" to="." method="_OnItemPressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton3" to="." method="_OnItemPressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton4" to="." method="_OnItemPressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton5" to="." method="_OnItemPressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton6" to="." method="_OnItemPressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_OnPopupConfirmed"]
+[connection signal="popup_hide" from="ConfirmationDialog" to="." method="_OnPopupHide"]
