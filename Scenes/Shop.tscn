@@ -1,25 +1,46 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Art/BackgroundPlaceholder.png" type="Texture" id=3]
 [ext_resource path="res://Art/KernelIcon.png" type="Texture" id=4]
+[ext_resource path="res://Art/GreenSquare.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/scroll.gd" type="Script" id=6]
+[ext_resource path="res://Art/SkinPlaceholder.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Shop.cs" type="Script" id=8]
+[ext_resource path="res://Sounds/Home.wav" type="AudioStream" id=9]
 
-[node name="Control" type="Control"]
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[node name="Shop" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -5.0
+autoplay = true
 
 [node name="Background" parent="." instance=ExtResource( 1 )]
 margin_left = 90.2604
 margin_right = 130.26
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = -79.178
+margin_left = -29.4207
 margin_top = -12.0281
-margin_right = 66.822
+margin_right = 116.579
 margin_bottom = 31.9719
 rect_scale = Vector2( 1.5, 1.5 )
 theme = ExtResource( 2 )
@@ -31,20 +52,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Button" type="Button" parent="."]
+margin_left = 10.0
+margin_top = 4.0
+margin_right = 42.0
+margin_bottom = 34.0
+theme = ExtResource( 2 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "back"
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 92.0
-margin_top = 1.0
-margin_right = 180.0
-margin_bottom = 33.0
-custom_constants/separation = 2
+margin_left = 94.0
+margin_top = 4.0
+margin_right = 174.0
+margin_bottom = 36.0
+custom_constants/separation = 0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
-margin_left = 3.0
-margin_right = 51.0
+margin_right = 48.0
 margin_bottom = 32.0
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/CenterContainer"]
@@ -55,15 +94,15 @@ rect_min_size = Vector2( 48, 16 )
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
-bbcode_text = "[right]99x[/right]"
-text = "99x"
+bbcode_text = "[right]999[/right]"
+text = "999"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
-margin_left = 53.0
-margin_right = 85.0
+margin_left = 48.0
+margin_right = 80.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 4 )
@@ -73,58 +112,452 @@ stretch_mode = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 6.0
 margin_top = 41.0
-margin_right = -6.0
-margin_bottom = -6.0
+margin_right = 24.0
+margin_bottom = -1.0
+mouse_filter = 1
+theme = ExtResource( 2 )
+scroll_horizontal_enabled = false
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 168.0
-margin_bottom = 55.0
+margin_right = 180.0
+margin_bottom = 350.0
 grow_horizontal = 0
 grow_vertical = 0
+rect_min_size = Vector2( 180, 350 )
 size_flags_vertical = 0
 theme = ExtResource( 2 )
 custom_constants/separation = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
-margin_right = 168.0
+margin_right = 180.0
 margin_bottom = 55.0
 rect_min_size = Vector2( 0, 55 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="ScrollContainer/VBoxContainer/MarginContainer"]
-modulate = Color( 0, 0, 0, 0.317647 )
-margin_right = 168.0
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 180.0
 margin_bottom = 55.0
 rect_min_size = Vector2( 168, 1 )
+texture = ExtResource( 5 )
+expand = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer"]
-margin_right = 168.0
+margin_right = 180.0
 margin_bottom = 55.0
 custom_constants/separation = 4
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 7.0
-margin_right = 107.0
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
 margin_bottom = 55.0
-rect_min_size = Vector2( 100, 50 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer"]
+margin_top = 12.0
+margin_right = 110.0
+margin_bottom = 42.0
+custom_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
-text = "Item 1"
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-anchor_top = 0.0545455
-anchor_bottom = 0.0545455
-margin_left = 111.0
-margin_right = 161.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 10[/center]"
+text = "Price: 10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer2"]
+margin_top = 4.0
+margin_right = 45.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
+
+[node name="MarginContainer5" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 59.0
+margin_right = 180.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 0, 55 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer5"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 180.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 168, 1 )
+texture = ExtResource( 5 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer5"]
+margin_right = 180.0
+margin_bottom = 55.0
+custom_constants/separation = 4
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer/CenterContainer"]
+margin_top = 12.0
+margin_right = 110.0
+margin_bottom = 42.0
+custom_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 50[/center]"
+text = "Price: 50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer/CenterContainer2"]
+margin_top = 4.0
+margin_right = 45.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 118.0
+margin_right = 180.0
+margin_bottom = 173.0
+rect_min_size = Vector2( 0, 55 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer4"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 180.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 168, 1 )
+texture = ExtResource( 5 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer4"]
+margin_right = 180.0
+margin_bottom = 55.0
+custom_constants/separation = 4
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer"]
+margin_top = 12.0
+margin_right = 110.0
+margin_bottom = 42.0
+custom_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 100[/center]"
+text = "Price: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer2"]
+margin_top = 4.0
+margin_right = 45.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 177.0
+margin_right = 180.0
+margin_bottom = 232.0
+rect_min_size = Vector2( 0, 55 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer3"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 180.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 168, 1 )
+texture = ExtResource( 5 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer3"]
+margin_right = 180.0
+margin_bottom = 55.0
+custom_constants/separation = 4
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer/CenterContainer"]
+margin_top = 12.0
+margin_right = 110.0
+margin_bottom = 42.0
+custom_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 250[/center]"
+text = "Price: 250"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer/CenterContainer2"]
+margin_top = 4.0
+margin_right = 45.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 236.0
+margin_right = 180.0
+margin_bottom = 291.0
+rect_min_size = Vector2( 0, 55 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer2"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 180.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 168, 1 )
+texture = ExtResource( 5 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer2"]
+margin_right = 180.0
+margin_bottom = 55.0
+custom_constants/separation = 4
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/CenterContainer"]
+margin_top = 12.0
+margin_right = 110.0
+margin_bottom = 42.0
+custom_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/CenterContainer/VBoxContainer2"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Skin[/center]"
+text = "??? Skin"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/CenterContainer/VBoxContainer2"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 500[/center]"
+text = "Price: 500"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/CenterContainer2"]
+margin_top = 4.0
+margin_right = 45.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="MarginContainer6" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 295.0
+margin_right = 180.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 0, 55 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer6"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 180.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 168, 1 )
+texture = ExtResource( 5 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer6"]
+margin_right = 180.0
+margin_bottom = 55.0
+custom_constants/separation = 4
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer/CenterContainer"]
+margin_top = 12.0
+margin_right = 110.0
+margin_bottom = 42.0
+custom_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer/CenterContainer/VBoxContainer2"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Skin[/center]"
+text = "??? Skin"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer/CenterContainer/VBoxContainer2"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 110, 15 )
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 999[/center]"
+text = "Price: 999"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer/CenterContainer2"]
+margin_top = 4.0
+margin_right = 45.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 7 )
+expand = true
+[connection signal="pressed" from="Button" to="." method="_OnBackPressed"]

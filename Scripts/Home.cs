@@ -41,6 +41,10 @@ public class Home : Node2D {
         this.RegisterButtons();
     }
 
+    public void _OnShopPressed() {
+        GetTree().ChangeScene("res://Scenes/Shop.tscn");
+    }
+
     public void RegisterButtons() {
         this.adsButton.Disabled = !this.enableAds;
         if (this.enableSound) {
