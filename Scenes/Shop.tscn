@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Art/KernelIcon.png" type="Texture" id=4]
 [ext_resource path="res://Art/GreenSquare.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/scroll.gd" type="Script" id=6]
+[ext_resource path="res://Art/SkinPlaceholder.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/Shop.cs" type="Script" id=8]
 [ext_resource path="res://Sounds/Shop.wav" type="AudioStream" id=9]
 [ext_resource path="res://Art/GreenSquareHover.png" type="Texture" id=10]
@@ -492,7 +493,7 @@ margin_top = 5.0
 margin_right = 45.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 expand = true
 
 [node name="TextureButton6" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
@@ -564,15 +565,16 @@ margin_top = 5.0
 margin_right = 45.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 expand = true
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-margin_left = 9.89542
-margin_top = 112.407
-margin_right = 169.895
-margin_bottom = 252.407
-rect_min_size = Vector2( 160, 140 )
+visible = true
+margin_left = 10.0
+margin_top = 112.0
+margin_right = 170.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 160, 120 )
 mouse_filter = 1
 theme = ExtResource( 2 )
 popup_exclusive = true
@@ -583,6 +585,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="Button" to="." method="_OnBackPressed"]
+[connection signal="scroll_ended" from="ScrollContainer" to="." method="_OnScrollEnded"]
+[connection signal="scroll_started" from="ScrollContainer" to="." method="_OnScrollStarted"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton" to="." method="_OnItemPressed"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton2" to="." method="_OnItemPressed"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/TextureButton3" to="." method="_OnItemPressed"]
