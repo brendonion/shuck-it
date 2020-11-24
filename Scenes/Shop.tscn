@@ -6,9 +6,9 @@
 [ext_resource path="res://Art/KernelIcon.png" type="Texture" id=4]
 [ext_resource path="res://Art/GreenSquare.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/scroll.gd" type="Script" id=6]
-[ext_resource path="res://Art/SkinPlaceholder.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/Shop.cs" type="Script" id=8]
 [ext_resource path="res://Sounds/Shop.wav" type="AudioStream" id=9]
+[ext_resource path="res://Art/GreenSquareHover.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -136,54 +136,54 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
 margin_right = 180.0
 margin_bottom = 55.0
 rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer"]
-modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 180.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 168, 1 )
-texture = ExtResource( 5 )
-expand = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer"]
-margin_right = 180.0
-margin_bottom = 55.0
-custom_constants/separation = 4
-alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton/HBoxContainer"]
 margin_left = 10.0
 margin_right = 120.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton/HBoxContainer/CenterContainer"]
 margin_top = 12.0
 margin_right = 110.0
 margin_bottom = 42.0
+mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
 text = "??? Backdrop"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
@@ -193,68 +193,69 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton/HBoxContainer"]
 margin_left = 124.0
 margin_right = 169.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer/HBoxContainer/CenterContainer2"]
-margin_top = 4.0
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/TextureButton/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
 margin_right = 45.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="MarginContainer5" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="TextureButton2" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
 margin_top = 59.0
 margin_right = 180.0
 margin_bottom = 114.0
 rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton2"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer5"]
-modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 180.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 168, 1 )
-texture = ExtResource( 5 )
-expand = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer5"]
-margin_right = 180.0
-margin_bottom = 55.0
-custom_constants/separation = 4
-alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton2/HBoxContainer"]
 margin_left = 10.0
 margin_right = 120.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton2/HBoxContainer/CenterContainer"]
 margin_top = 12.0
 margin_right = 110.0
 margin_bottom = 42.0
+mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton2/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
 text = "??? Backdrop"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton2/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
@@ -264,68 +265,69 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton2/HBoxContainer"]
 margin_left = 124.0
 margin_right = 169.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer5/HBoxContainer/CenterContainer2"]
-margin_top = 4.0
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/TextureButton2/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
 margin_right = 45.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="MarginContainer4" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="TextureButton3" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
 margin_top = 118.0
 margin_right = 180.0
 margin_bottom = 173.0
 rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton3"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer4"]
-modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 180.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 168, 1 )
-texture = ExtResource( 5 )
-expand = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer4"]
-margin_right = 180.0
-margin_bottom = 55.0
-custom_constants/separation = 4
-alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton3/HBoxContainer"]
 margin_left = 10.0
 margin_right = 120.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton3/HBoxContainer/CenterContainer"]
 margin_top = 12.0
 margin_right = 110.0
 margin_bottom = 42.0
+mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton3/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
 text = "??? Backdrop"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton3/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
@@ -335,68 +337,69 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton3/HBoxContainer"]
 margin_left = 124.0
 margin_right = 169.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer4/HBoxContainer/CenterContainer2"]
-margin_top = 4.0
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/TextureButton3/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
 margin_right = 45.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="MarginContainer3" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="TextureButton4" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
 margin_top = 177.0
 margin_right = 180.0
 margin_bottom = 232.0
 rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton4"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer3"]
-modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 180.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 168, 1 )
-texture = ExtResource( 5 )
-expand = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer3"]
-margin_right = 180.0
-margin_bottom = 55.0
-custom_constants/separation = 4
-alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton4/HBoxContainer"]
 margin_left = 10.0
 margin_right = 120.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton4/HBoxContainer/CenterContainer"]
 margin_top = 12.0
 margin_right = 110.0
 margin_bottom = 42.0
+mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton4/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
 text = "??? Backdrop"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton4/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
@@ -406,68 +409,69 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton4/HBoxContainer"]
 margin_left = 124.0
 margin_right = 169.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer3/HBoxContainer/CenterContainer2"]
-margin_top = 4.0
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/TextureButton4/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
 margin_right = 45.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="TextureButton5" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
 margin_top = 236.0
 margin_right = 180.0
 margin_bottom = 291.0
 rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton5"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer2"]
-modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 180.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 168, 1 )
-texture = ExtResource( 5 )
-expand = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer2"]
-margin_right = 180.0
-margin_bottom = 55.0
-custom_constants/separation = 4
-alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton5/HBoxContainer"]
 margin_left = 10.0
 margin_right = 120.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton5/HBoxContainer/CenterContainer"]
 margin_top = 12.0
 margin_right = 110.0
 margin_bottom = 42.0
+mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/CenterContainer/VBoxContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton5/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Skin[/center]"
 text = "??? Skin"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/CenterContainer/VBoxContainer2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton5/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
@@ -477,87 +481,89 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton5/HBoxContainer"]
 margin_left = 124.0
 margin_right = 169.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer2/HBoxContainer/CenterContainer2"]
-margin_top = 4.0
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/TextureButton5/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
 margin_right = 45.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
-texture = ExtResource( 7 )
+texture = ExtResource( 3 )
 expand = true
 
-[node name="MarginContainer6" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="TextureButton6" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
 margin_top = 295.0
 margin_right = 180.0
 margin_bottom = 350.0
 rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton6"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer6"]
-modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 180.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 168, 1 )
-texture = ExtResource( 5 )
-expand = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer6"]
-margin_right = 180.0
-margin_bottom = 55.0
-custom_constants/separation = 4
-alignment = 1
-
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton6/HBoxContainer"]
 margin_left = 10.0
 margin_right = 120.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/TextureButton6/HBoxContainer/CenterContainer"]
 margin_top = 12.0
 margin_right = 110.0
 margin_bottom = 42.0
+mouse_filter = 2
 custom_constants/separation = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer/CenterContainer/VBoxContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton6/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Skin[/center]"
 text = "??? Skin"
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer/CenterContainer/VBoxContainer2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/TextureButton6/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]Price: 999[/center]"
+bbcode_text = "[center]Price: 500[/center]"
 text = "Price: 999"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/TextureButton6/HBoxContainer"]
 margin_left = 124.0
 margin_right = 169.0
 margin_bottom = 55.0
+mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/MarginContainer6/HBoxContainer/CenterContainer2"]
-margin_top = 4.0
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/TextureButton6/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
 margin_right = 45.0
-margin_bottom = 49.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
-texture = ExtResource( 7 )
+texture = ExtResource( 3 )
 expand = true
 [connection signal="pressed" from="Button" to="." method="_OnBackPressed"]
