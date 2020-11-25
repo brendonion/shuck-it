@@ -2,9 +2,12 @@ using Godot;
 
 public class Score : Control {
 
-    public int points = 0;
-    public int misses = 0;
-    public int best   = 0;
+    // Saved variables
+    public int best    = 0;
+    public int kernels = 0;
+
+    public int points  = 0;
+    public int misses  = 0;
 
     public string saveFile = "user://savegame.save";
 
@@ -146,7 +149,7 @@ public class Score : Control {
         if (this.points > this.best) {
             this.bestScore.BbcodeText = $"[center]New Best![/center]";
             this.trophy.Texture = this.trophyTexture;
-            this.Save();
+            this.best = this.points;
         } else if (this.points > this.best / 2 && this.points <= this.best) {
             this.bestScore.BbcodeText = $"[center]Best: {this.best}[/center]";
             this.trophy.Texture = this.silverTrophyTexture;
@@ -154,6 +157,8 @@ public class Score : Control {
             this.bestScore.BbcodeText = $"[center]Best: {this.best}[/center]";
             this.trophy.Texture = this.emptyTrophyTexture;
         }
+
+        this.Save();
     }
 
     public void Load() {
@@ -163,10 +168,8 @@ public class Score : Control {
         
         saveGame.Open(this.saveFile, File.ModeFlags.Read);
 
-        while (saveGame.GetPosition() < saveGame.GetLen()) {
-            var saveData = new Godot.Collections.Dictionary<string, object>((Godot.Collections.Dictionary) JSON.Parse(saveGame.GetLine()).Result);
-            Set("best", saveData["BestScore"]);
-        }
+        Set("best", saveGame.GetVar());
+        Set("kernels", saveGame.GetVar());
 
         saveGame.Close();
     }
@@ -175,11 +178,9 @@ public class Score : Control {
         var saveGame = new File();
         saveGame.Open(this.saveFile, File.ModeFlags.Write);
 
-        var dict = new Godot.Collections.Dictionary<string, object>() {
-            { "BestScore", this.points },
-        };
+        saveGame.StoreVar(this.best);    // index 0
+        saveGame.StoreVar(this.kernels); // index 1
 
-        saveGame.StoreLine(JSON.Print(dict));
         saveGame.Close();
     }
 }

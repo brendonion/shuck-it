@@ -17,8 +17,6 @@ func _input(ev):
 			swipe_mouse_start = ev.position
 			swipe_mouse_times = [OS.get_ticks_msec()]
 			swipe_mouse_positions = [swipe_mouse_start]
-			yield(get_tree().create_timer(0.1), "timeout")
-			emit_signal("scroll_started")
 		else:
 			swipe_mouse_times.append(OS.get_ticks_msec())
 			swipe_mouse_positions.append(ev.position)
@@ -43,6 +41,7 @@ func _input(ev):
 			swiping = false
 			emit_signal("scroll_ended")
 	elif swiping and ev is InputEventMouseMotion:
+		emit_signal("scroll_started")
 		var delta = ev.position - swipe_mouse_start
 		set_h_scroll(swipe_start.x - delta.x)
 		set_v_scroll(swipe_start.y - delta.y)

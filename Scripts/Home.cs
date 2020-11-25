@@ -59,8 +59,10 @@ public class Home : Node2D {
     public void SaveSettings() {
         var settings = new File();
         settings.Open(settingsFile, File.ModeFlags.Write);
+
         settings.StoreVar(this.enableAds);
         settings.StoreVar(this.enableSound);
+
         settings.Close();
     }
 

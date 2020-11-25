@@ -22,6 +22,8 @@ public class Kernel : Node2D {
 
     public SceneTreeTimer timer;
 
+    public Score Score;
+
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
@@ -37,6 +39,8 @@ public class Kernel : Node2D {
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
         this.audioPlayer    = (AudioStreamPlayer2D) FindNode("AudioStreamPlayer2D");
         this.body.Position  = this.patrolPoints[0];
+
+        this.Score = (Score) GetParent().FindNode("Score");
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -72,6 +76,7 @@ public class Kernel : Node2D {
             this.speed = 0;
             this.animatedSprite.Play("collected");
             this.audioPlayer.Play();
+            this.Score.kernels += 1;
             await ToSignal(this.animatedSprite, "animation_finished");
             QueueFree();
         }

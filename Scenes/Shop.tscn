@@ -87,7 +87,7 @@ __meta__ = {
 margin_right = 48.0
 margin_bottom = 32.0
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer/CenterContainer"]
+[node name="KernelCount" type="RichTextLabel" parent="HBoxContainer/CenterContainer"]
 margin_top = 8.0
 margin_right = 48.0
 margin_bottom = 24.0
@@ -569,7 +569,6 @@ texture = ExtResource( 7 )
 expand = true
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-visible = true
 margin_left = 10.0
 margin_top = 112.0
 margin_right = 170.0
