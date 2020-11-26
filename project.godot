@@ -24,10 +24,6 @@ config/name="Shuck It"
 run/main_scene="res://Scenes/Home.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-SaveSystem="res://Scripts/SaveSystem.cs"
-
 [display]
 
 window/size/width=180

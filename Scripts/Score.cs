@@ -2,14 +2,10 @@ using Godot;
 
 public class Score : Control {
 
-    // Saved variables
-    public int best    = 0;
-    public int kernels = 0;
-
     public int points  = 0;
     public int misses  = 0;
 
-    public string saveFile = "user://savegame.save";
+    public SaveSystem SaveSystem;
 
     public RichTextLabel pointCounter;
     public RichTextLabel missCounter;
@@ -35,6 +31,9 @@ public class Score : Control {
 
     public override void _Ready() {
         GD.Randomize();
+
+        // Get singletons
+        SaveSystem = (SaveSystem) GetParent().FindNode("SaveSystem");
 
         // Score tracking nodes
         this.pointCounter = (RichTextLabel) FindNode("Points");
@@ -62,8 +61,6 @@ public class Score : Control {
             this.admob = (Godot.Object) this.GetParent().FindNode("AdMob");
             this.admob.Call("load_interstitial");
         }
-
-        this.Load();
     }
 
     public void _OnPlayAgainPressed() {
@@ -123,7 +120,7 @@ public class Score : Control {
     public void GameOver() {
         if (OS.GetName() == "Android") {
             this.admob.Call("load_banner");
-            if (((int) GD.RandRange(1, 5)) == 4) {
+            if (SaveSystem.timesPlayed % 3 == 0) {
                 this.admob.Call("show_interstitial");
             }
         }
@@ -146,41 +143,19 @@ public class Score : Control {
         this.finalScore.BbcodeText = $"[center]Score: {this.points}[/center]";
         
         // Determine trophy and save high score
-        if (this.points > this.best) {
+        if (this.points > SaveSystem.bestScore) {
             this.bestScore.BbcodeText = $"[center]New Best![/center]";
             this.trophy.Texture = this.trophyTexture;
-            this.best = this.points;
-        } else if (this.points > this.best / 2 && this.points <= this.best) {
-            this.bestScore.BbcodeText = $"[center]Best: {this.best}[/center]";
+            SaveSystem.bestScore = this.points;
+        } else if (this.points > SaveSystem.bestScore / 2 && this.points <= SaveSystem.bestScore) {
+            this.bestScore.BbcodeText = $"[center]Best: {SaveSystem.bestScore}[/center]";
             this.trophy.Texture = this.silverTrophyTexture;
         } else {
-            this.bestScore.BbcodeText = $"[center]Best: {this.best}[/center]";
+            this.bestScore.BbcodeText = $"[center]Best: {SaveSystem.bestScore}[/center]";
             this.trophy.Texture = this.emptyTrophyTexture;
         }
 
-        this.Save();
-    }
-
-    public void Load() {
-        var saveGame = new File();
-        if (!saveGame.FileExists(this.saveFile))
-            return; // Error!  We don't have a save to load.
-        
-        saveGame.Open(this.saveFile, File.ModeFlags.Read);
-
-        Set("best", saveGame.GetVar());
-        Set("kernels", saveGame.GetVar());
-
-        saveGame.Close();
-    }
-
-    public void Save() {
-        var saveGame = new File();
-        saveGame.Open(this.saveFile, File.ModeFlags.Write);
-
-        saveGame.StoreVar(this.best);    // index 0
-        saveGame.StoreVar(this.kernels); // index 1
-
-        saveGame.Close();
+        SaveSystem.timesPlayed += 1;
+        SaveSystem.Save();
     }
 }

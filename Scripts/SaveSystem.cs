@@ -6,12 +6,13 @@ public class SaveSystem : Node {
     public const string CONFIG_FILE = "res://config.cfg";
 
     // Settings sectiom
-    public bool enableAds = true;
+    public bool enableAds   = true;
     public bool enableSound = true;
 
     // Game section
-    public int bestScore = 0;
-    public int kernels = 0;
+    public int bestScore   = 0;
+    public int kernels     = 0;
+    public int timesPlayed = 0;
 
     // Shop section
     public Array<string> unlockedBackgrounds = new Array<string>() {
@@ -49,6 +50,7 @@ public class SaveSystem : Node {
 
         Set("bestScore", config.GetValue("game", "best_score"));
         Set("kernels", config.GetValue("game", "kernels"));
+        Set("timesPlayed", config.GetValue("game", "times_played"));
 
         Set("unlockedBackgrounds", config.GetValue("shop", "unlocked_backgrounds"));
         Set("unlockedSkins", config.GetValue("shop", "unlocked_skins"));
@@ -64,6 +66,7 @@ public class SaveSystem : Node {
 
         config.SetValue("game", "best_score", this.bestScore);
         config.SetValue("game", "kernels", this.kernels);
+        config.SetValue("game", "times_played", this.timesPlayed);
 
         config.SetValue("shop", "unlocked_backgrounds", this.unlockedBackgrounds);
         config.SetValue("shop", "unlocked_skins", this.unlockedSkins);

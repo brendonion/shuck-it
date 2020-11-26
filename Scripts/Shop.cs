@@ -1,13 +1,8 @@
 using Godot;
 
 public class Shop : Control {
-
-    public string saveFile = "user://savegame.save";
     
     public bool allowPress = true;
-
-    public int best; // ignored
-    public int kernels;
 
     public RichTextLabel kernelCount;
 
@@ -15,13 +10,17 @@ public class Shop : Control {
     
     public ConfirmationDialog confirmation;
 
+    public SaveSystem SaveSystem;
+
     public override void _Ready() {
+        // Get singletons
+        SaveSystem = (SaveSystem) FindNode("SaveSystem");
+
         this.kernelCount     = (RichTextLabel) FindNode("KernelCount");
         this.scrollContainer = (ScrollContainer) FindNode("ScrollContainer");
         this.confirmation    = (ConfirmationDialog) FindNode("ConfirmationDialog");
         this.confirmation.GetCloseButton().Visible = false;
 
-        this.Load();
         this.SetKernelCount();
     }
 
@@ -56,30 +55,7 @@ public class Shop : Control {
         this.allowPress = true;
     }
 
-    public void Load() {
-        var saveGame = new File();
-        if (!saveGame.FileExists(this.saveFile))
-            return; // Error!  We don't have a save to load.
-        
-        saveGame.Open(this.saveFile, File.ModeFlags.Read);
-
-        Set("best", saveGame.GetVar());
-        Set("kernels", saveGame.GetVar());
-
-        saveGame.Close();
-    }
-
-    public void Save() {
-        var saveGame = new File();
-        saveGame.Open(this.saveFile, File.ModeFlags.Write);
-
-        saveGame.StoreVar(this.best);    // index 0
-        saveGame.StoreVar(this.kernels); // index 1
-
-        saveGame.Close();
-    }
-
     public void SetKernelCount() {
-        this.kernelCount.BbcodeText = $"[right]{this.kernels}[/right]";
+        this.kernelCount.BbcodeText = $"[right]{SaveSystem.kernels}[/right]";
     }
 }

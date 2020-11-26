@@ -8,10 +8,11 @@ public class Home : Node2D {
     public Button adsButton;
     public Button soundButton;
 
-    public SaveSystem saveSystem;
+    public SaveSystem SaveSystem;
 
     public override void _Ready() {
-        this.saveSystem = (SaveSystem) GetNode("/root/SaveSystem");
+        // Get singletons
+        SaveSystem = (SaveSystem) FindNode("SaveSystem");
 
         this.adsButton   = (Button) FindNode("AdsButton");
         this.soundButton = (Button) FindNode("SoundButton");
@@ -34,8 +35,8 @@ public class Home : Node2D {
     }
 
     public void _OnSoundPressed() {
-        this.saveSystem.enableSound = !saveSystem.enableSound;
-        this.saveSystem.Save();
+        SaveSystem.enableSound = !SaveSystem.enableSound;
+        SaveSystem.Save();
         this.UpdateButtons();
     }
 
@@ -44,8 +45,8 @@ public class Home : Node2D {
     }
 
     public void UpdateButtons() {
-        this.adsButton.Disabled = !this.saveSystem.enableAds;
-        if (this.saveSystem.enableSound) {
+        this.adsButton.Disabled = !SaveSystem.enableAds;
+        if (SaveSystem.enableSound) {
             this.soundButton.Icon = this.soundOnTexture;
             AudioServer.SetBusMute(0, false);
         } else {

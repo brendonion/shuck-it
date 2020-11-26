@@ -47,7 +47,7 @@ public class Husk : RigidBody2D {
 
         // If at the bottom of screen, destroy itself
         if (this.sprite.GlobalPosition.y >= this.Game.screenSize.y) {
-            this.QueueFree();
+            QueueFree();
         }
     }
 
@@ -65,8 +65,8 @@ public class Husk : RigidBody2D {
                 } else if (this.sprite.Frame == 5) {
                     // Drop Husk
                     RemoveFromGroup("husk");
-                    this.SetAsToplevel(true);
-                    this.GetParent().MoveChild(this, 0);
+                    SetAsToplevel(true);
+                    GetParent().MoveChild(this, 0);
                     this.audioPlayer.Play();
                     this.collisionShape.QueueFree();
                     this.InputPickable = false;
