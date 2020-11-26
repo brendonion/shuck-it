@@ -28,6 +28,7 @@
     <Compile Include="Scripts\Husk.cs" />
     <Compile Include="Scripts\Kernel.cs" />
     <Compile Include="Scripts\Pig.cs" />
+    <Compile Include="Scripts\SaveSystem.cs" />
     <Compile Include="Scripts\Shop.cs" />
     <Compile Include="Scripts\TimerBar.cs" />
     <Compile Include="Scripts\Score.cs" />
