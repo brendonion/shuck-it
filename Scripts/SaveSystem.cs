@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public class SaveSystem : Node {
 
@@ -13,19 +14,19 @@ public class SaveSystem : Node {
     public int kernels = 0;
 
     // Shop section
-    public string[] unlockedBackgrounds = {
+    public Array<string> unlockedBackgrounds = new Array<string>() {
         "background_1.png"
     };
-    public string[] unlockedSkins = {
+    public Array<string> unlockedSkins = new Array<string>() {
         "skin_1.png"
     };
-    public string[] lockedBackgrounds = {
+    public Array<string> lockedBackgrounds = new Array<string>() {
         "background_2.png",
         "background_3.png",
         "background_4.png",
         "background_5.png",
     };
-    public string[] lockedSkins = {
+    public Array<string> lockedSkins = new Array<string>() {
         "skin_2.png",
         "skin_3.png",
     };
@@ -39,7 +40,7 @@ public class SaveSystem : Node {
         var config = new ConfigFile();
         var err    = config.Load(CONFIG_FILE);
 
-        // If file doesn't exist then return
+        // If error not OK then return
         if (err != Error.Ok) return;
 
         // Load data into member variables
