@@ -1,6 +1,6 @@
 [gd_scene load_steps=72 format=2]
 
-[ext_resource path="res://Art/BrickWall.png" type="Texture" id=1]
+[ext_resource path="res://Art/Unlockables/Background1.png" type="Texture" id=1]
 [ext_resource path="res://Art/RightHusk.png" type="Texture" id=2]
 [ext_resource path="res://Art/LeftHusk.png" type="Texture" id=3]
 [ext_resource path="res://Art/Pointer.png" type="Texture" id=4]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Art/Bar.png" type="Texture" id=17]
 [ext_resource path="res://Scripts/Tutorial.cs" type="Script" id=18]
 [ext_resource path="res://Sounds/Shop.wav" type="AudioStream" id=19]
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Page1"

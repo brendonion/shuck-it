@@ -28,7 +28,7 @@ public class Shop : Control {
         GetTree().ChangeScene("res://Scenes/Home.tscn");
     }
 
-    public void _OnItemPressed() {
+    public void _OnItemPressed(string type, string value) {
         if (this.allowPress) {
             this.scrollContainer.SetProcessInput(false);
             this.confirmation.PopupCentered();
