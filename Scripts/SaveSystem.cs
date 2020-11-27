@@ -3,7 +3,7 @@ using Godot.Collections;
 
 public class SaveSystem : Node {
 
-    public const string CONFIG_FILE = "user://config.cfg";
+    public const string CONFIG_FILE = "res://config.cfg";
 
     // Settings sectiom
     public bool enableAds   = true;
@@ -33,13 +33,8 @@ public class SaveSystem : Node {
     };
 
     // Customization section
-    public Array<string> currentBackground = new Array<string>() {
-        "Background1.png"
-    };
-    public Array<string> currentSkin = new Array<string>() {
-        "GoodSkin1.png", // "Skin1.png" good version
-        "BadSkin1.png",  // "Skin1.png" bad version
-    };
+    public string currentBackground = "Background1.png";
+    public string currentSkin       = "Skin1.png";
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
@@ -63,8 +58,8 @@ public class SaveSystem : Node {
 
         Set("unlockedBackgrounds", config.GetValue("shop", "unlocked_backgrounds"));
         Set("unlockedSkins", config.GetValue("shop", "unlocked_skins"));
-        Set("unlockedBackgrounds", config.GetValue("shop", "locked_backgrounds"));
-        Set("unlockedSkins", config.GetValue("shop", "locked_skins"));
+        Set("lockedBackgrounds", config.GetValue("shop", "locked_backgrounds"));
+        Set("lockedSkins", config.GetValue("shop", "locked_skins"));
 
         Set("currentBackground", config.GetValue("customization", "current_background"));
         Set("currentSkin", config.GetValue("customization", "current_skin"));
@@ -86,7 +81,7 @@ public class SaveSystem : Node {
         config.SetValue("shop", "locked_skins", this.lockedSkins);
 
         config.SetValue("customization", "current_background", this.currentBackground);
-        config.SetValue("customization", "current_skin", this.lockedSkins);
+        config.SetValue("customization", "current_skin", this.currentSkin);
 
         config.Save(CONFIG_FILE);
     }
