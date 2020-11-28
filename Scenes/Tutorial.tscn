@@ -18,9 +18,7 @@
 [ext_resource path="res://Art/BarBackground.png" type="Texture" id=16]
 [ext_resource path="res://Art/Bar.png" type="Texture" id=17]
 [ext_resource path="res://Scripts/Tutorial.cs" type="Script" id=18]
-[ext_resource path="res://Sounds/Shop.wav" type="AudioStream" id=19]
-
-
+[ext_resource path="res://Sounds/Shop.ogg" type="AudioStream" id=19]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Page1"
@@ -752,7 +750,7 @@ frames = SubResource( 28 )
 position = Vector2( 91.3436, -18.8987 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 39 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
@@ -788,7 +786,7 @@ frames = SubResource( 28 )
 [node name="Pig" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
 position = Vector2( -60.7482, 40.5941 )
 frames = SubResource( 47 )
-frame = 1
+frame = 3
 playing = true
 flip_h = true
 flip_v = true
@@ -826,7 +824,7 @@ frames = SubResource( 28 )
 [node name="Kernel" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( -37.4543, 144.823 )
 frames = SubResource( 52 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page6"]

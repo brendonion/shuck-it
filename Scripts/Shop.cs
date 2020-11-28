@@ -84,7 +84,8 @@ public class Shop : Control {
         }
     }
 
-    public void _OnScrollStarted() {
+    public async void _OnScrollStarted() {
+        await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
         this.allowPress = false;
     }
 

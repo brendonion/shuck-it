@@ -118,6 +118,8 @@ public class Score : Control {
 
     // TODO :: Put this in Game controller?
     public void GameOver() {
+        SaveSystem.timesPlayed += 1;
+
         if (OS.GetName() == "Android") {
             this.admob.Call("load_banner");
             if (SaveSystem.timesPlayed % 3 == 0) {
@@ -155,7 +157,6 @@ public class Score : Control {
             this.trophy.Texture = this.emptyTrophyTexture;
         }
 
-        SaveSystem.timesPlayed += 1;
         SaveSystem.Save();
     }
 }

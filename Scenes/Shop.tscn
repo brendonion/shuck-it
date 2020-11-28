@@ -8,7 +8,7 @@
 [ext_resource path="res://Scripts/scroll.gd" type="Script" id=6]
 [ext_resource path="res://Art/SkinPlaceholder.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/Shop.cs" type="Script" id=8]
-[ext_resource path="res://Sounds/Shop.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/Shop.ogg" type="AudioStream" id=9]
 [ext_resource path="res://Art/GreenSquareDark.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/SaveSystem.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Art/GoodCob.png" type="Texture" id=12]
@@ -155,6 +155,7 @@ texture_pressed = ExtResource( 10 )
 texture_disabled = ExtResource( 10 )
 expand = true
 script = ExtResource( 14 )
+name = "Classic"
 price = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background1"]
@@ -188,8 +189,8 @@ mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]Default[/center]"
-text = "Default"
+bbcode_text = "[center]Classic[/center]"
+text = "Classic"
 
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
@@ -549,6 +550,7 @@ expand = true
 script = ExtResource( 14 )
 type = "skin"
 value = "Skin1.png"
+name = "Classic Skin"
 price = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin1"]
@@ -582,8 +584,8 @@ mouse_filter = 2
 theme = ExtResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]Default Skin[/center]"
-text = "Default Skin"
+bbcode_text = "[center]Classic Skin[/center]"
+text = "Classic Skin"
 
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
