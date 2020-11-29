@@ -14,7 +14,7 @@
 [ext_resource path="res://Art/Play.png" type="Texture" id=12]
 [ext_resource path="res://Art/Pause.png" type="Texture" id=13]
 [ext_resource path="res://Art/Trophy.png" type="Texture" id=14]
-[ext_resource path="res://Sounds/GameOver.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sounds/GameOver.ogg" type="AudioStream" id=15]
 [ext_resource path="res://admob-lib/admob.gd" type="Script" id=16]
 [ext_resource path="res://Scenes/SaveSystem.tscn" type="PackedScene" id=17]
 
