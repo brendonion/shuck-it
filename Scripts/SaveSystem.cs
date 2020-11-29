@@ -3,7 +3,7 @@ using Godot.Collections;
 
 public class SaveSystem : Node {
 
-    public const string CONFIG_FILE = "res://config.cfg";
+    public const string CONFIG_FILE = "user://config.cfg";
 
     // Settings sectiom
     public bool enableAds   = true;
@@ -30,6 +30,7 @@ public class SaveSystem : Node {
     public Array<string> lockedSkins = new Array<string>() {
         "Skin2.png",
         "Skin3.png",
+        "Skin4.png",
     };
 
     // Customization section

@@ -5,12 +5,12 @@
 [ext_resource path="res://Art/LeftHusk.png" type="Texture" id=3]
 [ext_resource path="res://Art/Pointer.png" type="Texture" id=4]
 [ext_resource path="res://Art/MiddleHusk.png" type="Texture" id=5]
-[ext_resource path="res://Art/GoodCob.png" type="Texture" id=6]
+[ext_resource path="res://Art/Unlockables/GoodSkin1.png" type="Texture" id=6]
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=7]
 [ext_resource path="res://Art/Bad.png" type="Texture" id=8]
 [ext_resource path="res://Art/Good.png" type="Texture" id=9]
 [ext_resource path="res://Art/Arrow.png" type="Texture" id=10]
-[ext_resource path="res://Art/BadCob.png" type="Texture" id=11]
+[ext_resource path="res://Art/Unlockables/BadSkin1.png" type="Texture" id=11]
 [ext_resource path="res://Art/Fly.png" type="Texture" id=12]
 [ext_resource path="res://Art/Tap.png" type="Texture" id=13]
 [ext_resource path="res://Art/Kernel.png" type="Texture" id=14]
@@ -750,7 +750,7 @@ frames = SubResource( 28 )
 position = Vector2( 91.3436, -18.8987 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 39 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
@@ -824,7 +824,7 @@ frames = SubResource( 28 )
 [node name="Kernel" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( -37.4543, 144.823 )
 frames = SubResource( 52 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page6"]

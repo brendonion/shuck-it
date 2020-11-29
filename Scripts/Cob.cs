@@ -19,8 +19,11 @@ public class Cob : KinematicBody2D {
 
     public AnimatedSprite face;
 
-    public Texture goodCob = (Texture) ResourceLoader.Load("res://Art/GoodCob.png");
-    public Texture badCob  = (Texture) ResourceLoader.Load("res://Art/BadCob.png");
+    public Texture goodCob;
+    public Texture badCob;
+    public Texture faceCob = (Texture) ResourceLoader.Load("res://Art/Unlockables/GoodSkin1.png");
+
+    public SaveSystem SaveSystem;
 
     [Signal]
     public delegate void swiped(int point);
@@ -31,6 +34,13 @@ public class Cob : KinematicBody2D {
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
+
+        // Get singletons
+        SaveSystem = (SaveSystem) GetParent().FindNode("SaveSystem");
+
+        // Get cob textures
+        this.goodCob = (Texture) ResourceLoader.Load($"res://Art/Unlockables/Good{SaveSystem.currentSkin}");
+        this.badCob  = (Texture) ResourceLoader.Load($"res://Art/Unlockables/Bad{SaveSystem.currentSkin}");
 
         this.Game     = (Game) this.GetParent();
         this.husks    = (Node2D) FindNode("Husks");
@@ -138,7 +148,7 @@ public class Cob : KinematicBody2D {
         if (!this.face.Visible) {
             this.sprite.Texture = textures[(int) GD.RandRange(0, 2)];
         } else {
-            this.sprite.Texture = textures[0];
+            this.sprite.Texture = this.faceCob;
         }
     }
 

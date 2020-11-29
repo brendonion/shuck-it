@@ -23,7 +23,7 @@ public class Shop : Control {
         this.confirmation    = (ConfirmationDialog) FindNode("ConfirmationDialog");
         this.confirmation.GetCloseButton().Visible = false;
 
-        this.SetKernelCount();
+        this.UpdateKernelCount();
         this.UpdateShopItems();
     }
 
@@ -77,7 +77,7 @@ public class Shop : Control {
 
             this.confirmation.Hide();
 
-            this.SetKernelCount();
+            this.UpdateKernelCount();
             this.UpdateShopItems();
         } else {
             this.confirmation.DialogText = "Not enough kernels!";
@@ -101,7 +101,7 @@ public class Shop : Control {
         this.confirmation.DialogText = $"Are you sure you want to purchase this {this.selectedItem.type} for {this.selectedItem.price} kernels?";
     }
 
-    public void SetKernelCount() {
+    public void UpdateKernelCount() {
         this.kernelCount.BbcodeText = $"[right]{SaveSystem.kernels}[/right]";
     }
 
@@ -113,7 +113,11 @@ public class Shop : Control {
             if (SaveSystem.unlockedBackgrounds.Contains(item.value) || SaveSystem.unlockedSkins.Contains(item.value)) {
                 ((RichTextLabel) item.FindNode("Name")).BbcodeText = $"[center]{item.name}[/center]";
                 ((RichTextLabel) item.FindNode("Price")).BbcodeText = $"[center]Unequipped[/center]";
-                ((TextureRect) item.FindNode("TextureRect")).Texture = ResourceLoader.Load<Texture>($"res://Art/Unlockables/{item.value}");
+                if (item.type == "background") {
+                    ((TextureRect) item.FindNode("TextureRect")).Texture = (Texture) ResourceLoader.Load($"res://Art/Unlockables/{item.value}");
+                } else {
+                    ((TextureRect) item.FindNode("TextureRect")).Texture = (Texture) ResourceLoader.Load($"res://Art/Unlockables/Good{item.value}");
+                }
             } else {
                 ((RichTextLabel) item.FindNode("Name")).BbcodeText = $"[center]{item.placeholder}[/center]";
                 ((RichTextLabel) item.FindNode("Price")).BbcodeText = $"[center]Price: {item.price}[/center]";

@@ -50,6 +50,8 @@ public class Game : Node2D {
     public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
     public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
 
+    public SaveSystem SaveSystem;
+
     [Signal]
     public delegate void new_round(float duration);
 
@@ -62,6 +64,12 @@ public class Game : Node2D {
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
+
+         // Get singletons
+        SaveSystem = (SaveSystem) FindNode("SaveSystem");
+
+        // Set background
+        ((TextureRect) FindNode("Background")).Texture = (Texture) ResourceLoader.Load($"res://Art/Unlockables/{SaveSystem.currentBackground}");
 
         // Get screen size
         this.screenSize   = GetViewport().GetVisibleRect().Size;
