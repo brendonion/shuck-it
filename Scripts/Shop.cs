@@ -12,6 +12,8 @@ public class Shop : Control {
 
     public ShopItem selectedItem;
 
+    public Godot.Object admob;
+
     public SaveSystem SaveSystem;
 
     public override void _Ready() {
@@ -25,6 +27,17 @@ public class Shop : Control {
 
         this.UpdateKernelCount();
         this.UpdateShopItems();
+
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) {
+            this.admob = (Godot.Object) FindNode("AdMob");
+            this.admob.Call("load_banner");
+        }
+    }
+
+    public override void _ExitTree() {
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) {
+            this.admob.Call("hide_banner");
+        }
     }
 
     public void _OnBackPressed() {
@@ -85,12 +98,12 @@ public class Shop : Control {
     }
 
     public async void _OnScrollStarted() {
-        await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
+        await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
         this.allowPress = false;
     }
 
     public async void _OnScrollEnded() {
-        await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
+        await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
         this.allowPress = true;
     }
 

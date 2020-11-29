@@ -13,6 +13,8 @@ public class Cob : KinematicBody2D {
 
     public Game Game;
 
+    public Score Score;
+
     public Sprite sprite;
 
     public Node2D husks;
@@ -43,6 +45,7 @@ public class Cob : KinematicBody2D {
         this.badCob  = (Texture) ResourceLoader.Load($"res://Art/Unlockables/Bad{SaveSystem.currentSkin}");
 
         this.Game     = (Game) this.GetParent();
+        this.Score    = (Score) this.Game.Score;
         this.husks    = (Node2D) FindNode("Husks");
         this.sprite   = (Sprite) FindNode("Sprite");
         this.face     = (AnimatedSprite) FindNode("Face");
@@ -110,6 +113,11 @@ public class Cob : KinematicBody2D {
         if (this.Position.x > this.Game.screenSize.x * 2) {
             int nextPoint;
             if (this.isFinale) {
+                // Saves points and kernels
+                if (this.Score.points > SaveSystem.bestScore) {
+                    SaveSystem.bestScore = this.Score.points;
+                }
+                SaveSystem.Save();
                 GetTree().ChangeScene("res://Scenes/Finale.tscn");
                 return;
             } else if (this.face.Visible) {

@@ -9,11 +9,13 @@ public class Game : Node2D {
         HUSKS      = 3,
         BAR        = 5,
         FLIES      = 10,
-        SPEED_UP   = 25,
-        PIG        = 30,
-        FACES      = 50,
+        PIG        = 25,
+        SPEED_UP   = 30,
         SPEED_UP_2 = 75,
-        FINALE     = 100,
+        SPEED_UP_3 = 125,
+        FACES      = 400,
+        TINDER     = 401,
+        FINALE     = 500,
     }
 
     public Events currentEvent = Events.START;
@@ -150,10 +152,18 @@ public class Game : Node2D {
             num = (int) GD.RandRange(1, 3); // 1 - 2 flies
         } else if (this.round <= (int) Events.FLIES + 10) {
             num = (int) GD.RandRange(2, 5); // 2 - 4 flies
-        } else if (this.round <= (int) Events.FLIES + 15) {
+        } else if (this.round <= (int) Events.FLIES + 25) {
             num = (int) GD.RandRange(3, 5); // 3 - 4 flies
-        } else {
+        } else if (this.round <= (int) Events.FLIES + 40) {
             num = (int) GD.RandRange(3, 6); // 3 - 5 flies
+        } else if (this.round <= (int) Events.FLIES + 60) {
+            num = (int) GD.RandRange(4, 7); // 4 - 6 flies
+        } else if (this.round <= (int) Events.FLIES + 80) {
+            num = (int) GD.RandRange(4, 8); // 4 - 7 flies
+        } else if (this.round <= (int) Events.FLIES + 100) {
+            num = (int) GD.RandRange(5, 9); // 5 - 8 flies
+        } else {
+            num = (int) GD.RandRange(7, 11); // 7 - 10 flies
         }
         for (int i = 0; i < num; i++) {
             // Spawn fly and set it's speed
@@ -227,23 +237,44 @@ public class Game : Node2D {
             case Events.FLIES:
                 this.spawnFlies = true;
                 break;
+            case Events.PIG:
+                this.spawnPigs = true;
+                break;
             case Events.SPEED_UP:
                 this.kernelSpeed = 175f;
                 this.flySpeed    = 150f;
                 // this.timeOut  = 9f;
                 break;
-            case Events.PIG:
-                this.spawnPigs = true;
-                break;
-            case Events.FACES:
-                this.spawnFaces       = true;
-                this.Cob.face.Visible = true;
-                break;
-             case Events.SPEED_UP_2:
+            case Events.SPEED_UP_2:
                 this.kernelSpeed = 200f;
                 this.flySpeed    = 175f;
                 this.pigSpeed    = 150f;
                 // this.timeOut  = 8f;
+                break;
+            case Events.SPEED_UP_3:
+                this.pigSpeed    = 175f;
+                // this.timeOut  = 7f;
+                break;
+            case Events.FACES:
+                // Hide everything else for dramatic effect
+                this.maxHusks         = 10;
+                this.husks            = 10;
+                this.spawnFlies       = false;
+                this.spawnPigs        = false;
+                this.TimerBar.Visible = false;
+                this.Score.Visible    = false;
+                // Show faces
+                this.Cob.face.Visible = true;
+                this.spawnFaces       = true;
+                break;
+            case Events.TINDER:
+                // Faces still visible, revert back everything else, but now it's tinder
+                this.maxHusks         = 5;
+                this.husks            = 5;
+                this.spawnFlies       = true;
+                this.spawnPigs        = true;
+                this.TimerBar.Visible = true;
+                this.Score.Visible    = true;
                 break;
             case Events.FINALE:
                 this.maxHusks             = 10;

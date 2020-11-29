@@ -5,8 +5,6 @@ public class Score : Control {
     public int points  = 0;
     public int misses  = 0;
 
-    public SaveSystem SaveSystem;
-
     public RichTextLabel pointCounter;
     public RichTextLabel missCounter;
     public RichTextLabel finalScore;
@@ -28,6 +26,8 @@ public class Score : Control {
     public Texture emptyTrophyTexture  = (Texture) ResourceLoader.Load("res://Art/EmptyTrophy.png");
 
     public Godot.Object admob;
+
+    public SaveSystem SaveSystem;
 
     public override void _Ready() {
         GD.Randomize();
@@ -57,24 +57,24 @@ public class Score : Control {
         this.Cob.Connect("swiped", this, "UpdateScore");
         this.TimerBar.Connect("timeout", this, "GameOver");
 
-        if (OS.GetName() == "Android") {
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) {
             this.admob = (Godot.Object) this.GetParent().FindNode("AdMob");
             this.admob.Call("load_interstitial");
         }
     }
 
     public void _OnPlayAgainPressed() {
-        if (OS.GetName() == "Android") this.admob.Call("hide_banner");
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) this.admob.Call("hide_banner");
         GetTree().ReloadCurrentScene();
     }
 
     public void _OnExitPressed() {
-        if (OS.GetName() == "Android") this.admob.Call("hide_banner");
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) this.admob.Call("hide_banner");
         GetTree().ChangeScene("res://Scenes/Home.tscn");
     }
 
     public void _OnPausePressed() {
-        if (OS.GetName() == "Android") this.admob.Call("load_banner");
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) this.admob.Call("load_banner");
         GetTree().Paused         = true;
         this.Cob.Visible         = false;
         this.PauseScreen.Visible = true;
@@ -82,7 +82,7 @@ public class Score : Control {
     }
 
     public void _OnResumePressed() {
-        if (OS.GetName() == "Android") this.admob.Call("hide_banner");
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) this.admob.Call("hide_banner");
         GetTree().Paused         = false;
         this.Cob.Visible         = true;
         this.PauseScreen.Visible = false;
@@ -120,7 +120,7 @@ public class Score : Control {
     public void GameOver() {
         SaveSystem.timesPlayed += 1;
 
-        if (OS.GetName() == "Android") {
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) {
             this.admob.Call("load_banner");
             if (SaveSystem.timesPlayed % 3 == 0) {
                 this.admob.Call("show_interstitial");
