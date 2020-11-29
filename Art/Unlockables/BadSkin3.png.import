@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Skin2.png-7b1ec3bd774fdf8e715f511449e2b6d5.stex"
+path="res://.import/BadSkin3.png-00a8f85a418d9f2f584f76decbdd6088.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Unlockables/Skin2.png"
-dest_files=[ "res://.import/Skin2.png-7b1ec3bd774fdf8e715f511449e2b6d5.stex" ]
+source_file="res://Art/Unlockables/BadSkin3.png"
+dest_files=[ "res://.import/BadSkin3.png-00a8f85a418d9f2f584f76decbdd6088.stex" ]
 
 [params]
 
