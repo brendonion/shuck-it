@@ -277,6 +277,9 @@ public class Game : Node2D {
                 this.Score.Visible    = true;
                 break;
             case Events.FINALE:
+                // Saves points and kernels
+                if (this.Score.points > SaveSystem.bestScore) SaveSystem.bestScore = this.Score.points;
+                SaveSystem.Save();
                 this.maxHusks             = 10;
                 this.husks                = 10;
                 this.spawnFlies           = false;
