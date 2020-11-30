@@ -68,12 +68,7 @@ public class Fly : Node2D {
 
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (@event.IsActionPressed("ui_touch") && this.speed != 0) {
-            RemoveFromGroup("fly"); // Causing weird bug (remove_from_group: Condition "!data.grouped.has(p_identifier)" is true)
-            var flies = GetTree().GetNodesInGroup("fly");
-            if (flies.Count == 0) {
-                this.Game.EmitSignal("fly_destroyed", 0);
-            }
-
+            RemoveFromGroup("fly");
             this.speed = 0;
             this.animatedSprite.Play("squash");
             this.audioPlayer.Play();

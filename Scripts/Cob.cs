@@ -3,6 +3,7 @@ using Godot;
 public class Cob : KinematicBody2D {
 
     public bool isDraggable = false;
+    public bool isDragging  = false;
     public bool isReleased  = false;
     public bool isFinale    = false; // External boolean to be set on final round
 
@@ -10,6 +11,7 @@ public class Cob : KinematicBody2D {
 
     public Vector2 dragDirection;
     public Vector2 startPos;
+    public Vector2 initialTouchPos;
 
     public Game Game;
 
@@ -80,26 +82,39 @@ public class Cob : KinematicBody2D {
         var pigs  = GetTree().GetNodesInGroup("pig");
         // If draggable and there are no flies or pigs
         if (this.isDraggable && flies.Count == 0 && pigs.Count == 0) {
+            if (@event is InputEventScreenTouch eventTouch) {
+                this.initialTouchPos = eventTouch.Position;
+            }
+
             // If dragging, set Position and dragDirection
             if (@event is InputEventScreenDrag eventDrag) {
-                // Offset the sprite to where initially touched
-                if (this.sprite.Position == Vector2.Zero) {
-                    this.sprite.Position = new Vector2(
-                        this.sprite.GlobalPosition.x - eventDrag.Position.x,
-                        this.sprite.GlobalPosition.y - eventDrag.Position.y
-                    );
-                    this.face.Position = this.sprite.Position;
-                }
-                this.Position      = eventDrag.Position;
-                this.dragDirection = eventDrag.Speed.x != 0
-                    ? eventDrag.Speed.Normalized()
-                    : (this.Position - this.Game.screenCenter).Normalized();
-                // Guarantee a consistent speed
-                this.dragDirection.x = this.dragDirection.x < 0 ? -1 : 1;
-                
-                // Guarantee right direction if isFinale
-                if (this.isFinale) {
-                    this.dragDirection.x = 1;
+                // Make sure the user has dragged a little bit before moving the cob
+                // This prevents premature releasing
+                if (this.isDragging || eventDrag.Position.x < this.initialTouchPos.x - 10 || eventDrag.Position.x > this.initialTouchPos.x + 10) {
+                    // Set isDragging to true to indicate the intent of dragging the cob
+                    this.isDragging = true;
+
+                    // Offset the sprite to where initially touched
+                    if (this.sprite.Position == Vector2.Zero) {
+                        this.sprite.Position = new Vector2(
+                            this.sprite.GlobalPosition.x - eventDrag.Position.x,
+                            this.sprite.GlobalPosition.y - eventDrag.Position.y
+                        );
+                        this.face.Position = this.sprite.Position;
+                    }
+
+                    this.Position = eventDrag.Position;
+
+                    this.dragDirection = eventDrag.Speed.x != 0
+                        ? eventDrag.Speed.Normalized()
+                        : (this.Position - this.Game.screenCenter).Normalized();
+                    // Guarantee a consistent speed
+                    this.dragDirection.x = this.dragDirection.x < 0 ? -1 : 1;
+                    
+                    // Guarantee right direction if isFinale
+                    if (this.isFinale) {
+                        this.dragDirection.x = 1;
+                    }
                 }
             }
         }
@@ -138,7 +153,9 @@ public class Cob : KinematicBody2D {
         this.face.Position   = Vector2.Zero;
         this.Position        = this.startPos;
         this.dragDirection   = new Vector2();
+        this.initialTouchPos = new Vector2();
         this.isDraggable     = false;
+        this.isDragging      = false;
         this.isReleased      = false;
         this.SetCobTexture();
     }

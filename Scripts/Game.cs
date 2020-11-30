@@ -10,7 +10,7 @@ public class Game : Node2D {
         BAR        = 5,
         FLIES      = 10,
         PIG        = 25,
-        SPEED_UP   = 30,
+        SPEED_UP   = 50,
         SPEED_UP_2 = 75,
         SPEED_UP_3 = 125,
         FACES      = 400,
@@ -56,12 +56,6 @@ public class Game : Node2D {
 
     [Signal]
     public delegate void new_round(float duration);
-
-    [Signal]
-    public delegate void fly_spawned();
-
-    [Signal]
-    public delegate void fly_destroyed();
 
     public override void _Ready() {
         // Randomize seed
@@ -241,18 +235,18 @@ public class Game : Node2D {
                 this.spawnPigs = true;
                 break;
             case Events.SPEED_UP:
-                this.kernelSpeed = 175f;
                 this.flySpeed    = 150f;
                 // this.timeOut  = 9f;
                 break;
             case Events.SPEED_UP_2:
-                this.kernelSpeed = 200f;
-                this.flySpeed    = 175f;
                 this.pigSpeed    = 150f;
+                this.kernelSpeed = 175f;
                 // this.timeOut  = 8f;
                 break;
             case Events.SPEED_UP_3:
+                this.flySpeed    = 175f;
                 this.pigSpeed    = 175f;
+                this.kernelSpeed = 200f;
                 // this.timeOut  = 7f;
                 break;
             case Events.FACES:
@@ -262,7 +256,6 @@ public class Game : Node2D {
                 this.spawnFlies       = false;
                 this.spawnPigs        = false;
                 this.TimerBar.Visible = false;
-                this.Score.Visible    = false;
                 // Show faces
                 this.Cob.face.Visible = true;
                 this.spawnFaces       = true;
@@ -274,10 +267,9 @@ public class Game : Node2D {
                 this.spawnFlies       = true;
                 this.spawnPigs        = true;
                 this.TimerBar.Visible = true;
-                this.Score.Visible    = true;
                 break;
             case Events.FINALE:
-                // Saves points and kernels
+                // Saves bestScore and kernels
                 if (this.Score.points > SaveSystem.bestScore) SaveSystem.bestScore = this.Score.points;
                 SaveSystem.Save();
                 this.maxHusks             = 10;
