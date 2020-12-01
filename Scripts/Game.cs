@@ -125,9 +125,14 @@ public class Game : Node2D {
     public async void CreateKernel() {
         if (this.round == (int) Events.FINALE) return;
 
-        // 1 in 10 chance to spawn a kernel
-        int num = (int) GD.RandRange(1, 11);
-        if (num == 10) {
+        int num;
+        if (this.round > (int) Events.SPEED_UP_3) {
+            num = (int) GD.RandRange(1, 6); // 1 in 5
+        } else {
+            num = (int) GD.RandRange(1, 11); // 1 in 10
+        }
+        // If num is 5 spawn a kernel
+        if (num == 5) {
             // Wait 1 - 3 seconds before spawning
             float waitTime = (float) GD.RandRange(1, 4);
             await ToSignal(GetTree().CreateTimer(waitTime, false), "timeout");

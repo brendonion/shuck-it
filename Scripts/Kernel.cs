@@ -74,8 +74,8 @@ public class Kernel : Node2D {
 
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (@event.IsActionPressed("ui_touch") && this.speed != 0) {
-            // Add to SaveSystem.kernels but do not save until game over
-            SaveSystem.kernels += 1;
+            // If SaveSystem.kernels is less than 9999, add 1 to them but do not save until game over
+            if (SaveSystem.kernels < 9999) SaveSystem.kernels += 1;
 
             this.speed = 0;
             this.animatedSprite.Play("collected");

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Art/Unlockables/Background1.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/ShopItem.cs" type="Script" id=14]
 [ext_resource path="res://admob-lib/admob.gd" type="Script" id=15]
+[ext_resource path="res://Sounds/KaChing.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Sounds/Miss.wav" type="AudioStream" id=17]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -898,6 +900,12 @@ __meta__ = {
 script = ExtResource( 15 )
 banner_on_top = false
 banner_id = "ca-app-pub-1794508493895269/3851480488"
+
+[node name="PurchaseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
 [connection signal="pressed" from="Button" to="." method="_OnBackPressed"]
 [connection signal="scroll_ended" from="ScrollContainer" to="." method="_OnScrollEnded"]
 [connection signal="scroll_started" from="ScrollContainer" to="." method="_OnScrollStarted"]

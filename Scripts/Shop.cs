@@ -8,6 +8,9 @@ public class Shop : Control {
 
     public ScrollContainer scrollContainer;
     
+    public AudioStreamPlayer2D purchaseSound;
+    public AudioStreamPlayer2D missSound;
+
     public ConfirmationDialog confirmation;
 
     public ShopItem selectedItem;
@@ -22,6 +25,8 @@ public class Shop : Control {
 
         this.kernelCount     = (RichTextLabel) FindNode("KernelCount");
         this.scrollContainer = (ScrollContainer) FindNode("ScrollContainer");
+        this.purchaseSound   = (AudioStreamPlayer2D) FindNode("PurchaseSound");
+        this.missSound   = (AudioStreamPlayer2D) FindNode("MissSound");
         this.confirmation    = (ConfirmationDialog) FindNode("ConfirmationDialog");
         this.confirmation.GetCloseButton().Visible = false;
 
@@ -88,12 +93,14 @@ public class Shop : Control {
             }
             SaveSystem.Save();
 
+            this.purchaseSound.Play();
             this.confirmation.Hide();
 
             this.UpdateKernelCount();
             this.UpdateShopItems();
         } else {
             this.confirmation.DialogText = "Not enough kernels!";
+            this.missSound.Play();
         }
     }
 
