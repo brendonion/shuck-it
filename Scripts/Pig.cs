@@ -86,14 +86,14 @@ public class Pig : Node2D {
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (@event.IsActionPressed("ui_touch")) {
             // If not hit then set to true and subtract from health
-            if (!this.hit) {
+            if (!this.hit && !this.dead) {
                 this.hit     = true;
                 this.health -= 1;
                 this.squealSound.Play();
             }
 
             // Retreat after 2 hits
-            if (this.health % 2 == 0) {
+            if (this.health % 2 == 0 && !this.dead) {
                 this.retreating  = true;
                 this.speed       = this.retreatSpeed;
                 this.patrolIndex = 0;
