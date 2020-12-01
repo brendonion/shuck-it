@@ -221,6 +221,7 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 13 )
 expand = true
+stretch_mode = 7
 
 [node name="Background2" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
 "shop_item",
@@ -299,6 +300,7 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
+stretch_mode = 7
 
 [node name="Background3" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
 "shop_item",
@@ -378,6 +380,7 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
+stretch_mode = 7
 
 [node name="Background4" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
 "shop_item",
@@ -457,6 +460,7 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
+stretch_mode = 7
 
 [node name="Background5" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
 "shop_item",
@@ -536,6 +540,7 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 3 )
 expand = true
+stretch_mode = 7
 
 [node name="Skin1" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
 "shop_item",

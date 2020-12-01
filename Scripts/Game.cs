@@ -13,8 +13,8 @@ public class Game : Node2D {
         SPEED_UP   = 50,
         SPEED_UP_2 = 75,
         SPEED_UP_3 = 125,
-        FACES      = 400,
-        TINDER     = 401,
+        FACES      = 250,
+        TINDER     = 251,
         FINALE     = 500,
     }
 
@@ -157,7 +157,7 @@ public class Game : Node2D {
         } else if (this.round <= (int) Events.FLIES + 100) {
             num = (int) GD.RandRange(5, 9); // 5 - 8 flies
         } else {
-            num = (int) GD.RandRange(7, 11); // 7 - 10 flies
+            num = (int) GD.RandRange(6, 11); // 6 - 10 flies
         }
         for (int i = 0; i < num; i++) {
             // Spawn fly and set it's speed
@@ -244,8 +244,8 @@ public class Game : Node2D {
                 // this.timeOut  = 8f;
                 break;
             case Events.SPEED_UP_3:
-                this.flySpeed    = 175f;
-                this.pigSpeed    = 175f;
+                this.flySpeed    = 165f;
+                this.pigSpeed    = 165f;
                 this.kernelSpeed = 200f;
                 // this.timeOut  = 7f;
                 break;
