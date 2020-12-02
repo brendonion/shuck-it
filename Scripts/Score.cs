@@ -10,6 +10,8 @@ public class Score : Control {
     public RichTextLabel finalScore;
     public RichTextLabel bestScore;
     public Button pauseButton;
+    public Button playAgainButton;
+    public Button exitButton;
     public Control gameOver;
     public Sprite trophy;
     public AudioStreamPlayer2D pointSound;
@@ -43,11 +45,13 @@ public class Score : Control {
         this.missSound    = (AudioStreamPlayer2D) FindNode("MissSound");
         
         // Game over nodes
-        this.gameOver      = (Control) FindNode("Game Over");
-        this.gameOverSound = (AudioStreamPlayer2D) this.gameOver.FindNode("GameOverSound");
-        this.trophy        = (Sprite) this.gameOver.FindNode("Trophy");
-        this.finalScore    = (RichTextLabel) this.gameOver.FindNode("FinalScore");
-        this.bestScore     = (RichTextLabel) this.gameOver.FindNode("BestScore");
+        this.gameOver        = (Control) FindNode("Game Over");
+        this.gameOverSound   = (AudioStreamPlayer2D) this.gameOver.FindNode("GameOverSound");
+        this.trophy          = (Sprite) this.gameOver.FindNode("Trophy");
+        this.finalScore      = (RichTextLabel) this.gameOver.FindNode("FinalScore");
+        this.bestScore       = (RichTextLabel) this.gameOver.FindNode("BestScore");
+        this.playAgainButton = (Button) this.gameOver.FindNode("PlayAgainButton");
+        this.exitButton      = (Button) this.gameOver.FindNode("ExitButton");
         
         this.Cob          = (Cob) this.GetParent().FindNode("Cob");
         this.TimerBar     = (TimerBar) this.GetParent().FindNode("TimerBar");
@@ -117,7 +121,7 @@ public class Score : Control {
     }
 
     // TODO :: Put this in Game controller?
-    public void GameOver() {
+    public async void GameOver() {
         SaveSystem.timesPlayed += 1;
 
         if (OS.GetName() == "Android" && SaveSystem.enableAds) {
@@ -158,5 +162,11 @@ public class Score : Control {
         }
 
         SaveSystem.Save();
+
+        // Wait a bit to show action buttons (ad retention purposes)
+        await ToSignal(GetTree().CreateTimer(2.5f), "timeout");
+
+        this.playAgainButton.Visible = true;
+        this.exitButton.Visible      = true;
     }
 }

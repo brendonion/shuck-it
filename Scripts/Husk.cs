@@ -85,7 +85,22 @@ public class Husk : RigidBody2D {
     }
 
     public void _OnHuskInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (this.isTopLayer && @event is InputEventScreenDrag eventDrag && (!this.sprite.Playing || this.sprite.Frame == 0)) {
+        var flies = GetTree().GetNodesInGroup("fly");
+        var pigs  = GetTree().GetNodesInGroup("pig");
+        
+        // Only shuck if:
+        // - is top layer
+        // - is drag event
+        // - no flies
+        // - no pigs
+        // - sprite isn't playing or the frame is 0
+        if (
+            this.isTopLayer &&
+            @event is InputEventScreenDrag eventDrag &&
+            flies.Count == 0 &&
+            pigs.Count == 0 &&
+            (!this.sprite.Playing || this.sprite.Frame == 0)
+        ) {
             int frame        = this.sprite.Frame;
             float spritePosY = this.sprite.GlobalPosition.y;
             float dragPosY   = eventDrag.Position.y;

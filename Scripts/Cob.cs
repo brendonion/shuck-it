@@ -78,10 +78,7 @@ public class Cob : KinematicBody2D {
     }
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        var flies = GetTree().GetNodesInGroup("fly");
-        var pigs  = GetTree().GetNodesInGroup("pig");
-        // If draggable and there are no flies or pigs
-        if (this.isDraggable && flies.Count == 0 && pigs.Count == 0) {
+        if (this.isDraggable) {
             if (@event is InputEventScreenTouch eventTouch) {
                 this.initialTouchPos = eventTouch.Position;
             }

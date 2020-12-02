@@ -6,13 +6,9 @@ public class Fly : Node2D {
 
     public int patrolIndex = 0;
 
-    public Game Game;
-
     public Path2D patrolPath;
 
     public Vector2[] patrolPoints;
-
-    public Vector2 startPos;
 
     public KinematicBody2D body;
 
@@ -34,14 +30,15 @@ public class Fly : Node2D {
             (Path2D) FindNode("FlyPath5"),
         };
 
+        Vector2 screenSize       = GetViewport().GetVisibleRect().Size;
+        Vector2[] startPositions = { new Vector2(screenSize.x / 2, -30), new Vector2(screenSize.x / 2, screenSize.y) };
+
+        this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
+        this.body.Position  = startPositions[(int) GD.RandRange(0, 2)];
         this.patrolPath     = paths[(int) GD.RandRange(0, 5)];
         this.patrolPoints   = this.patrolPath.Curve.GetBakedPoints();
-        this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
         this.audioPlayer    = (AudioStreamPlayer2D) FindNode("AudioStreamPlayer2D");
-        this.startPos       = this.body.Position;
-
-        this.Game = (Game) GetTree().Root.GetChild(0);
     }
 
     public override void _PhysicsProcess(float delta) {

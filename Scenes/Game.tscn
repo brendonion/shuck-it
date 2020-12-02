@@ -200,6 +200,7 @@ __meta__ = {
 }
 
 [node name="PlayAgainButton" type="Button" parent="Score/Game Over"]
+visible = false
 margin_left = 40.0
 margin_top = 189.0
 margin_right = 139.0
@@ -211,6 +212,7 @@ __meta__ = {
 }
 
 [node name="ExitButton" type="Button" parent="Score/Game Over"]
+visible = false
 margin_left = 40.0
 margin_top = 224.0
 margin_right = 139.0

@@ -903,9 +903,11 @@ banner_id = "ca-app-pub-1794508493895269/3851480488"
 
 [node name="PurchaseSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 16 )
+volume_db = -5.0
 
 [node name="MissSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 17 )
+volume_db = -5.0
 [connection signal="pressed" from="Button" to="." method="_OnBackPressed"]
 [connection signal="scroll_ended" from="ScrollContainer" to="." method="_OnScrollEnded"]
 [connection signal="scroll_started" from="ScrollContainer" to="." method="_OnScrollStarted"]

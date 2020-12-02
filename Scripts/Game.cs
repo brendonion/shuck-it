@@ -10,9 +10,9 @@ public class Game : Node2D {
         BAR        = 5,
         FLIES      = 10,
         PIG        = 25,
-        SPEED_UP   = 50,
-        SPEED_UP_2 = 75,
-        SPEED_UP_3 = 125,
+        SPEED_UP   = 33,
+        SPEED_UP_2 = 66,
+        SPEED_UP_3 = 99,
         FACES      = 250,
         TINDER     = 251,
         FINALE     = 500,
@@ -131,8 +131,8 @@ public class Game : Node2D {
         } else {
             num = (int) GD.RandRange(1, 11); // 1 in 10
         }
-        // If num is 5 spawn a kernel
-        if (num == 5) {
+        // Spawn a kernel if num equals 1
+        if (num == 1) {
             // Wait 1 - 3 seconds before spawning
             float waitTime = (float) GD.RandRange(1, 4);
             await ToSignal(GetTree().CreateTimer(waitTime, false), "timeout");
@@ -175,10 +175,16 @@ public class Game : Node2D {
     }
 
     public void CreatePigs() {
-        // 1 in 4 chance to spawn a pig
-        int num = (this.round == (int) Events.PIG) ? 4 : (int) GD.RandRange(1, 5);
-        if (num == 4) {
-            // Spawn pig and set it's speed
+        int num;
+        if (this.round == (int) Events.PIG) {
+            num = 1; // Guarantee a pig to spawn
+        } else if (this.round < (int) Events.SPEED_UP_3) {
+            num = (int) GD.RandRange(1, 5); // 1 in 4
+        } else {
+            num = (int) GD.RandRange(1, 4); // 1 in 3
+        }
+        // Spawn pig and set it's speed if num equals 1
+        if (num == 1) {
             Pig pig   = (Pig) PigScene.Instance();
             pig.speed = this.pigSpeed;
             AddChild(pig);
@@ -245,12 +251,13 @@ public class Game : Node2D {
                 break;
             case Events.SPEED_UP_2:
                 this.pigSpeed    = 150f;
+                this.flySpeed    = 175f;
                 this.kernelSpeed = 175f;
                 // this.timeOut  = 8f;
                 break;
             case Events.SPEED_UP_3:
-                this.flySpeed    = 165f;
-                this.pigSpeed    = 165f;
+                this.pigSpeed    = 175f;
+                this.flySpeed    = 200f;
                 this.kernelSpeed = 200f;
                 // this.timeOut  = 7f;
                 break;
