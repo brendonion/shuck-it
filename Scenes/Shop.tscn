@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://admob-lib/admob.gd" type="Script" id=15]
 [ext_resource path="res://Sounds/KaChing.ogg" type="AudioStream" id=16]
 [ext_resource path="res://Sounds/Miss.wav" type="AudioStream" id=17]
+[ext_resource path="res://Theme/alt_font.tres" type="DynamicFont" id=18]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -159,6 +160,7 @@ texture_disabled = ExtResource( 10 )
 expand = true
 script = ExtResource( 14 )
 name = "Classic"
+placeholder = "??? Background"
 price = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background1"]
@@ -178,18 +180,20 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 0, 20 )
 mouse_filter = 2
 custom_constants/separation = 0
+alignment = 1
 
 [node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Classic[/center]"
@@ -198,10 +202,10 @@ text = "Classic"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Equipped[/center]"
@@ -239,6 +243,7 @@ expand = true
 script = ExtResource( 14 )
 value = "Background2.png"
 name = "Brown Brick"
+placeholder = "??? Background"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background2"]
 margin_right = 180.0
@@ -257,9 +262,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background2/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -268,7 +273,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
@@ -277,10 +282,10 @@ text = "??? Backdrop"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background2/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 10[/center]"
@@ -318,6 +323,7 @@ expand = true
 script = ExtResource( 14 )
 value = "Background3.png"
 name = "Outhouse"
+placeholder = "??? Background"
 price = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background3"]
@@ -337,9 +343,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background3/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -348,7 +354,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
@@ -357,10 +363,11 @@ text = "??? Backdrop"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background3/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
 theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 50[/center]"
@@ -398,6 +405,7 @@ expand = true
 script = ExtResource( 14 )
 value = "Background4.png"
 name = "Sunset"
+placeholder = "??? Background"
 price = 100
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background4"]
@@ -417,9 +425,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background4/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -428,7 +436,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
@@ -437,10 +445,10 @@ text = "??? Backdrop"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background4/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 100[/center]"
@@ -478,6 +486,7 @@ expand = true
 script = ExtResource( 14 )
 value = "Background5.png"
 name = "Night Sky"
+placeholder = "??? Background"
 price = 250
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background5"]
@@ -497,9 +506,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background5/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -508,7 +517,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
@@ -517,10 +526,10 @@ text = "??? Backdrop"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background5/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 250[/center]"
@@ -558,6 +567,7 @@ expand = true
 script = ExtResource( 14 )
 value = "Background6.png"
 name = "Wasteland"
+placeholder = "??? Background"
 price = 500
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background6"]
@@ -577,9 +587,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background6/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -588,7 +598,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
@@ -597,10 +607,10 @@ text = "??? Backdrop"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background6/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 250[/center]"
@@ -638,6 +648,7 @@ expand = true
 script = ExtResource( 14 )
 value = "Background7.png"
 name = "City Scape"
+placeholder = "??? Background"
 price = 999
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background7"]
@@ -657,9 +668,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background7/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -668,7 +679,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Backdrop[/center]"
@@ -677,10 +688,10 @@ text = "??? Backdrop"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background7/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 250[/center]"
@@ -719,7 +730,7 @@ script = ExtResource( 14 )
 type = "skin"
 value = "Skin1.png"
 name = "Classic"
-placeholder = "??? skin"
+placeholder = "??? Skin"
 price = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin1"]
@@ -739,9 +750,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -750,7 +761,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Classic Skin[/center]"
@@ -759,10 +770,10 @@ text = "Classic Skin"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Equipped[/center]"
@@ -800,7 +811,7 @@ script = ExtResource( 14 )
 type = "skin"
 value = "Skin2.png"
 name = "Silver"
-placeholder = "??? skin"
+placeholder = "??? Skin"
 price = 250
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin2"]
@@ -820,9 +831,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin2/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -831,7 +842,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Skin[/center]"
@@ -840,10 +851,10 @@ text = "??? Skin"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin2/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 500[/center]"
@@ -881,7 +892,7 @@ script = ExtResource( 14 )
 type = "skin"
 value = "Skin3.png"
 name = "Golden"
-placeholder = "??? skin"
+placeholder = "??? Skin"
 price = 500
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin3"]
@@ -901,9 +912,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin3/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -913,6 +924,7 @@ margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
 theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Skin[/center]"
@@ -921,10 +933,10 @@ text = "??? Skin"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin3/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 500[/center]"
@@ -962,7 +974,7 @@ script = ExtResource( 14 )
 type = "skin"
 value = "Skin4.png"
 name = "Rainbow"
-placeholder = "??? skin"
+placeholder = "??? Skin"
 price = 750
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin4"]
@@ -982,9 +994,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin4/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -993,7 +1005,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Skin[/center]"
@@ -1002,10 +1014,10 @@ text = "??? Skin"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin4/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 500[/center]"
@@ -1043,7 +1055,7 @@ script = ExtResource( 14 )
 type = "skin"
 value = "Skin5.png"
 name = "Diamond"
-placeholder = "??? skin"
+placeholder = "??? Skin"
 price = 999
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin5"]
@@ -1063,9 +1075,9 @@ margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin5/HBoxContainer/CenterContainer"]
-margin_top = 12.0
+margin_top = 14.0
 margin_right = 110.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_constants/separation = 0
 
@@ -1074,7 +1086,7 @@ margin_right = 110.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 110, 15 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]??? Skin[/center]"
@@ -1083,10 +1095,10 @@ text = "??? Skin"
 [node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin5/HBoxContainer/CenterContainer/VBoxContainer"]
 margin_top = 15.0
 margin_right = 110.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 110, 15 )
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
 mouse_filter = 2
-theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Price: 500[/center]"

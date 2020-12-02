@@ -23,7 +23,6 @@ public class Cob : KinematicBody2D {
 
     public Texture goodCob;
     public Texture badCob;
-    public Texture faceCob = (Texture) ResourceLoader.Load("res://Art/Unlockables/GoodSkin1.png");
 
     public SaveSystem SaveSystem;
 
@@ -162,7 +161,7 @@ public class Cob : KinematicBody2D {
         if (!this.face.Visible) {
             this.sprite.Texture = textures[(int) GD.RandRange(0, 2)];
         } else {
-            this.sprite.Texture = this.faceCob;
+            this.sprite.Texture = goodCob;
         }
     }
 
