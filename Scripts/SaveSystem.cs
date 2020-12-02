@@ -26,11 +26,14 @@ public class SaveSystem : Node {
         "Background3.png",
         "Background4.png",
         "Background5.png",
+        "Background6.png",
+        "Background7.png",
     };
     public Array<string> lockedSkins = new Array<string>() {
         "Skin2.png",
         "Skin3.png",
         "Skin4.png",
+        "Skin5.png",
     };
 
     // Customization section
