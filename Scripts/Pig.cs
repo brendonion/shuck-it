@@ -47,7 +47,7 @@ public class Pig : Node2D {
         this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
         this.squealSound    = (AudioStreamPlayer2D) FindNode("SquealSound");
-        this.deathSound    = (AudioStreamPlayer2D) FindNode("DeathSound");
+        this.deathSound     = (AudioStreamPlayer2D) FindNode("DeathSound");
 
         this.Game = (Game) GetTree().Root.GetChild(0);
 

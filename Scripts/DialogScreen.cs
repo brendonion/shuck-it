@@ -1,19 +1,14 @@
 using Godot;
-using System;
 
-public class DialogScreen : Control
-{
+public class DialogScreen : Control {
+
     public SceneTreeTimer timer;
-
-    // public ColorRect background;
 
     public Dialog text1;
     public Dialog text2;
     public Dialog text3;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
-        // this.background = (ColorRect) FindNode("ColorRect");
         this.text1 = (Dialog) FindNode("Text1");
         this.text2 = (Dialog) FindNode("Text2");
         this.text3 = (Dialog) FindNode("Text3");

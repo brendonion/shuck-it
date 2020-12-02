@@ -67,7 +67,7 @@ public class Fly : Node2D {
     }
 
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (@event.IsActionPressed("ui_touch") && this.speed != 0) {
+        if ((@event is InputEventScreenTouch || @event is InputEventScreenDrag) && this.speed != 0) {
             RemoveFromGroup("fly");
             this.speed = 0;
             this.animatedSprite.Play("squash");
