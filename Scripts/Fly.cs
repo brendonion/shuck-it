@@ -31,10 +31,15 @@ public class Fly : Node2D {
         };
 
         Vector2 screenSize       = GetViewport().GetVisibleRect().Size;
-        Vector2[] startPositions = { new Vector2(screenSize.x / 2, -30), new Vector2(screenSize.x / 2, screenSize.y) };
+        Vector2[] startPositions = {
+            new Vector2(screenSize.x / 2 + 40, -30),
+            new Vector2(screenSize.x / 2 - 40, -30),
+            new Vector2(screenSize.x / 2 + 40, screenSize.y),
+            new Vector2(screenSize.x / 2 - 40, screenSize.y),
+        };
 
         this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
-        this.body.Position  = startPositions[(int) GD.RandRange(0, 2)];
+        this.body.Position  = startPositions[(int) GD.RandRange(0, 4)];
         this.patrolPath     = paths[(int) GD.RandRange(0, 5)];
         this.patrolPoints   = this.patrolPath.Curve.GetBakedPoints();
         this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
