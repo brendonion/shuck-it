@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Sounds/GameOver.ogg" type="AudioStream" id=15]
 [ext_resource path="res://admob-lib/admob.gd" type="Script" id=16]
 [ext_resource path="res://Scenes/SaveSystem.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Theme/font.tres" type="DynamicFont" id=18]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 8.0
@@ -91,7 +92,7 @@ margin_right = 92.0
 margin_bottom = 14.0
 rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
-theme = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=10 freq=2][center]0[/center][/wave]"
 text = "0"
@@ -104,7 +105,7 @@ margin_left = 8.81293
 margin_top = -1.0
 margin_right = 51.8129
 margin_bottom = 39.0
-theme = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=10 freq=2][center][/center][/wave]"
 __meta__ = {
@@ -161,7 +162,7 @@ rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-theme = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=20 freq=2][center]GAME OVER[/center][/wave]"
 text = "GAME OVER"
@@ -176,7 +177,7 @@ margin_right = 129.0
 margin_bottom = 155.0
 rect_min_size = Vector2( 80, 0 )
 rect_scale = Vector2( 1.5, 1.5 )
-theme = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[center]Score: 0[/center]"
 text = "Score: 0"
@@ -191,7 +192,7 @@ margin_right = 129.0
 margin_bottom = 175.0
 rect_min_size = Vector2( 80, 0 )
 rect_scale = Vector2( 1.5, 1.5 )
-theme = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[center]Best: 0[/center]"
 text = "Best: 0"
@@ -203,7 +204,7 @@ __meta__ = {
 visible = false
 margin_left = 40.0
 margin_top = 189.0
-margin_right = 139.0
+margin_right = 144.0
 margin_bottom = 218.0
 theme = ExtResource( 5 )
 text = "Play Again"
@@ -215,7 +216,7 @@ __meta__ = {
 visible = false
 margin_left = 40.0
 margin_top = 224.0
-margin_right = 139.0
+margin_right = 144.0
 margin_bottom = 253.0
 theme = ExtResource( 5 )
 text = "Exit"
@@ -258,9 +259,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -89.0
+margin_left = -84.0
 margin_top = -70.5
-margin_right = 91.0
+margin_right = 85.0
 margin_bottom = 117.5
 bbcode_enabled = true
 text = "You realize something. You get to know these corn as people. You see the beauty in all corn. Each individually embodying their own story. Each equally worthy of love."
@@ -292,9 +293,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -89.0
+margin_left = -85.0
 margin_top = -70.5
-margin_right = 91.0
+margin_right = 85.0
 margin_bottom = 117.5
 bbcode_enabled = true
 text = "\"It was me you were looking for this whole time\""
@@ -330,7 +331,7 @@ margin_top = 87.0
 margin_right = 91.0
 margin_bottom = 131.0
 rect_scale = Vector2( 2, 2 )
-theme = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=10 freq=2][center]Pause[/center][/wave]"
 text = "Pause"
