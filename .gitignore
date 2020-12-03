@@ -6,3 +6,6 @@ logs/
 *.apk
 android/.gradle
 android/build
+export_presets.cfg
+config.cfg
+shuckit.keystore
