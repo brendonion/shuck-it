@@ -26,7 +26,7 @@ public class Shop : Control {
         this.kernelCount     = (RichTextLabel) FindNode("KernelCount");
         this.scrollContainer = (ScrollContainer) FindNode("ScrollContainer");
         this.purchaseSound   = (AudioStreamPlayer2D) FindNode("PurchaseSound");
-        this.missSound   = (AudioStreamPlayer2D) FindNode("MissSound");
+        this.missSound       = (AudioStreamPlayer2D) FindNode("MissSound");
         this.confirmation    = (ConfirmationDialog) FindNode("ConfirmationDialog");
         this.confirmation.GetCloseButton().Visible = false;
 

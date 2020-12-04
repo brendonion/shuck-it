@@ -8,6 +8,8 @@ public class Home : Node2D {
     public Button adsButton;
     public Button soundButton;
 
+    public Godot.Object androidPayment;
+
     public SaveSystem SaveSystem;
 
     public override void _Ready() {
@@ -16,6 +18,11 @@ public class Home : Node2D {
 
         this.adsButton   = (Button) FindNode("AdsButton");
         this.soundButton = (Button) FindNode("SoundButton");
+
+        if (OS.GetName() == "Android") {
+            this.androidPayment = (Godot.Object) FindNode("AndroidPayment");
+            this.androidPayment.Call("check_purchase");
+        }
 
         this.UpdateButtons();
     }
@@ -29,9 +36,9 @@ public class Home : Node2D {
     }
 
     public void _OnAdsPressed() {
-        // this.enableAds = !this.enableAds;
-        // this.SaveSettings();
-        // this.UpdateButtons();
+        if (OS.GetName() == "Android") {
+            this.androidPayment.Call("purchase_item");
+        }
     }
 
     public void _OnSoundPressed() {
@@ -45,7 +52,7 @@ public class Home : Node2D {
     }
 
     public void UpdateButtons() {
-        this.adsButton.Disabled = !SaveSystem.enableAds;
+        this.adsButton.Visible = SaveSystem.enableAds;
         if (SaveSystem.enableSound) {
             this.soundButton.Icon = this.soundOnTexture;
             AudioServer.SetBusMute(0, false);
