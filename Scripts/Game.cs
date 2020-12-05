@@ -103,7 +103,7 @@ public class Game : Node2D {
         if (@event.IsActionPressed("ui_touch")) {
             ((AnimatedSprite) this.ReadyScreen.FindNode("AnimatedSprite")).Visible = false;
             ((RichTextLabel) this.ReadyScreen.FindNode("RichTextLabel")).BbcodeText = "[shake amp=10 freq=2][center]Shuck It![/center][/shake]";
-            await ToSignal(GetTree().CreateTimer(1f), "timeout");
+            await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
             this.ReadyScreen.QueueFree();
             this.Score.Visible = true;
             this.ready = true;
