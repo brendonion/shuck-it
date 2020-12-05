@@ -16,9 +16,6 @@ func _ready():
     save_system = get_parent().find_node("SaveSystem")
     ads_button  = get_parent().find_node("AdsButton")
 
-    print(save_system)
-    print(ads_button)
-
     # These are all signals supported by the API
     # You can drop some of these based on your needs
     payment.connect("connected", self, "_on_connected") # No params

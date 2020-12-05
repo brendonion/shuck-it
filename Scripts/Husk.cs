@@ -38,9 +38,11 @@ public class Husk : RigidBody2D {
 
     public override void _PhysicsProcess(float delta) {
         // Find parents rigid body children (husks)
-        // If this is the last husk and there are no flies, then it is on top
+        // If this is the last husk and there are no flies or pigs, then it is on top
         var siblings = this.GetParent().GetChildren();
-        if (siblings[siblings.Count - 1] == this) {
+        var flies    = GetTree().GetNodesInGroup("fly");
+        var pigs     = GetTree().GetNodesInGroup("pig");
+        if (siblings[siblings.Count - 1] == this && flies.Count == 0 && pigs.Count == 0) {
             this.isTopLayer = true;
             this.ModulateColor();
         }

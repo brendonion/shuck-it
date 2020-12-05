@@ -162,15 +162,21 @@ public class Game : Node2D {
         } else if (this.round <= (int) Events.FLIES + 100) {
             num = (int) GD.RandRange(5, 9); // 5 - 8 flies
         } else {
-            num = (int) GD.RandRange(6, 11); // 6 - 10 flies
+            num = (int) GD.RandRange(7, 11); // 7 - 10 flies
         }
+
         for (int i = 0; i < num; i++) {
-            // Spawn fly and set it's speed
+            // Spawn fly, set it's speed, and stop their process
             Fly fly   = (Fly) FlyScene.Instance();
-            fly.speed = this.flySpeed; 
+            fly.speed = this.flySpeed;
+            fly.SetPhysicsProcess(false);
             AddChild(fly);
-            // Space out each fly
-            await ToSignal(GetTree().CreateTimer(0.5f, false), "timeout");
+
+            // Space them out between 0.25 - 0.5 seconds
+            await ToSignal(GetTree().CreateTimer((float) GD.RandRange(0.25f, 0.5f), false), "timeout");
+
+            // Start the fly's process again
+            fly.SetPhysicsProcess(true);
         }
     }
 
