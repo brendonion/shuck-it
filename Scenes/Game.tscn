@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://admob-lib/admob.gd" type="Script" id=16]
 [ext_resource path="res://Scenes/SaveSystem.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Theme/font.tres" type="DynamicFont" id=18]
+[ext_resource path="res://Art/Tap.png" type="Texture" id=19]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 8.0
@@ -51,6 +52,22 @@ content_margin_right = 12.0
 content_margin_left = 12.0
 content_margin_right = 12.0
 
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 19 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -68,6 +85,7 @@ __meta__ = {
 }
 
 [node name="Score" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 margin_right = 180.0
 margin_bottom = 321.0
@@ -356,11 +374,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ReadyScreen" type="Control" parent="."]
+margin_right = 180.0
+margin_bottom = 320.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ReadyScreen"]
+margin_left = 2.0
+margin_top = 87.0
+margin_right = 91.0
+margin_bottom = 131.0
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=10 freq=2][center]Ready?[/center][/wave]"
+text = "Ready?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ReadyScreen"]
+position = Vector2( 90, 172.364 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 11 )
+frame = 1
+playing = true
+
 [node name="AdMob" type="Node" parent="."]
 script = ExtResource( 16 )
+banner_on_top = false
 banner_id = "ca-app-pub-1794508493895269/3851480488"
 interstitial_id = "ca-app-pub-1794508493895269/5079983438"
 [connection signal="pressed" from="Score/PauseButton" to="Score" method="_OnPausePressed"]
 [connection signal="pressed" from="Score/Game Over/PlayAgainButton" to="Score" method="_OnPlayAgainPressed"]
 [connection signal="pressed" from="Score/Game Over/ExitButton" to="Score" method="_OnExitPressed"]
 [connection signal="pressed" from="PauseScreen/ResumeButton" to="Score" method="_OnResumePressed"]
+[connection signal="gui_input" from="ReadyScreen" to="." method="_OnReadyScreenGuiInput"]

@@ -24,6 +24,7 @@ public class Game : Node2D {
     public int husks    = 3; // Husk count
     public int maxHusks = 5; // Max husks
     
+    public bool ready       = false; // Player readied flag
     public bool initialized = false; // Cob initialized flag
     public bool spawnFlies  = false; // Fly spawn flag
     public bool spawnPigs   = false; // Pig spawn flag
@@ -44,6 +45,7 @@ public class Game : Node2D {
     public TimerBar TimerBar;
     public Score Score;
     public DialogScreen DialogScreen;
+    public Control ReadyScreen;
 
     public PackedScene KernelScene     = (PackedScene) ResourceLoader.Load("res://Scenes/Kernel.tscn");
     public PackedScene FlyScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Fly.tscn");
@@ -51,6 +53,8 @@ public class Game : Node2D {
     public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
     public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
     public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
+
+    public Godot.Object admob;
 
     public SaveSystem SaveSystem;
 
@@ -76,16 +80,36 @@ public class Game : Node2D {
         this.TimerBar     = (TimerBar) FindNode("TimerBar");
         this.Score        = (Score) FindNode("Score");
         this.DialogScreen = (DialogScreen) FindNode("DialogScreen");
+        this.ReadyScreen  = (Control) FindNode("ReadyScreen");
 
         // Connect custom signals
         this.Cob.Connect("swiped", this, "CreateNextRound");
 
         this.CreateCorn();
+
+        if (OS.GetName() == "Android" && SaveSystem.enableAds) {
+            this.admob = (Godot.Object) FindNode("AdMob");
+            this.admob.Call("load_banner");
+        }
     }
 
     public override void _PhysicsProcess(float delta) {
-        if (!this.initialized && HasNode("Cob") && !this.DialogScreen.Visible) {
+        if (this.ready && !this.initialized && HasNode("Cob") && !this.DialogScreen.Visible) {
             this.InitCornPosition(delta);
+        }
+    }
+
+    public async void _OnReadyScreenGuiInput(InputEvent @event) {
+        if (@event.IsActionPressed("ui_touch")) {
+            ((AnimatedSprite) this.ReadyScreen.FindNode("AnimatedSprite")).Visible = false;
+            ((RichTextLabel) this.ReadyScreen.FindNode("RichTextLabel")).BbcodeText = "[shake amp=10 freq=2][center]Shuck It![/center][/shake]";
+            await ToSignal(GetTree().CreateTimer(1f), "timeout");
+            this.ReadyScreen.QueueFree();
+            this.Score.Visible = true;
+            this.ready = true;
+            if (OS.GetName() == "Android" && SaveSystem.enableAds) {
+                this.admob.Call("hide_banner");
+            }
         }
     }
 
