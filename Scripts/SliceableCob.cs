@@ -37,6 +37,9 @@ public class SliceableCob : Node2D {
     [Signal]
     public delegate void sliced(int point);
 
+    [Signal]
+    public delegate void complete(int point);
+
     public override void _Ready() {
         // Get singletons
         SaveSystem = (SaveSystem) GetParent().FindNode("SaveSystem");
@@ -148,6 +151,7 @@ public class SliceableCob : Node2D {
         this.kernelsEarned.Visible = true;
 
         if (bonusKernels > 0) {
+            EmitSignal(nameof(sliced), 1);
             this.kernelsEarned.BbcodeText = $"[wave amp=15 freq=5][center]+{bonusKernels} kernels[/center][/wave]";
             this.purchaseSound.Play();
 
@@ -162,13 +166,13 @@ public class SliceableCob : Node2D {
             }
 
             SaveSystem.kernels += bonusKernels;
-            EmitSignal(nameof(sliced), 1);
         } else {
-            this.kernelsEarned.BbcodeText = $"[shake amp=5 freq=2][center]No bonus kernels![/center][/shake]";
             EmitSignal(nameof(sliced), -1);
+            this.kernelsEarned.BbcodeText = $"[shake amp=5 freq=2][center]No bonus kernels![/center][/shake]";
         }
 
         await ToSignal(GetTree().CreateTimer(1f), "timeout");
+        EmitSignal(nameof(complete), 0);
         QueueFree();
     }
 

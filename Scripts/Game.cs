@@ -217,8 +217,9 @@ public class Game : Node2D {
         }
 
         // Connect signals
-        this.SliceableCob.Connect("sliced", this, "CreateNextRound");
+        this.SliceableCob.Connect("sliced", this.TimerBar, "ClearTimer");
         this.SliceableCob.Connect("sliced", this.Score, "UpdateScore");
+        this.SliceableCob.Connect("complete", this, "CreateNextRound");
 
         // Hide "Bonus Round!" text after 1.5 seconds
         await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
