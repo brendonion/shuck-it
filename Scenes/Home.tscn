@@ -53,7 +53,6 @@ margin_bottom = 269.308
 [node name="Logo" type="AnimatedSprite" parent="."]
 position = Vector2( 92.5537, 82.0793 )
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -70,14 +69,14 @@ __meta__ = {
 margin_right = 89.0
 margin_bottom = 28.0
 theme = ExtResource( 4 )
-text = "PLAY"
+text = "Play"
 
 [node name="TutorialButton" type="Button" parent="VBoxContainer"]
 margin_top = 35.0
 margin_right = 89.0
 margin_bottom = 63.0
 theme = ExtResource( 4 )
-text = "TUTORIAL"
+text = "Tutorial"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 47.0

@@ -6,6 +6,8 @@ public class Fly : Node2D {
 
     public int patrolIndex = 0;
 
+    public bool dead = false;
+
     public Path2D patrolPath;
 
     public Vector2[] patrolPoints;
@@ -58,7 +60,7 @@ public class Fly : Node2D {
             }
         }
         // Fade out the Fly when squashed
-        if (this.speed == 0) {
+        if (this.dead) {
             if (this.timer == null) {
                 this.timer = GetTree().CreateTimer(0.25f, false);
             } else if (this.timer.TimeLeft <= 0f) {
@@ -71,6 +73,7 @@ public class Fly : Node2D {
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if ((@event is InputEventScreenTouch || @event is InputEventScreenDrag) && this.speed != 0) {
             RemoveFromGroup("fly");
+            this.dead = true;
             this.speed = 0;
             this.animatedSprite.Play("squash");
             this.audioPlayer.Play();

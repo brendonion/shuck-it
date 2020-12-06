@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class Game : Node2D {
 
@@ -189,18 +190,23 @@ public class Game : Node2D {
             num = (int) GD.RandRange(7, 11); // 7 - 10 flies
         }
 
-        for (int i = 0; i < num; i++) {
-            // Spawn fly, set it's speed, and stop their process
-            Fly fly   = (Fly) FlyScene.Instance();
-            fly.speed = this.flySpeed;
-            fly.SetPhysicsProcess(false);
-            AddChild(fly);
+        List<Fly> flies = new List<Fly>();
 
+        for (int i = 0; i < num; i++) {
+            // Spawn fly, set it's speed to 0
+            Fly fly = (Fly) FlyScene.Instance();
+            fly.speed = 0;
+            fly.Visible = false;
+            flies.Add(fly);
+            AddChild(fly);
+        }
+
+        for (int i = 0; i < num; i++) {
+            // Set the fly's speed
+            flies[i].Visible = true;
+            flies[i].speed = this.flySpeed;
             // Space them out between 0.25 - 0.5 seconds
             await ToSignal(GetTree().CreateTimer((float) GD.RandRange(0.25f, 0.5f), false), "timeout");
-
-            // Start the fly's process again
-            fly.SetPhysicsProcess(true);
         }
     }
 
