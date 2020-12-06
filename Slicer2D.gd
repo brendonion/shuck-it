@@ -22,8 +22,6 @@ class SlicingData:
 
 
 func slice_world(start : Vector2, end : Vector2, collision_layer : int = 0x7FFFFFFF, destroy : bool = true) -> Array:
-    print("start: ", start)
-    print("end: ", end)
     return _slice(start, end, collision_layer, destroy)
 
 

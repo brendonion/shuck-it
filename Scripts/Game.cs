@@ -6,17 +6,33 @@ public class Game : Node2D {
 
     // Round numbers that trigger events
     public enum Events {
-        START      = 0,
-        HUSKS      = 3,
-        BAR        = 5,
-        FLIES      = 10,
-        PIG        = 25,
-        SPEED_UP   = 33,
-        SPEED_UP_2 = 66,
-        SPEED_UP_3 = 99,
-        FACES      = 250,
-        TINDER     = 251,
-        FINALE     = 500,
+        START         = 0,
+        HUSKS         = 3,
+        BAR           = 5,
+        FLIES         = 10,
+        PIG           = 25,
+        SPEED_UP      = 33,
+        BONUS         = 50,
+        BONUS_RESET   = 51,
+        SPEED_UP_2    = 66,
+        SPEED_UP_3    = 99,
+        BONUS_2       = 100,
+        BONUS_2_RESET = 101,
+        BONUS_3       = 150,
+        BONUS_3_RESET = 151,
+        BONUS_4       = 200,
+        BONUS_4_RESET = 201,
+        FACES         = 250,
+        TINDER        = 251,
+        BONUS_5       = 300,
+        BONUS_5_RESET = 301,
+        BONUS_6       = 350,
+        BONUS_6_RESET = 351,
+        BONUS_7       = 400,
+        BONUS_7_RESET = 401,
+        BONUS_8       = 450,
+        BONUS_8_RESET = 451,
+        FINALE        = 500,
     }
 
     public Events currentEvent = Events.START;
@@ -25,11 +41,13 @@ public class Game : Node2D {
     public int husks    = 3; // Husk count
     public int maxHusks = 5; // Max husks
     
-    public bool ready       = false; // Player readied flag
-    public bool initialized = false; // Cob initialized flag
-    public bool spawnFlies  = false; // Fly spawn flag
-    public bool spawnPigs   = false; // Pig spawn flag
-    public bool spawnFaces  = false; // Cob face spawn flag
+    public bool ready          = false; // Player readied flag
+    public bool initialized    = false; // Cob initialized flag
+    public bool spawnKernel    = true;  // Kernel spawn flag
+    public bool spawnFlies     = false; // Fly spawn flag
+    public bool spawnPigs      = false; // Pig spawn flag
+    public bool spawnFaces     = false; // Cob face spawn flag
+    public bool spawnBonusCorn = false; // Sliceable cob spawn flag
 
     public float flySpeed    = 125f; // Fly speed
     public float pigSpeed    = 125f; // Pig speed
@@ -43,17 +61,20 @@ public class Game : Node2D {
     public Vector2 screenCenter;
 
     public Cob Cob;
+    public SliceableCob SliceableCob;
     public TimerBar TimerBar;
     public Score Score;
     public DialogScreen DialogScreen;
     public Control ReadyScreen;
+    public Control BonusScreen;
 
-    public PackedScene KernelScene     = (PackedScene) ResourceLoader.Load("res://Scenes/Kernel.tscn");
-    public PackedScene FlyScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Fly.tscn");
-    public PackedScene PigScene        = (PackedScene) ResourceLoader.Load("res://Scenes/Pig.tscn");
-    public PackedScene RightHuskScene  = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
-    public PackedScene LeftHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
-    public PackedScene MiddleHuskScene = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
+    public PackedScene KernelScene       = (PackedScene) ResourceLoader.Load("res://Scenes/Kernel.tscn");
+    public PackedScene FlyScene          = (PackedScene) ResourceLoader.Load("res://Scenes/Fly.tscn");
+    public PackedScene PigScene          = (PackedScene) ResourceLoader.Load("res://Scenes/Pig.tscn");
+    public PackedScene RightHuskScene    = (PackedScene) ResourceLoader.Load("res://Scenes/RightHusk.tscn");
+    public PackedScene LeftHuskScene     = (PackedScene) ResourceLoader.Load("res://Scenes/LeftHusk.tscn");
+    public PackedScene MiddleHuskScene   = (PackedScene) ResourceLoader.Load("res://Scenes/MiddleHusk.tscn");
+    public PackedScene SliceableCobScene = (PackedScene) ResourceLoader.Load("res://Scenes/SliceableCob.tscn");
 
     public Godot.Object admob;
 
@@ -82,6 +103,7 @@ public class Game : Node2D {
         this.Score        = (Score) FindNode("Score");
         this.DialogScreen = (DialogScreen) FindNode("DialogScreen");
         this.ReadyScreen  = (Control) FindNode("ReadyScreen");
+        this.BonusScreen  = (Control) FindNode("BonusScreen");
 
         // Connect custom signals
         this.Cob.Connect("swiped", this, "CreateNextRound");
@@ -96,7 +118,11 @@ public class Game : Node2D {
 
     public override void _PhysicsProcess(float delta) {
         if (this.ready && !this.initialized && HasNode("Cob") && !this.DialogScreen.Visible) {
-            this.InitCornPosition(delta);
+            if (this.spawnBonusCorn) {
+                this.InitBonusCornPosition(delta);
+            } else {
+                this.InitCornPosition(delta);
+            }
         }
     }
 
@@ -125,6 +151,17 @@ public class Game : Node2D {
         }
     }
 
+    public void InitBonusCornPosition(float delta) {
+        if (this.SliceableCob.Cob.Position.y < this.screenCenter.y) {
+            this.timePassed  += delta;
+            this.SliceableCob.Cob.Position = this.SliceableCob.Cob.Position.LinearInterpolate(this.screenCenter, this.timePassed / this.timeSec);
+        } else {
+            this.initialized = true;
+            this.timePassed  = 0f;
+            EmitSignal(nameof(new_round), this.timeOut);
+        }
+    }
+
     public void CreateCorn() {
         PackedScene[] huskArr = {(PackedScene) MiddleHuskScene, (PackedScene) LeftHuskScene, (PackedScene) RightHuskScene};
         for (int i = 1; i <= this.husks; i++) {
@@ -145,6 +182,50 @@ public class Game : Node2D {
                 this.Cob.husks.AddChild(huskArr[(int) GD.RandRange(0, 3)].Instance());
             }
         }
+
+        // Guarantee Cob is not draggable
+        this.Cob.isDraggable = false;
+    }
+
+    public async void CreateBonusCorn() {
+        // Instantiate SliceableCob
+        this.SliceableCob = (SliceableCob) SliceableCobScene.Instance();
+        // Add to scene
+        AddChild(this.SliceableCob);
+        // Set position to above screen
+        this.SliceableCob.Cob.Position = new Vector2(this.screenSize.x / 2, -100);
+
+        // Add husks
+        PackedScene[] huskArr = {(PackedScene) MiddleHuskScene, (PackedScene) LeftHuskScene, (PackedScene) RightHuskScene};
+        for (int i = 1; i <= this.husks; i++) {
+            // Guarantee middle husk is last if huskCount is >= 5
+            if (i == 1 && this.husks == this.maxHusks) {
+                this.SliceableCob.husks.AddChild(huskArr[0].Instance());
+                continue;
+            }
+            // Guarantee a middle, left, and right husk to spawn
+            if (i == this.husks) {
+                this.SliceableCob.husks.AddChild(huskArr[0].Instance());
+            } else if (i == this.husks - 1) {
+                this.SliceableCob.husks.AddChild(huskArr[1].Instance());
+            } else if (i == this.husks - 2) {
+                this.SliceableCob.husks.AddChild(huskArr[2].Instance());
+            } else {
+                // Spawn a random husk
+                this.SliceableCob.husks.AddChild(huskArr[(int) GD.RandRange(0, 3)].Instance());
+            }
+        }
+
+        // Connect signals
+        this.SliceableCob.Connect("sliced", this, "CreateNextRound");
+        this.SliceableCob.Connect("sliced", this.Score, "UpdateScore");
+
+        // Hide "Bonus Round!" text after 1.5 seconds
+        await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
+        this.BonusScreen.Visible = false;
+
+        // Ready up
+        this.ready = true;
     }
 
     public async void CreateKernel() {
@@ -246,11 +327,16 @@ public class Game : Node2D {
 
         this.HandleEvent();
 
-        this.CreateCorn();
-        this.CreateKernel();
-        if (this.spawnFlies) this.CreateFlies();
-        if (this.spawnPigs)  this.CreatePigs();
-        if (this.spawnFaces) this.CreateFaces();
+        if (this.spawnBonusCorn) {
+            this.CreateBonusCorn();
+        } else {
+            this.CreateCorn();
+        }
+
+        if (this.spawnKernel) this.CreateKernel();
+        if (this.spawnFlies)  this.CreateFlies();
+        if (this.spawnPigs)   this.CreatePigs();
+        if (this.spawnFaces)  this.CreateFaces();
 
         this.initialized = false;
     }
@@ -285,6 +371,14 @@ public class Game : Node2D {
                 this.flySpeed    = 150f;
                 // this.timeOut  = 9f;
                 break;
+            case Events.BONUS:
+                this.spawnBonusCorn      = true;
+                this.BonusScreen.Visible = true;
+                this.ready               = false;
+                break;
+            case Events.BONUS_RESET:
+                this.spawnBonusCorn = false;
+                break;
             case Events.SPEED_UP_2:
                 this.pigSpeed    = 150f;
                 this.flySpeed    = 175f;
@@ -296,6 +390,30 @@ public class Game : Node2D {
                 this.flySpeed    = 200f;
                 this.kernelSpeed = 200f;
                 // this.timeOut  = 7f;
+                break;
+            case Events.BONUS_2:
+                this.spawnBonusCorn      = true;
+                this.BonusScreen.Visible = true;
+                this.ready               = false;
+                break;
+            case Events.BONUS_2_RESET:
+                this.spawnBonusCorn = false;
+                break;
+            case Events.BONUS_3:
+                this.spawnBonusCorn      = true;
+                this.BonusScreen.Visible = true;
+                this.ready               = false;
+                break;
+            case Events.BONUS_3_RESET:
+                this.spawnBonusCorn = false;
+                break;
+            case Events.BONUS_4:
+                this.spawnBonusCorn      = true;
+                this.BonusScreen.Visible = true;
+                this.ready               = false;
+                break;
+            case Events.BONUS_4_RESET:
+                this.spawnBonusCorn = false;
                 break;
             case Events.FACES:
                 // Hide everything else for dramatic effect
@@ -315,6 +433,38 @@ public class Game : Node2D {
                 this.spawnFlies       = true;
                 this.spawnPigs        = true;
                 this.TimerBar.Visible = true;
+                break;
+            case Events.BONUS_5:
+                this.spawnBonusCorn      = true;
+                this.BonusScreen.Visible = true;
+                this.ready               = false;
+                break;
+            case Events.BONUS_5_RESET:
+                this.spawnBonusCorn = false;
+                break;
+            case Events.BONUS_6:
+                this.spawnBonusCorn      = true;
+                this.BonusScreen.Visible = true;
+                this.ready               = false;
+                break;
+            case Events.BONUS_6_RESET:
+                this.spawnBonusCorn = false;
+                break;
+            case Events.BONUS_7:
+                this.spawnBonusCorn      = true;
+                this.BonusScreen.Visible = true;
+                this.ready               = false;
+                break;
+            case Events.BONUS_7_RESET:
+                this.spawnBonusCorn = false;
+                break;
+            case Events.BONUS_8:
+                this.spawnBonusCorn      = true;
+                this.BonusScreen.Visible = true;
+                this.ready               = false;
+                break;
+            case Events.BONUS_8_RESET:
+                this.spawnBonusCorn = false;
                 break;
             case Events.FINALE:
                 // Saves bestScore and kernels

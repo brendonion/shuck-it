@@ -29,9 +29,6 @@ public class Cob : KinematicBody2D {
     [Signal]
     public delegate void swiped(int point);
 
-    [Signal]
-    public delegate void shucked(float duration);
-
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();

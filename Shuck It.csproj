@@ -31,7 +31,7 @@
     <Compile Include="Scripts\SaveSystem.cs" />
     <Compile Include="Scripts\Shop.cs" />
     <Compile Include="Scripts\ShopItem.cs" />
-    <Compile Include="Scripts\TestSlicing.cs" />
+    <Compile Include="Scripts\SliceableCob.cs" />
     <Compile Include="Scripts\TimerBar.cs" />
     <Compile Include="Scripts\Score.cs" />
     <Compile Include="Scripts\Tutorial.cs" />

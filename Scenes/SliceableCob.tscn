@@ -1,20 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Sliceable2D.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/sliceable_sprite.gd" type="Script" id=1]
 [ext_resource path="res://Art/Unlockables/GoodSkin1.png" type="Texture" id=2]
 [ext_resource path="res://Slicer2D.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/TestSlicing.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/SliceableCob.cs" type="Script" id=4]
+[ext_resource path="res://Theme/font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Sounds/KaChing.ogg" type="AudioStream" id=6]
 
-[node name="Node2D" type="Node2D"]
+[node name="SliceableCob" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="Slicer2D" type="Node2D" parent="."]
 position = Vector2( 85.0299, 134.363 )
 script = ExtResource( 3 )
 
-[node name="SliceableCob" type="RigidBody2D" parent="."]
-position = Vector2( 86.6416, 134.436 )
-z_index = -1
+[node name="Cob" type="RigidBody2D" parent="."]
+collision_layer = 1024
+collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource( 1 )
 __meta__ = {
@@ -22,8 +24,31 @@ __meta__ = {
 }
 sprite_node = NodePath("Sprite")
 
-[node name="Sprite" type="Sprite" parent="SliceableCob"]
+[node name="Sprite" type="Sprite" parent="Cob"]
 texture = ExtResource( 2 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SliceableCob"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Cob"]
 polygon = PoolVector2Array( 37.7, -31.979, 12.8748, -94.3447, -9.22561, -94.6474, -34.959, -29.557, -34.3535, 65.5052, 0.765007, 103.349, 36.489, 66.4135 )
+
+[node name="Husks" type="Node2D" parent="Cob"]
+
+[node name="KernelsEarned" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 1.0
+margin_top = 87.0
+margin_right = 90.0
+margin_bottom = 131.0
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=15 freq=5
+][center]+10 kernels[/center][/wave]"
+text = "+10 kernels"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PurchaseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -5.0
