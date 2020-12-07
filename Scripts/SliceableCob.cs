@@ -174,7 +174,7 @@ public class SliceableCob : Node2D {
             this.kernelsEarned.BbcodeText = $"[shake amp=5 freq=2][center]No bonus kernels![/center][/shake]";
         }
 
-        await ToSignal(GetTree().CreateTimer(1f), "timeout");
+        await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
         EmitSignal(nameof(complete), 0);
         QueueFree();
     }
