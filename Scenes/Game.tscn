@@ -400,7 +400,6 @@ __meta__ = {
 position = Vector2( 90, 172.364 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 11 )
-frame = 1
 playing = true
 
 [node name="BonusScreen" type="Control" parent="."]

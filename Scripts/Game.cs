@@ -253,8 +253,12 @@ public class Game : Node2D {
             await ToSignal(GetTree().CreateTimer(waitTime, false), "timeout");
             // Spawn kernel and set it's speed
             Kernel kernel = (Kernel) KernelScene.Instance();
+            kernel.isBomb = (int) GD.RandRange(1, 4) == 3; // 1 in 3 chance to spawn a bomb instead
             kernel.speed  = this.kernelSpeed;
+
             AddChild(kernel);
+
+            kernel.Connect("tapped", this.Score, "UpdateScore");
         }
     }
 
@@ -447,6 +451,7 @@ public class Game : Node2D {
                 SaveSystem.Save();
                 this.maxHusks             = 10;
                 this.husks                = 10;
+                this.spawnKernel          = false;
                 this.spawnFlies           = false;
                 this.spawnPigs            = false;
                 this.TimerBar.Visible     = false;
