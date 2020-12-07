@@ -142,10 +142,13 @@ public class SliceableCob : Node2D {
         this.ZIndex = 0;
         this.Cob.ZIndex = 0;
 
+        // Wait a bit before looping through slices (alleviates weird jittering bug)
+        await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
+
         for (int i = 0; i < this.linesIdx + 1; i++) {
-            object sliceData = this.Slicer2D.Call("slice_world", (object) this.beginPoints[i], (object) this.endPoints[i]);
+            object sliceData = this.Slicer2D.Call("slice_one", (object) this.Cob, (object) this.beginPoints[i], (object) this.endPoints[i]);
             await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
-            bonusKernels += ((Godot.Collections.Array) sliceData).Count;
+            bonusKernels += sliceData != null ? 1 : 0;
         }
 
         this.kernelsEarned.Visible = true;
