@@ -6,33 +6,41 @@ public class Game : Node2D {
 
     // Round numbers that trigger events
     public enum Events {
-        START         = 0,
-        HUSKS         = 3,
-        BAR           = 5,
-        FLIES         = 10,
-        PIG           = 25,
-        SPEED_UP      = 33,
-        BONUS         = 50,
-        BONUS_RESET   = 51,
-        SPEED_UP_2    = 66,
-        SPEED_UP_3    = 99,
-        BONUS_2       = 100,
-        BONUS_2_RESET = 101,
-        BONUS_3       = 150,
-        BONUS_3_RESET = 151,
-        BONUS_4       = 200,
-        BONUS_4_RESET = 201,
-        FACES         = 250,
-        TINDER        = 251,
-        BONUS_5       = 300,
-        BONUS_5_RESET = 301,
-        BONUS_6       = 350,
-        BONUS_6_RESET = 351,
-        BONUS_7       = 400,
-        BONUS_7_RESET = 401,
-        BONUS_8       = 450,
-        BONUS_8_RESET = 451,
-        FINALE        = 500,
+        START          = 0,
+        HUSKS          = 3,
+        BAR            = 5,
+        FLIES          = 10,
+        PIG            = 25,
+        SPEED_UP       = 33,
+        BONUS          = 40,
+        BONUS_RESET    = 41,
+        SPEED_UP_2     = 66,
+        BONUS_2        = 80,
+        BONUS_2_RESET  = 81,
+        SPEED_UP_3     = 99,
+        BONUS_3        = 120,
+        BONUS_3_RESET  = 121,
+        BONUS_4        = 160,
+        BONUS_4_RESET  = 161,
+        BONUS_5        = 200,
+        BONUS_5_RESET  = 201,
+        BONUS_6        = 240,
+        BONUS_6_RESET  = 241,
+        FACES          = 250,
+        TINDER         = 251,
+        BONUS_7        = 280,
+        BONUS_7_RESET  = 281,
+        BONUS_8        = 320,
+        BONUS_8_RESET  = 321,
+        BONUS_9        = 360,
+        BONUS_9_RESET  = 361,
+        BONUS_10       = 400,
+        BONUS_10_RESET = 401,
+        BONUS_11       = 440,
+        BONUS_11_RESET = 441,
+        BONUS_12       = 480,
+        BONUS_12_RESET = 481,
+        FINALE         = 500,
     }
 
     public Events currentEvent = Events.START;
@@ -373,11 +381,33 @@ public class Game : Node2D {
                 // this.timeOut  = 9f;
                 break;
             case Events.BONUS:
+            case Events.BONUS_2:
+            case Events.BONUS_3:
+            case Events.BONUS_4:
+            case Events.BONUS_5:
+            case Events.BONUS_6:
+            case Events.BONUS_7:
+            case Events.BONUS_8:
+            case Events.BONUS_9:
+            case Events.BONUS_10:
+            case Events.BONUS_11:
+            case Events.BONUS_12:
                 this.spawnBonusCorn      = true;
                 this.BonusScreen.Visible = true;
                 this.ready               = false;
                 break;
             case Events.BONUS_RESET:
+            case Events.BONUS_2_RESET:
+            case Events.BONUS_3_RESET:
+            case Events.BONUS_4_RESET:
+            case Events.BONUS_5_RESET:
+            case Events.BONUS_6_RESET:
+            case Events.BONUS_7_RESET:
+            case Events.BONUS_8_RESET:
+            case Events.BONUS_9_RESET:
+            case Events.BONUS_10_RESET:
+            case Events.BONUS_11_RESET:
+            case Events.BONUS_12_RESET:
                 this.spawnBonusCorn = false;
                 break;
             case Events.SPEED_UP_2:
@@ -391,30 +421,6 @@ public class Game : Node2D {
                 this.flySpeed    = 200f;
                 this.kernelSpeed = 200f;
                 // this.timeOut  = 7f;
-                break;
-            case Events.BONUS_2:
-                this.spawnBonusCorn      = true;
-                this.BonusScreen.Visible = true;
-                this.ready               = false;
-                break;
-            case Events.BONUS_2_RESET:
-                this.spawnBonusCorn = false;
-                break;
-            case Events.BONUS_3:
-                this.spawnBonusCorn      = true;
-                this.BonusScreen.Visible = true;
-                this.ready               = false;
-                break;
-            case Events.BONUS_3_RESET:
-                this.spawnBonusCorn = false;
-                break;
-            case Events.BONUS_4:
-                this.spawnBonusCorn      = true;
-                this.BonusScreen.Visible = true;
-                this.ready               = false;
-                break;
-            case Events.BONUS_4_RESET:
-                this.spawnBonusCorn = false;
                 break;
             case Events.FACES:
                 // Hide everything else for dramatic effect
@@ -434,38 +440,6 @@ public class Game : Node2D {
                 this.spawnFlies       = true;
                 this.spawnPigs        = true;
                 this.TimerBar.Visible = true;
-                break;
-            case Events.BONUS_5:
-                this.spawnBonusCorn      = true;
-                this.BonusScreen.Visible = true;
-                this.ready               = false;
-                break;
-            case Events.BONUS_5_RESET:
-                this.spawnBonusCorn = false;
-                break;
-            case Events.BONUS_6:
-                this.spawnBonusCorn      = true;
-                this.BonusScreen.Visible = true;
-                this.ready               = false;
-                break;
-            case Events.BONUS_6_RESET:
-                this.spawnBonusCorn = false;
-                break;
-            case Events.BONUS_7:
-                this.spawnBonusCorn      = true;
-                this.BonusScreen.Visible = true;
-                this.ready               = false;
-                break;
-            case Events.BONUS_7_RESET:
-                this.spawnBonusCorn = false;
-                break;
-            case Events.BONUS_8:
-                this.spawnBonusCorn      = true;
-                this.BonusScreen.Visible = true;
-                this.ready               = false;
-                break;
-            case Events.BONUS_8_RESET:
-                this.spawnBonusCorn = false;
                 break;
             case Events.FINALE:
                 // Saves bestScore and kernels
