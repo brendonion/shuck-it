@@ -28,7 +28,7 @@ public class Kernel : Node2D {
     public SceneTreeTimer timer;
 
     [Signal]
-    public delegate void tapped(int point);
+    public delegate void detonated(int point);
 
     public override void _Ready() {
         // Randomize seed
@@ -52,6 +52,7 @@ public class Kernel : Node2D {
 
         if (this.isBomb) {
             this.animatedSprite.Play("bomb");
+            this.animatedSprite.FlipH = this.patrolPath == paths[1];
         }
     }
 
@@ -90,7 +91,7 @@ public class Kernel : Node2D {
             if (this.isBomb) {
                 this.animatedSprite.Play("explosion");
                 this.explosionSound.Play();
-                EmitSignal(nameof(tapped), -1);
+                EmitSignal(nameof(detonated), -1);
             } else {
                 // TODO :: If SaveSystem.kernels is less than 9999, add 1 to them but do not save until game over
                 SaveSystem.kernels += 1;

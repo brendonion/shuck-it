@@ -25,20 +25,20 @@ atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 72, 72 )
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 7 )
-region = Rect2( 72, 0, 72, 72 )
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 7 )
-region = Rect2( 144, 0, 72, 72 )
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 7 )
-region = Rect2( 216, 0, 72, 72 )
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 6 )
@@ -73,20 +73,20 @@ atlas = ExtResource( 6 )
 region = Rect2( 504, 0, 72, 72 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 72, 72 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 64 )
+atlas = ExtResource( 7 )
+region = Rect2( 72, 0, 72, 72 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 64 )
+atlas = ExtResource( 7 )
+region = Rect2( 144, 0, 72, 72 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 64 )
+atlas = ExtResource( 7 )
+region = Rect2( 216, 0, 72, 72 )
 
 [sub_resource type="SpriteFrames" id=21]
 animations = [ {
@@ -95,20 +95,20 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "bomb",
-"speed": 5.0
+"name": "collected",
+"speed": 15.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "explosion",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
-"name": "collected",
-"speed": 15.0
+"name": "bomb",
+"speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=22]
@@ -137,6 +137,7 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = SubResource( 21 )
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]

@@ -6,7 +6,7 @@ public class Game : Node2D {
 
     // Round numbers that trigger events
     public enum Events {
-        START          = 0,
+        START          = 1,
         HUSKS          = 3,
         BAR            = 5,
         FLIES          = 10,
@@ -51,7 +51,7 @@ public class Game : Node2D {
     
     public bool ready          = false; // Player readied flag
     public bool initialized    = false; // Cob initialized flag
-    public bool spawnKernel    = true;  // Kernel spawn flag
+    public bool spawnKernel    = false;  // Kernel spawn flag
     public bool spawnFlies     = false; // Fly spawn flag
     public bool spawnPigs      = false; // Pig spawn flag
     public bool spawnFaces     = false; // Cob face spawn flag
@@ -241,24 +241,26 @@ public class Game : Node2D {
         if (this.round == (int) Events.FINALE) return;
 
         int num;
-        if (this.round > (int) Events.SPEED_UP_3) {
-            num = (int) GD.RandRange(1, 6); // 1 in 5
+        bool lateGame = this.round > (int) Events.SPEED_UP_3;
+        if (lateGame) {
+            num = (int) GD.RandRange(1, 4); // 1 in 3
         } else {
-            num = (int) GD.RandRange(1, 11); // 1 in 10
+            num = (int) GD.RandRange(1, 6); // 1 in 5
         }
         // Spawn a kernel if num equals 1
         if (num == 1) {
             // Wait 1 - 3 seconds before spawning
             float waitTime = (float) GD.RandRange(1, 4);
             await ToSignal(GetTree().CreateTimer(waitTime, false), "timeout");
-            // Spawn kernel and set it's speed
             Kernel kernel = (Kernel) KernelScene.Instance();
-            kernel.isBomb = (int) GD.RandRange(1, 4) == 3; // 1 in 3 chance to spawn a bomb instead
+            // Chance to spawn a bomb instead
+            kernel.isBomb = (int) GD.RandRange(1, lateGame ? 3 : 4) == 1;
+            // Set it's speed
             kernel.speed  = this.kernelSpeed;
 
             AddChild(kernel);
 
-            kernel.Connect("tapped", this.Score, "UpdateScore");
+            kernel.Connect("detonated", this.Score, "UpdateScore");
         }
     }
 
@@ -365,6 +367,7 @@ public class Game : Node2D {
 
         switch (this.currentEvent) {
             case Events.START:
+                this.spawnKernel = true;
                 break;
             case Events.HUSKS:
                 if (this.husks < this.maxHusks) {
