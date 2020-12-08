@@ -400,15 +400,17 @@ __meta__ = {
 position = Vector2( 90, 172.364 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 11 )
+frame = 1
 playing = true
 
 [node name="BonusScreen" type="Control" parent="."]
-pause_mode = 2
+pause_mode = 1
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 180.0
 margin_bottom = 320.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

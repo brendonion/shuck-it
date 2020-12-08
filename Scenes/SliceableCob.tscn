@@ -8,6 +8,7 @@
 [ext_resource path="res://Sounds/KaChing.ogg" type="AudioStream" id=6]
 
 [node name="SliceableCob" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 4 )
 
 [node name="Slicer2D" type="Node2D" parent="."]

@@ -70,6 +70,8 @@ public class SliceableCob : Node2D {
 
     public override void _Input(InputEvent @event) {
         if (!this.finished && this.isSliceable && @event is InputEventScreenDrag eventDrag) {
+            if (eventDrag.Position.y < 40) return;
+
             this.drawEnabled = true;
 
             // Keep track of draw direction and prev drag pos
@@ -106,7 +108,7 @@ public class SliceableCob : Node2D {
             Update();
         }
 
-        if (!this.finished && this.isSliceable && @event.IsActionReleased("ui_touch")) {
+        if (!this.finished && this.isSliceable && @event.IsActionReleased("ui_touch") && this.end.y > 40) {
             this.finished    = true;
             this.drawEnabled = false;
             this.isSliceable = false;
@@ -143,11 +145,11 @@ public class SliceableCob : Node2D {
         this.Cob.ZIndex = 0;
 
         // Wait a bit before looping through slices (alleviates weird jittering bug)
-        await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
+        await ToSignal(GetTree().CreateTimer(0.1f, false), "timeout");
 
         for (int i = 0; i < this.linesIdx + 1; i++) {
             object sliceData = this.Slicer2D.Call("slice_one", (object) this.Cob, (object) this.beginPoints[i], (object) this.endPoints[i]);
-            await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
+            await ToSignal(GetTree().CreateTimer(0.05f, false), "timeout");
             bonusKernels += sliceData != null ? 1 : 0;
         }
 
@@ -164,7 +166,7 @@ public class SliceableCob : Node2D {
                 AddChild(kernel);
                 kernel.speed = 0f;
                 kernel.body.Position = new Vector2(screenSize.x / 2, screenSize.y / 2);
-                await ToSignal(GetTree().CreateTimer(0.2f), "timeout");
+                await ToSignal(GetTree().CreateTimer(0.2f, false), "timeout");
                 kernel.QueueFree();
             }
 
@@ -174,7 +176,7 @@ public class SliceableCob : Node2D {
             this.kernelsEarned.BbcodeText = $"[shake amp=5 freq=2][center]No bonus kernels![/center][/shake]";
         }
 
-        await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
+        await ToSignal(GetTree().CreateTimer(1.5f, false), "timeout");
         EmitSignal(nameof(complete), 0);
         QueueFree();
     }

@@ -79,16 +79,26 @@ public class Score : Control {
 
     public void _OnPausePressed() {
         if (OS.GetName() == "Android" && SaveSystem.enableAds) this.admob.Call("load_banner");
-        GetTree().Paused         = true;
-        this.Cob.Visible         = false;
+        GetTree().Paused = true;
+        SliceableCob sliceableCob = ((Game) GetParent()).SliceableCob;
+        if (sliceableCob != null && !sliceableCob.IsQueuedForDeletion()) {
+            sliceableCob.Visible = false;
+            sliceableCob.SetProcessInput(false);
+        }
+        this.Cob.Visible = false;
         this.PauseScreen.Visible = true;
         this.PauseScreen.SetAsToplevel(true);
     }
 
     public void _OnResumePressed() {
         if (OS.GetName() == "Android" && SaveSystem.enableAds) this.admob.Call("hide_banner");
-        GetTree().Paused         = false;
-        this.Cob.Visible         = true;
+        GetTree().Paused = false;
+        SliceableCob sliceableCob = ((Game) GetParent()).SliceableCob;
+        if (sliceableCob != null && !sliceableCob.IsQueuedForDeletion()) {
+            sliceableCob.Visible = true;
+            sliceableCob.SetProcessInput(true);
+        }
+        this.Cob.Visible = true;
         this.PauseScreen.Visible = false;
     }
 

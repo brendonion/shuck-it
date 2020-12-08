@@ -138,7 +138,7 @@ public class Game : Node2D {
         if (@event.IsActionPressed("ui_touch")) {
             ((AnimatedSprite) this.ReadyScreen.FindNode("AnimatedSprite")).Visible = false;
             ((RichTextLabel) this.ReadyScreen.FindNode("RichTextLabel")).BbcodeText = "[shake amp=10 freq=2][center]Shuck It![/center][/shake]";
-            await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
+            await ToSignal(GetTree().CreateTimer(1.5f, false), "timeout");
             this.ReadyScreen.QueueFree();
             this.Score.Visible = true;
             this.ready = true;
@@ -230,7 +230,7 @@ public class Game : Node2D {
         this.SliceableCob.Connect("complete", this, "CreateNextRound");
 
         // Hide "Bonus Round!" text after 1.5 seconds
-        await ToSignal(GetTree().CreateTimer(1.5f), "timeout");
+        await ToSignal(GetTree().CreateTimer(1.5f, false), "timeout");
         this.BonusScreen.Visible = false;
 
         // Ready up
@@ -308,17 +308,19 @@ public class Game : Node2D {
 
     public void CreatePigs() {
         int num;
+        bool lateGame = this.round > (int) Events.SPEED_UP_3;
         if (this.round == (int) Events.PIG) {
             num = 1; // Guarantee a pig to spawn
-        } else if (this.round < (int) Events.SPEED_UP_3) {
-            num = (int) GD.RandRange(1, 5); // 1 in 4
-        } else {
+        } else if (lateGame) {
             num = (int) GD.RandRange(1, 4); // 1 in 3
+        } else {
+            num = (int) GD.RandRange(1, 5); // 1 in 4
         }
-        // Spawn pig and set it's speed if num equals 1
+        // Spawn pig and set it's speed and health if num equals 1
         if (num == 1) {
-            Pig pig   = (Pig) PigScene.Instance();
-            pig.speed = this.pigSpeed;
+            Pig pig    = (Pig) PigScene.Instance();
+            pig.speed  = this.pigSpeed;
+            pig.health = lateGame ? 6 : 4;
             AddChild(pig);
         }
     }

@@ -15,7 +15,7 @@ public class Pig : Node2D {
     public float retreatSpeed = 175f;
     public float deathSpeed   = 50f;
 
-    public int health      = 6;
+    public int health      = 4;
     public int patrolIndex = 0;
 
     public SceneTreeTimer modulateTimer;
