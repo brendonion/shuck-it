@@ -413,6 +413,7 @@ public class Game : Node2D {
             case Events.BONUS_11_RESET:
             case Events.BONUS_12_RESET:
                 this.spawnBonusCorn = false;
+                this.SliceableCob   = null;
                 break;
             case Events.SPEED_UP_2:
                 this.pigSpeed    = 150f;

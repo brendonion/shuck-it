@@ -124,6 +124,13 @@ public class Score : Control {
     public async void GameOver() {
         SaveSystem.timesPlayed += 1;
 
+        // Remove gameplay nodes
+        SliceableCob sliceableCob = ((Game) GetParent()).SliceableCob;
+        if (sliceableCob != null && !sliceableCob.IsQueuedForDeletion()) sliceableCob.QueueFree();
+        this.DialogScreen.QueueFree();
+        this.Cob.QueueFree();
+        this.TimerBar.QueueFree();
+
         if (OS.GetName() == "Android" && SaveSystem.enableAds) {
             this.admob.Call("load_banner");
             if (SaveSystem.timesPlayed % 3 == 0) {
@@ -132,11 +139,6 @@ public class Score : Control {
         }
 
         this.gameOverSound.Play();
-
-        // Remove gameplay nodes
-        this.DialogScreen.QueueFree();
-        this.Cob.QueueFree();
-        this.TimerBar.QueueFree();
 
         // Hide score tracking nodes
         this.missCounter.Visible = false;
