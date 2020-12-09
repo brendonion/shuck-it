@@ -73,7 +73,7 @@ func _on_purchase_acknowledged(purchase_token):
   print("GodotGooglePlayBilling PURCHASE ACKNOWLEDGED")
   print("Purchase Token: " + purchase_token)
 
-func _on_purchase_acknowledgment_error(response_id, message, purchase_token):
+func _on_purchase_acknowledgement_error(response_id, message, purchase_token):
   print("GodotGooglePlayBilling PURCHASE ACKNOWLEDGMENT ERROR")
   print("Response ID: " + str(response_id))
   print("Message: " + message)
