@@ -105,12 +105,12 @@ public class Shop : Control {
     }
 
     public async void _OnScrollStarted() {
-        await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
+        await ToSignal(GetTree().CreateTimer(0.075f), "timeout");
         this.allowPress = false;
     }
 
     public async void _OnScrollEnded() {
-        await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
+        await ToSignal(GetTree().CreateTimer(0.075f), "timeout");
         this.allowPress = true;
     }
 

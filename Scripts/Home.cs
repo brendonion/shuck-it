@@ -12,19 +12,21 @@ public class Home : Node2D {
 
     public SaveSystem SaveSystem;
 
-    public override void _Ready() {
+    public async override void _Ready() {
         // Get singletons
         SaveSystem = (SaveSystem) FindNode("SaveSystem");
 
         this.adsButton   = (Button) FindNode("AdsButton");
         this.soundButton = (Button) FindNode("SoundButton");
 
+        this.UpdateButtons();
+
         if (OS.GetName() == "Android") {
             this.androidPayment = (Godot.Object) FindNode("AndroidPayment");
+            // Wait a second to connect to the Google Billing API
+            await ToSignal(GetTree().CreateTimer(1f), "timeout");
             this.androidPayment.Call("check_purchase");
         }
-
-        this.UpdateButtons();
     }
 
     public void _OnPlayPressed() {

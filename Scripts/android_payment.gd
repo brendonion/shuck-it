@@ -55,17 +55,16 @@ func _on_purchases_updated(purchases):
 
 func _on_purchase_error(response_id, message):
   print("GodotGooglePlayBilling PURCHASE ERROR")
-  print("Response ID: " + response_id)
+  print("Response ID: " + str(response_id))
   print("Message: " + message)
 
 func _on_sku_details_query_completed(sku_details):
   print("GodotGooglePlayBilling SKU DETAILS QUERY COMPLETED")
-  for available_sku in sku_details:
-        print("Available SKU: " + available_sku)
+  print("Sku Details: ", sku_details)
 
 func _on_sku_details_query_error(response_id, message, skus):
   print("GodotGooglePlayBilling SKU DETAILS QUERY ERROR")
-  print("Response ID: " + response_id)
+  print("Response ID: " + str(response_id))
   print("Message: " + message)
   for sku_name in skus:
         print("SKU: "+ sku_name)
@@ -76,7 +75,7 @@ func _on_purchase_acknowledged(purchase_token):
 
 func _on_purchase_acknowledgment_error(response_id, message, purchase_token):
   print("GodotGooglePlayBilling PURCHASE ACKNOWLEDGMENT ERROR")
-  print("Response ID: " + response_id)
+  print("Response ID: " + str(response_id))
   print("Message: " + message)
   print("Purchase Token: " + purchase_token)
 
@@ -89,7 +88,15 @@ func purchase_item():
 func check_purchase():
   print("CHECKING PURCHASE...")
   var query = payment.queryPurchases(self.type) # Or "subs" for subscriptions
+  print("Purchase Query: ", query);
   if query.status == OK:
+    print("PURCHASE OK.")
+    if query.purchases == null || query.purchases.size() == 0:
+      save_system.enableAds = true
+      save_system.Save()
+      # Update UI
+      ads_button.visible = true
+    else:
       for purchase in query.purchases:
           if purchase.sku == self.sku:
               # Entitle the user to the content they bought
@@ -99,3 +106,5 @@ func check_purchase():
               ads_button.visible = false
               if !purchase.is_acknowledged:
                   payment.acknowledgePurchase(purchase.purchase_token)
+  else:
+    print("PURCHASE ERROR.")
