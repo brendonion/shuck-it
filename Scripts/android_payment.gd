@@ -6,6 +6,8 @@ var save_system
 
 var ads_button
 
+var dialog
+
 var type = "inapp"
 
 var sku = "ad_removal"
@@ -15,6 +17,8 @@ func _ready():
     payment     = Engine.get_singleton("GodotGooglePlayBilling")
     save_system = get_parent().find_node("SaveSystem")
     ads_button  = get_parent().find_node("AdsButton")
+    dialog      = get_parent().find_node("AcceptDialog")
+    dialog.get_close_button().visible = false
 
     # These are all signals supported by the API
     # You can drop some of these based on your needs
@@ -78,6 +82,12 @@ func _on_purchase_acknowledgement_error(response_id, message, purchase_token):
   print("Response ID: " + str(response_id))
   print("Message: " + message)
   print("Purchase Token: " + purchase_token)
+  dialog.dialog_text = "Something went wrong with your purchase."
+  dialog.popup_centered()
+  save_system.enableAds = true
+  save_system.Save()
+  # Update UI
+  ads_button.visible = true
 
 ### Helper functions ###
 
@@ -98,7 +108,8 @@ func check_purchase():
       ads_button.visible = true
     else:
       for purchase in query.purchases:
-          if purchase.sku == self.sku:
+          # If purchase sku matches self.sku AND purchase state != Pending
+          if purchase.sku == self.sku && purchase.purchase_state != 2:
               # Entitle the user to the content they bought
               save_system.enableAds = false
               save_system.Save()
@@ -106,5 +117,8 @@ func check_purchase():
               ads_button.visible = false
               if !purchase.is_acknowledged:
                   payment.acknowledgePurchase(purchase.purchase_token)
+          elif purchase.purchase_state == 2:
+            dialog.dialog_text = "Purchase pending."
+            dialog.popup_centered()
   else:
     print("PURCHASE ERROR.")

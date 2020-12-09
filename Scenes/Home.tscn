@@ -53,6 +53,7 @@ margin_bottom = 269.308
 [node name="Logo" type="AnimatedSprite" parent="."]
 position = Vector2( 92.5537, 82.0793 )
 frames = SubResource( 5 )
+frame = 3
 playing = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -115,14 +116,26 @@ icon = ExtResource( 7 )
 modulate = Color( 1, 1, 1, 0.705882 )
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = 303.0
+margin_top = 304.0
 margin_right = 241.0
-margin_bottom = 326.0
+margin_bottom = 327.0
 rect_scale = Vector2( 0.75, 0.75 )
 custom_fonts/normal_font = ExtResource( 10 )
 bbcode_enabled = true
 bbcode_text = "[center]Made by Brendan Walker[center]"
 text = "Made by Brendan Walker"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 5.0
+margin_top = 93.0
+margin_right = 165.0
+margin_bottom = 193.0
+rect_min_size = Vector2( 160, 100 )
+theme = ExtResource( 4 )
+dialog_autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
