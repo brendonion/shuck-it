@@ -45,10 +45,11 @@ public class Game : Node2D {
 
     public Events currentEvent = Events.START;
 
-    public int round    = 0; // Round number
-    public int husks    = 3; // Husk count
-    public int maxHusks = 5; // Max husks
-    
+    public int round     = 0; // Round number
+    public int husks     = 3; // Husk count
+    public int maxHusks  = 5; // Max husks
+    public int pigHealth = 3; // Pig health
+
     public bool ready          = false; // Player readied flag
     public bool initialized    = false; // Cob initialized flag
     public bool spawnKernel    = false;  // Kernel spawn flag
@@ -308,10 +309,9 @@ public class Game : Node2D {
 
     public void CreatePigs() {
         int num;
-        bool lateGame = this.round > (int) Events.SPEED_UP_3;
         if (this.round == (int) Events.PIG) {
             num = 1; // Guarantee a pig to spawn
-        } else if (lateGame) {
+        } else if (this.round > (int) Events.SPEED_UP_3) {
             num = (int) GD.RandRange(1, 4); // 1 in 3
         } else {
             num = (int) GD.RandRange(1, 5); // 1 in 4
@@ -320,7 +320,7 @@ public class Game : Node2D {
         if (num == 1) {
             Pig pig    = (Pig) PigScene.Instance();
             pig.speed  = this.pigSpeed;
-            pig.health = lateGame ? 6 : 4;
+            pig.health = this.pigHealth;
             AddChild(pig);
         }
     }
@@ -430,6 +430,7 @@ public class Game : Node2D {
                 this.pigSpeed    = 175f;
                 this.flySpeed    = 200f;
                 this.kernelSpeed = 200f;
+                this.pigHealth   = 5;
                 // this.timeOut  = 7f;
                 break;
             case Events.FACES:

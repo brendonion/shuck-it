@@ -32,7 +32,7 @@ public class Fly : Node2D {
             (Path2D) FindNode("FlyPath5"),
         };
 
-        Vector2 screenSize       = GetViewport().GetVisibleRect().Size;
+        Vector2 screenSize = GetViewport().GetVisibleRect().Size;
         Vector2[] startPositions = {
             new Vector2(screenSize.x / 2 + 40, -30),
             new Vector2(screenSize.x / 2 - 40, -30),

@@ -85,7 +85,7 @@ public class Kernel : Node2D {
     }
 
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (@event.IsActionPressed("ui_touch") && this.speed != 0) {
+        if ((@event is InputEventScreenTouch || @event is InputEventScreenDrag) && this.speed != 0) {
             this.speed = 0;
 
             if (this.isBomb) {
