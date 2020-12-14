@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://Art/Unlockables/Background1.png" type="Texture" id=1]
 [ext_resource path="res://Art/RightHusk.png" type="Texture" id=2]
@@ -20,10 +20,11 @@
 [ext_resource path="res://Scripts/Tutorial.cs" type="Script" id=18]
 [ext_resource path="res://Sounds/Shop.ogg" type="AudioStream" id=19]
 [ext_resource path="res://Theme/font.tres" type="DynamicFont" id=20]
+[ext_resource path="res://Art/Bomb.png" type="Texture" id=21]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Page1"
-length = 5.0
+length = 8.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimationPlayer/Page1/Corn/MiddleHusk:frame")
 tracks/0/interp = 1
@@ -46,7 +47,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 2, 3, 4, 5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.729412, 0.729412, 0.729412, 1 ), Color( 1, 1, 1, 1 ), Color( 0.788235, 0.788235, 0.788235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.827451, 0.827451, 0.827451, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimationPlayer/Page1/Pointer:position")
@@ -55,10 +56,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 3.9, 4.2, 4.4, 4.7, 4.9, 5.1, 5.3, 5.6, 5.8, 6, 6.2, 6.4, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 108.905, 76.2101 ), Vector2( 108.905, 76.2101 ), Vector2( 109.581, 99.919 ), Vector2( 109.581, 126.119 ), Vector2( 109.581, 152.119 ), Vector2( 109.243, 184.119 ), Vector2( 108.905, 218.118 ), Vector2( 108.905, 218.118 ), Vector2( 122.905, 202.772 ) ]
+"values": [ Vector2( 108.905, 76.2101 ), Vector2( 108.905, 76.2101 ), Vector2( 109.581, 99.919 ), Vector2( 109.581, 126.119 ), Vector2( 109.581, 152.119 ), Vector2( 109.243, 184.119 ), Vector2( 108.905, 218.118 ), Vector2( 108.905, 218.118 ), Vector2( 122.905, 202.772 ), Vector2( 93.8058, 72.5351 ), Vector2( 79.611, 91.698 ), Vector2( 78.611, 112.698 ), Vector2( 78.611, 146.698 ), Vector2( 78.611, 183.698 ), Vector2( 78.611, 228.698 ), Vector2( 122.26, 75.3946 ), Vector2( 136.26, 91.3946 ), Vector2( 136.26, 113.395 ), Vector2( 135.26, 145.395 ), Vector2( 135.26, 183.395 ), Vector2( 135.26, 228.395 ), Vector2( 153.26, 217.395 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimationPlayer/Page1/Corn/MiddleHusk:position")
@@ -71,6 +72,78 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 90.8886, 139.296 ), Vector2( 90.8886, 139.296 ), Vector2( 90.8886, 291.296 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimationPlayer/Page1/Corn/LeftHusk:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4.5, 4.7, 4.9, 5.1, 5.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimationPlayer/Page1/Corn/LeftHusk:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 5.4, 5.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 90.8588, 139.375 ), Vector2( 90.8588, 139.375 ), Vector2( 90.8588, 273.375 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AnimationPlayer/Page1/Corn/RightHusk:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 5.8, 6, 6.2, 6.4, 6.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AnimationPlayer/Page1/Corn/RightHusk:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 6.8, 7.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 90.8654, 139.323 ), Vector2( 90.8654, 139.323 ), Vector2( 90.8654, 273.323 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AnimationPlayer/Page1/Corn/LeftHusk:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 4.5, 5.2, 5.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AnimationPlayer/Page1/Corn/RightHusk:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 5.8, 6.5, 7.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -203,10 +276,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5 ),
+"times": PoolRealArray( 0, 0.5, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 110.655, 142.355 ), Vector2( 110.655, 142.355 ), Vector2( 62.9948, 45.0241 ) ]
+"values": [ Vector2( 110.655, 142.355 ), Vector2( 110.655, 142.355 ), Vector2( 81.9948, 55.0241 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimationPlayer/Page5/Pointer:playing")
@@ -215,7 +288,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 1.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -289,7 +362,218 @@ tracks/3/keys = {
 resource_name = "Page7"
 length = 2.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimationPlayer/Page7/TextureProgress:value")
+tracks/0/path = NodePath("AnimationPlayer/Page7/Bomb:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 222.213, 140.874 ), Vector2( 93.079, 114.663 ), Vector2( -41.9212, 130.663 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page7/Pointer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 1, 1.4, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 108.64, 148.6 ), Vector2( 108.64, 148.6 ), Vector2( 108.64, 179.6 ), Vector2( 108.64, 179.6 ), Vector2( 108.64, 148.6 ) ]
+}
+
+[sub_resource type="Animation" id=58]
+resource_name = "Page8"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page8/Corn:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/Page8/Pointer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/Page8/RichTextLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimationPlayer/Page8/Corn/MiddleHusk:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2, 1.4, 1.6, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimationPlayer/Page8/Corn/MiddleHusk:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 90.8886, 139.296 ), Vector2( 90.8886, 139.296 ), Vector2( 90.8886, 285.296 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimationPlayer/Page8/Pointer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1, 1.2, 1.4, 1.6, 2, 2.7, 3.2, 3.4, 3.6, 3.8, 4, 4.3, 4.5, 4.7, 4.9, 5.1, 5.3, 5.6, 5.9, 6.2, 6.5, 6.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 108.952, 82.4167 ), Vector2( 108.952, 82.4167 ), Vector2( 108.952, 96.9552 ), Vector2( 108.952, 118.747 ), Vector2( 108.952, 151.54 ), Vector2( 108.952, 223.417 ), Vector2( 92.4106, 77.7117 ), Vector2( 85.4106, 90.7117 ), Vector2( 83.4106, 114.712 ), Vector2( 83.4106, 146.712 ), Vector2( 83.4106, 184.712 ), Vector2( 83.4106, 227.712 ), Vector2( 123.411, 75.7117 ), Vector2( 131.411, 90.7117 ), Vector2( 132.411, 112.712 ), Vector2( 132.411, 147.712 ), Vector2( 132.411, 183.712 ), Vector2( 132.411, 228.712 ), Vector2( 150.844, 92.3009 ), Vector2( 150.844, 92.3009 ), Vector2( 54.9106, 129.108 ), Vector2( 152.802, 176.096 ), Vector2( 47.4709, 225.042 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AnimationPlayer/Page8/Corn/LeftHusk:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 2.7, 3.2, 3.4, 3.6, 3.8, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 1, 2, 3, 4, 5 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AnimationPlayer/Page8/Corn/LeftHusk:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 4, 4.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 90.8588, 139.375 ), Vector2( 90.8588, 139.375 ), Vector2( 90.8588, 268.375 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AnimationPlayer/Page8/Corn/RightHusk:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 4.3, 4.5, 4.7, 4.9, 5.1, 5.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 1, 2, 3, 4, 5 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AnimationPlayer/Page8/Corn/RightHusk:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 5.3, 5.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 90.8654, 139.323 ), Vector2( 90.8654, 139.323 ), Vector2( 90.8654, 267.323 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("AnimationPlayer/Page8/Line2D:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 5.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("AnimationPlayer/Page8/Line2D:points")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 5.9, 6.2, 6.5, 6.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ PoolVector2Array(  ), PoolVector2Array(  ), PoolVector2Array( 137.911, 76.9227, 36.4308, 116.142 ), PoolVector2Array( 137.911, 76.9227, 36.4308, 116.142, 135.46, 164.186 ), PoolVector2Array( 137.911, 76.9227, 36.4308, 116.142, 135.46, 164.186, 29.5674, 212.72 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("AnimationPlayer/Page8/Corn/MiddleHusk:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 1, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("AnimationPlayer/Page8/Corn/LeftHusk:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 2.5, 3, 3.5, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("AnimationPlayer/Page8/Corn/RightHusk:modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 4.5, 5, 5.5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/Page9/TextureProgress:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -301,55 +585,55 @@ tracks/0/keys = {
 "values": [ 100.0, 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimationPlayer/Page7/Pointer:position")
+tracks/1/path = NodePath("AnimationPlayer/Page9/TextureProgress:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 108.952, 82.4167 ), Vector2( 108.64, 148.6 ) ]
+"update": 1,
+"values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AnimationPlayer/Page7/Corn/MiddleHusk:frame")
+tracks/2/path = NodePath("AnimationPlayer/Page9/RichTextLabel:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ false, true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AnimationPlayer/Page7/Corn:visible")
+tracks/3/path = NodePath("AnimationPlayer/Page9/Corn/MiddleHusk:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ 0, 1, 2 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("AnimationPlayer/Page7/TextureProgress:visible")
+tracks/4/path = NodePath("AnimationPlayer/Page9/Pointer:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 108.952, 82.4167 ), Vector2( 108.952, 101.417 ), Vector2( 108.952, 121.417 ), Vector2( 108.952, 137.417 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AnimationPlayer/Page7/Pointer:visible")
+tracks/5/path = NodePath("AnimationPlayer/Page9/Corn:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -361,7 +645,7 @@ tracks/5/keys = {
 "values": [ true, false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("AnimationPlayer/Page7/RichTextLabel:visible")
+tracks/6/path = NodePath("AnimationPlayer/Page9/Pointer:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -370,10 +654,10 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ true, false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("AnimationPlayer/Page7/Corn/MiddleHusk:modulate")
+tracks/7/path = NodePath("AnimationPlayer/Page9/Corn/MiddleHusk:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -382,223 +666,244 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.745098, 0.745098, 0.745098, 1 ), Color( 1, 1, 1, 1 ), Color( 0.788235, 0.788235, 0.788235, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ), Color( 0.694118, 0.694118, 0.694118, 1 ), Color( 1, 1, 1, 1 ) ]
 }
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
-region = Rect2( 192, 0, 192, 192 )
+region = Rect2( 0, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 192, 192 )
+region = Rect2( 192, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 576, 0, 192, 192 )
+region = Rect2( 384, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
-region = Rect2( 768, 0, 192, 192 )
+region = Rect2( 576, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
 region = Rect2( 960, 0, 192, 192 )
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 192, 192 )
+region = Rect2( 0, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 192, 192 )
+region = Rect2( 192, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 2 )
-region = Rect2( 576, 0, 192, 192 )
+region = Rect2( 384, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 768, 0, 192, 192 )
+region = Rect2( 576, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 2 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
 region = Rect2( 960, 0, 192, 192 )
 
-[sub_resource type="SpriteFrames" id=21]
+[sub_resource type="SpriteFrames" id=22]
 animations = [ {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 5 )
-region = Rect2( 192, 0, 192, 192 )
+region = Rect2( 0, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 5 )
-region = Rect2( 384, 0, 192, 192 )
+region = Rect2( 192, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 5 )
-region = Rect2( 576, 0, 192, 192 )
+region = Rect2( 384, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 5 )
-region = Rect2( 768, 0, 192, 192 )
+region = Rect2( 576, 0, 192, 192 )
 
 [sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 5 )
+region = Rect2( 768, 0, 192, 192 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 5 )
 region = Rect2( 960, 0, 192, 192 )
 
-[sub_resource type="SpriteFrames" id=28]
+[sub_resource type="SpriteFrames" id=29]
 animations = [ {
-"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 9 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=31]
+[sub_resource type="SpriteFrames" id=32]
 animations = [ {
-"frames": [ SubResource( 29 ), SubResource( 30 ) ],
+"frames": [ SubResource( 30 ), SubResource( 31 ) ],
 "loop": true,
 "name": "default",
 "speed": 3.0
 } ]
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 8 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=34]
+[sub_resource type="SpriteFrames" id=35]
 animations = [ {
-"frames": [ SubResource( 32 ), SubResource( 33 ) ],
+"frames": [ SubResource( 33 ), SubResource( 34 ) ],
 "loop": true,
 "name": "default",
 "speed": 3.0
 } ]
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 12 )
 region = Rect2( 128, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=37]
+[sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 12 )
 region = Rect2( 256, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=38]
+[sub_resource type="AtlasTexture" id=39]
 atlas = ExtResource( 12 )
 region = Rect2( 384, 0, 128, 128 )
 
-[sub_resource type="SpriteFrames" id=39]
+[sub_resource type="SpriteFrames" id=40]
 animations = [ {
-"frames": [ SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
+"frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="AtlasTexture" id=40]
+[sub_resource type="AtlasTexture" id=41]
 atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=41]
+[sub_resource type="AtlasTexture" id=42]
 atlas = ExtResource( 13 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=42]
+[sub_resource type="SpriteFrames" id=43]
 animations = [ {
-"frames": [ SubResource( 40 ), SubResource( 41 ) ],
+"frames": [ SubResource( 41 ), SubResource( 42 ) ],
 "loop": true,
 "name": "default",
 "speed": 3.0
 } ]
 
-[sub_resource type="AtlasTexture" id=43]
+[sub_resource type="AtlasTexture" id=44]
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 110, 80 )
 
-[sub_resource type="AtlasTexture" id=44]
+[sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 15 )
 region = Rect2( 110, 0, 110, 80 )
 
-[sub_resource type="AtlasTexture" id=45]
+[sub_resource type="AtlasTexture" id=46]
 atlas = ExtResource( 15 )
 region = Rect2( 220, 0, 110, 80 )
 
-[sub_resource type="AtlasTexture" id=46]
+[sub_resource type="AtlasTexture" id=47]
 atlas = ExtResource( 15 )
 region = Rect2( 330, 0, 110, 80 )
 
-[sub_resource type="SpriteFrames" id=47]
+[sub_resource type="SpriteFrames" id=48]
 animations = [ {
-"frames": [ SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ) ],
+"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=48]
+[sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=49]
+[sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 14 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=50]
+[sub_resource type="AtlasTexture" id=51]
 atlas = ExtResource( 14 )
 region = Rect2( 128, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=51]
+[sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 14 )
 region = Rect2( 192, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=52]
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 21 )
+region = Rect2( 0, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 21 )
+region = Rect2( 72, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 21 )
+region = Rect2( 144, 0, 72, 72 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 21 )
+region = Rect2( 216, 0, 72, 72 )
+
+[sub_resource type="SpriteFrames" id=57]
 animations = [ {
-"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
+"frames": [ SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ) ],
 "loop": true,
-"name": "default",
+"name": "kernel",
 "speed": 7.0
+}, {
+"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ) ],
+"loop": true,
+"name": "bomb",
+"speed": 5.0
 } ]
 
 [node name="Tutorial" type="Node2D"]
@@ -635,6 +940,8 @@ anims/Page4 = SubResource( 4 )
 anims/Page5 = SubResource( 5 )
 anims/Page6 = SubResource( 6 )
 anims/Page7 = SubResource( 7 )
+anims/Page8 = SubResource( 58 )
+anims/Page9 = SubResource( 8 )
 
 [node name="Page1" type="Node2D" parent="AnimationPlayer"]
 visible = false
@@ -651,15 +958,15 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 14 )
+frames = SubResource( 15 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 21 )
+frames = SubResource( 22 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page1/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 28 )
+frames = SubResource( 29 )
 
 [node name="Pointer" type="Sprite" parent="AnimationPlayer/Page1"]
 position = Vector2( 108.905, 76.2101 )
@@ -671,7 +978,8 @@ visible = false
 
 [node name="Good" type="AnimatedSprite" parent="AnimationPlayer/Page2"]
 position = Vector2( 148.5, 106.937 )
-frames = SubResource( 31 )
+frames = SubResource( 32 )
+frame = 1
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page2"]
@@ -698,8 +1006,7 @@ visible = false
 
 [node name="Bad" type="AnimatedSprite" parent="AnimationPlayer/Page3"]
 position = Vector2( 28.1227, 106.707 )
-frames = SubResource( 34 )
-frame = 1
+frames = SubResource( 35 )
 playing = true
 
 [node name="Arrow" type="Sprite" parent="AnimationPlayer/Page3"]
@@ -737,27 +1044,27 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 14 )
+frames = SubResource( 15 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 21 )
+frames = SubResource( 22 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page4/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 28 )
+frames = SubResource( 29 )
 
 [node name="Fly" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
 position = Vector2( 91.3436, -18.8987 )
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 39 )
-frame = 1
+frames = SubResource( 40 )
+frame = 3
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page4"]
 position = Vector2( 110.655, 142.355 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 42 )
+frames = SubResource( 43 )
 
 [node name="Page5" type="Node2D" parent="AnimationPlayer"]
 visible = false
@@ -774,20 +1081,20 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 14 )
+frames = SubResource( 15 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 21 )
+frames = SubResource( 22 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page5/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 28 )
+frames = SubResource( 29 )
 
 [node name="Pig" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
 position = Vector2( -60.7482, 40.5941 )
-frames = SubResource( 47 )
-frame = 2
+frames = SubResource( 48 )
+frame = 3
 playing = true
 flip_h = true
 flip_v = true
@@ -795,7 +1102,7 @@ flip_v = true
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page5"]
 position = Vector2( 110.655, 142.355 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 42 )
+frames = SubResource( 43 )
 
 [node name="Page6" type="Node2D" parent="AnimationPlayer"]
 visible = false
@@ -812,26 +1119,26 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 14 )
+frames = SubResource( 15 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 21 )
+frames = SubResource( 22 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page6/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 28 )
+frames = SubResource( 29 )
 
 [node name="Kernel" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( -37.4543, 144.823 )
-frames = SubResource( 52 )
-frame = 2
+frames = SubResource( 57 )
+animation = "kernel"
 playing = true
 
 [node name="Pointer" type="AnimatedSprite" parent="AnimationPlayer/Page6"]
 position = Vector2( 110.655, 142.355 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 42 )
+frames = SubResource( 43 )
 
 [node name="Page7" type="Node2D" parent="AnimationPlayer"]
 visible = false
@@ -848,17 +1155,108 @@ texture = ExtResource( 6 )
 
 [node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
 position = Vector2( 90.8588, 139.375 )
-frames = SubResource( 14 )
+frames = SubResource( 15 )
 
 [node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
 position = Vector2( 90.8654, 139.323 )
-frames = SubResource( 21 )
+frames = SubResource( 22 )
 
 [node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page7/Corn"]
 position = Vector2( 90.8886, 139.296 )
-frames = SubResource( 28 )
+frames = SubResource( 29 )
 
-[node name="TextureProgress" type="TextureProgress" parent="AnimationPlayer/Page7"]
+[node name="Bomb" type="AnimatedSprite" parent="AnimationPlayer/Page7"]
+position = Vector2( 222.213, 140.874 )
+frames = SubResource( 57 )
+animation = "bomb"
+frame = 1
+playing = true
+flip_h = true
+
+[node name="Pointer" type="Sprite" parent="AnimationPlayer/Page7"]
+position = Vector2( 108.64, 148.6 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="Page8" type="Node2D" parent="AnimationPlayer"]
+visible = false
+
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page8"]
+visible = false
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page8/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 6 )
+
+[node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page8/Corn"]
+position = Vector2( 90.8588, 139.375 )
+frames = SubResource( 15 )
+
+[node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page8/Corn"]
+position = Vector2( 90.8654, 139.323 )
+frames = SubResource( 22 )
+
+[node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page8/Corn"]
+position = Vector2( 90.8886, 139.296 )
+frames = SubResource( 29 )
+
+[node name="Pointer" type="Sprite" parent="AnimationPlayer/Page8"]
+visible = false
+position = Vector2( 108.952, 82.4167 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AnimationPlayer/Page8"]
+margin_left = 1.0
+margin_top = 78.0
+margin_right = 90.0
+margin_bottom = 125.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = ExtResource( 20 )
+bbcode_enabled = true
+bbcode_text = "[shake amp=10 freq=2][center]Bonus
+Round![/center][/shake]"
+text = "Bonus
+Round!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="AnimationPlayer/Page8"]
+visible = false
+width = 2.0
+default_color = Color( 1, 0, 0, 1 )
+
+[node name="Page9" type="Node2D" parent="AnimationPlayer"]
+visible = false
+
+[node name="Corn" type="Node2D" parent="AnimationPlayer/Page9"]
+position = Vector2( -3.11157, 3.50052 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Cob" type="Sprite" parent="AnimationPlayer/Page9/Corn"]
+position = Vector2( 90.8588, 139.338 )
+texture = ExtResource( 6 )
+
+[node name="LeftHusk" type="AnimatedSprite" parent="AnimationPlayer/Page9/Corn"]
+position = Vector2( 90.8588, 139.375 )
+frames = SubResource( 15 )
+
+[node name="RightHusk" type="AnimatedSprite" parent="AnimationPlayer/Page9/Corn"]
+position = Vector2( 90.8654, 139.323 )
+frames = SubResource( 22 )
+
+[node name="MiddleHusk" type="AnimatedSprite" parent="AnimationPlayer/Page9/Corn"]
+position = Vector2( 90.8886, 139.296 )
+frames = SubResource( 29 )
+
+[node name="TextureProgress" type="TextureProgress" parent="AnimationPlayer/Page9"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 153.0
@@ -870,12 +1268,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pointer" type="Sprite" parent="AnimationPlayer/Page7"]
+[node name="Pointer" type="Sprite" parent="AnimationPlayer/Page9"]
 position = Vector2( 108.952, 82.4167 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="AnimationPlayer/Page7"]
+[node name="RichTextLabel" type="RichTextLabel" parent="AnimationPlayer/Page9"]
 visible = false
 margin_left = 1.0
 margin_top = 78.0

@@ -24,6 +24,8 @@ public class Tutorial : Node2D {
         this.pages.Add((Node2D) FindNode("Page5"));
         this.pages.Add((Node2D) FindNode("Page6"));
         this.pages.Add((Node2D) FindNode("Page7"));
+        this.pages.Add((Node2D) FindNode("Page8"));
+        this.pages.Add((Node2D) FindNode("Page9"));
 
         this.currentPageIndex = 0;
         this.pages[this.currentPageIndex].Visible = true;
