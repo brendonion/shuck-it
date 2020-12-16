@@ -7,52 +7,52 @@
 [ext_resource path="res://Sounds/PigDeath.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 110, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 220, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 1 )
 region = Rect2( 330, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 110, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 220, 0, 110, 80 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 2 )
 region = Rect2( 330, 0, 110, 80 )
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "default",
-"speed": 7.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 7 ), SubResource( 7 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 3 ), SubResource( 3 ) ],
 "loop": true,
 "name": "death",
 "speed": 7.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
 } ]
 
-[sub_resource type="CircleShape2D" id=10]
-radius = 49.9075
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 65.2362, 50.0688 )
 
 [sub_resource type="Curve2D" id=11]
 _data = {
@@ -90,7 +90,7 @@ frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( -9, -8 )
+position = Vector2( 0, -8 )
 shape = SubResource( 10 )
 
 [node name="PigPath1" type="Path2D" parent="."]
