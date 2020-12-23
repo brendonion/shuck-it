@@ -137,7 +137,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 180.0
-margin_bottom = 748.0
+margin_bottom = 807.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 180, 350 )
@@ -1122,11 +1122,70 @@ rect_min_size = Vector2( 45, 45 )
 texture = ExtResource( 7 )
 expand = true
 
-[node name="Empty" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
-modulate = Color( 1, 1, 1, 0 )
+[node name="ComingSoon" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
 margin_top = 708.0
 margin_right = 180.0
-margin_bottom = 748.0
+margin_bottom = 763.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/ComingSoon"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/ComingSoon/HBoxContainer"]
+margin_left = 35.0
+margin_right = 145.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/ComingSoon/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/ComingSoon/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]More Coming[/center]"
+text = "More Coming"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/ComingSoon/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Soon![/center]"
+text = "Soon!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Empty" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 767.0
+margin_right = 180.0
+margin_bottom = 807.0
 rect_min_size = Vector2( 0, 40 )
 disabled = true
 texture_normal = ExtResource( 5 )
