@@ -1211,6 +1211,7 @@ __meta__ = {
 
 [node name="AdMob" type="Node" parent="."]
 script = ExtResource( 15 )
+is_real = true
 banner_on_top = false
 banner_id = "ca-app-pub-1794508493895269/3851480488"
 
