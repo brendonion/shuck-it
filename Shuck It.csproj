@@ -14,14 +14,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="netstandard" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scripts\Finale.cs" />
+    <Compile Include="Scripts\Dialog.cs" />
+    <Compile Include="Scripts\DialogScreen.cs" />
+    <Compile Include="Scripts\Home.cs" />
     <Compile Include="Scripts\Cob.cs" />
     <Compile Include="Scripts\Fly.cs" />
     <Compile Include="Scripts\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Husk.cs" />
-    <Compile Include="Scripts\RhythmBar.cs" />
+    <Compile Include="Scripts\Kernel.cs" />
+    <Compile Include="Scripts\Pig.cs" />
+    <Compile Include="Scripts\SaveSystem.cs" />
+    <Compile Include="Scripts\Shop.cs" />
+    <Compile Include="Scripts\ShopItem.cs" />
+    <Compile Include="Scripts\SliceableCob.cs" />
+    <Compile Include="Scripts\TimerBar.cs" />
     <Compile Include="Scripts\Score.cs" />
+    <Compile Include="Scripts\Tutorial.cs" />
   </ItemGroup>
 </Project>

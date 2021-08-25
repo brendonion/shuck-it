@@ -1,0 +1,1241 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Scenes/Background.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Theme/theme.tres" type="Theme" id=2]
+[ext_resource path="res://Art/BackgroundPlaceholder.png" type="Texture" id=3]
+[ext_resource path="res://Art/KernelIcon.png" type="Texture" id=4]
+[ext_resource path="res://Art/GreenSquare.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/scroll.gd" type="Script" id=6]
+[ext_resource path="res://Art/SkinPlaceholder.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Shop.cs" type="Script" id=8]
+[ext_resource path="res://Sounds/Shop.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Art/GreenSquareDark.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/SaveSystem.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Art/Unlockables/GoodSkin1.png" type="Texture" id=12]
+[ext_resource path="res://Art/Unlockables/Background1.png" type="Texture" id=13]
+[ext_resource path="res://Scripts/ShopItem.cs" type="Script" id=14]
+[ext_resource path="res://admob-lib/admob.gd" type="Script" id=15]
+[ext_resource path="res://Sounds/KaChing.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Sounds/Miss.wav" type="AudioStream" id=17]
+[ext_resource path="res://Theme/alt_font.tres" type="DynamicFont" id=18]
+[ext_resource path="res://Theme/font.tres" type="DynamicFont" id=19]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[node name="Shop" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveSystem" parent="." instance=ExtResource( 11 )]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -5.0
+autoplay = true
+
+[node name="Background" parent="." instance=ExtResource( 1 )]
+margin_left = 90.0569
+margin_right = 130.057
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -29.4207
+margin_top = -12.2409
+margin_right = 116.579
+margin_bottom = 31.7591
+rect_scale = Vector2( 1.5, 1.5 )
+custom_fonts/normal_font = ExtResource( 19 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=10 freq=2][center]Shop[/center][/wave]"
+text = "Shop"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 10.0
+margin_top = 4.0
+margin_right = 42.0
+margin_bottom = 34.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "back"
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 94.0
+margin_top = 4.0
+margin_right = 174.0
+margin_bottom = 36.0
+custom_constants/separation = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+margin_right = 48.0
+margin_bottom = 32.0
+
+[node name="KernelCount" type="RichTextLabel" parent="HBoxContainer/CenterContainer"]
+margin_top = 8.0
+margin_right = 48.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 48, 16 )
+custom_fonts/normal_font = ExtResource( 19 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]999[/right]"
+text = "999"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+margin_left = 48.0
+margin_right = 80.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 41.0
+margin_right = 24.0
+margin_bottom = -1.0
+mouse_filter = 1
+theme = ExtResource( 2 )
+scroll_horizontal_enabled = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 180.0
+margin_bottom = 807.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 180, 350 )
+size_flags_vertical = 0
+theme = ExtResource( 2 )
+custom_constants/separation = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background1" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_right = 180.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
+disabled = true
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+name = "Classic"
+placeholder = "??? Background"
+price = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background1"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 0, 20 )
+mouse_filter = 2
+custom_constants/separation = 0
+alignment = 1
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Classic[/center]"
+text = "Classic"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Equipped[/center]"
+text = "Equipped"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Background1/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 7
+
+[node name="Background2" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 59.0
+margin_right = 180.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+value = "Background2.png"
+name = "Brown Brick"
+placeholder = "??? Background"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background2"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background2/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background2/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background2/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background2/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 10[/center]"
+text = "Price: 10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background2/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Background2/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+
+[node name="Background3" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 118.0
+margin_right = 180.0
+margin_bottom = 173.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+value = "Background3.png"
+name = "Outhouse"
+placeholder = "??? Background"
+price = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background3"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background3/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background3/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background3/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background3/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 50[/center]"
+text = "Price: 50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background3/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Background3/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+
+[node name="Background4" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 177.0
+margin_right = 180.0
+margin_bottom = 232.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+value = "Background4.png"
+name = "Sunset"
+placeholder = "??? Background"
+price = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background4"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background4/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background4/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background4/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background4/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 100[/center]"
+text = "Price: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background4/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Background4/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+
+[node name="Background5" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 236.0
+margin_right = 180.0
+margin_bottom = 291.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+value = "Background5.png"
+name = "Night Sky"
+placeholder = "??? Background"
+price = 250
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background5"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background5/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background5/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background5/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background5/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 250[/center]"
+text = "Price: 250"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background5/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Background5/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+
+[node name="Background6" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 295.0
+margin_right = 180.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+value = "Background6.png"
+name = "Wasteland"
+placeholder = "??? Background"
+price = 500
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background6"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background6/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background6/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background6/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background6/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 250[/center]"
+text = "Price: 250"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background6/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Background6/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+
+[node name="Background7" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 354.0
+margin_right = 180.0
+margin_bottom = 409.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+value = "Background7.png"
+name = "City Scape"
+placeholder = "??? Background"
+price = 999
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Background7"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background7/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Background7/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background7/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Backdrop[/center]"
+text = "??? Backdrop"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Background7/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 250[/center]"
+text = "Price: 250"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Background7/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Background7/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+
+[node name="Skin1" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 413.0
+margin_right = 180.0
+margin_bottom = 468.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+type = "skin"
+value = "Skin1.png"
+name = "Classic"
+placeholder = "??? Skin"
+price = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin1"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Classic Skin[/center]"
+text = "Classic Skin"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Equipped[/center]"
+text = "Equipped"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Skin1/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 12 )
+expand = true
+
+[node name="Skin2" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 472.0
+margin_right = 180.0
+margin_bottom = 527.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+type = "skin"
+value = "Skin2.png"
+name = "Silver"
+placeholder = "??? Skin"
+price = 250
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin2"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin2/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin2/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin2/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Skin[/center]"
+text = "??? Skin"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin2/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 500[/center]"
+text = "Price: 500"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin2/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Skin2/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Skin3" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 531.0
+margin_right = 180.0
+margin_bottom = 586.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+type = "skin"
+value = "Skin3.png"
+name = "Golden"
+placeholder = "??? Skin"
+price = 500
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin3"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin3/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin3/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin3/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+theme = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Skin[/center]"
+text = "??? Skin"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin3/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 500[/center]"
+text = "Price: 500"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin3/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Skin3/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Skin4" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 590.0
+margin_right = 180.0
+margin_bottom = 645.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+type = "skin"
+value = "Skin4.png"
+name = "Rainbow"
+placeholder = "??? Skin"
+price = 750
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin4"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin4/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin4/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin4/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Skin[/center]"
+text = "??? Skin"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin4/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 500[/center]"
+text = "Price: 500"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin4/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Skin4/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Skin5" type="TextureButton" parent="ScrollContainer/VBoxContainer" groups=[
+"shop_item",
+]]
+margin_top = 649.0
+margin_right = 180.0
+margin_bottom = 704.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+script = ExtResource( 14 )
+type = "skin"
+value = "Skin5.png"
+name = "Diamond"
+placeholder = "??? Skin"
+price = 999
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Skin5"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin5/HBoxContainer"]
+margin_left = 10.0
+margin_right = 120.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Skin5/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin5/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]??? Skin[/center]"
+text = "??? Skin"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Skin5/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Price: 500[/center]"
+text = "Price: 500"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/Skin5/HBoxContainer"]
+margin_left = 124.0
+margin_right = 169.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/Skin5/HBoxContainer/CenterContainer2"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 45 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="ComingSoon" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
+margin_top = 708.0
+margin_right = 180.0
+margin_bottom = 763.0
+rect_min_size = Vector2( 0, 55 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/ComingSoon"]
+margin_right = 180.0
+margin_bottom = 55.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/ComingSoon/HBoxContainer"]
+margin_left = 35.0
+margin_right = 145.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/ComingSoon/HBoxContainer/CenterContainer"]
+margin_top = 14.0
+margin_right = 110.0
+margin_bottom = 41.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Name" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/ComingSoon/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 110, 15 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]More Coming[/center]"
+text = "More Coming"
+
+[node name="Price" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/ComingSoon/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 15.0
+margin_right = 110.0
+margin_bottom = 27.0
+rect_min_size = Vector2( 110, 12 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Soon![/center]"
+text = "Soon!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Empty" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 767.0
+margin_right = 180.0
+margin_bottom = 807.0
+rect_min_size = Vector2( 0, 40 )
+disabled = true
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
+expand = true
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_left = 10.0
+margin_top = 112.0
+margin_right = 170.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 160, 120 )
+mouse_filter = 1
+theme = ExtResource( 2 )
+popup_exclusive = true
+window_title = "Confirm"
+dialog_text = "Purchase new backdrop for 250 kernels?"
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource( 15 )
+is_real = true
+banner_on_top = false
+banner_id = "ca-app-pub-1794508493895269/3851480488"
+
+[node name="PurchaseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
+volume_db = -5.0
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
+volume_db = -5.0
+[connection signal="pressed" from="Button" to="." method="_OnBackPressed"]
+[connection signal="scroll_ended" from="ScrollContainer" to="." method="_OnScrollEnded"]
+[connection signal="scroll_started" from="ScrollContainer" to="." method="_OnScrollStarted"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Background1" to="." method="_OnItemPressed" binds= [ "Background1" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Background2" to="." method="_OnItemPressed" binds= [ "Background2" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Background3" to="." method="_OnItemPressed" binds= [ "Background3" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Background4" to="." method="_OnItemPressed" binds= [ "Background4" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Background5" to="." method="_OnItemPressed" binds= [ "Background5" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Background6" to="." method="_OnItemPressed" binds= [ "Background6" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Background7" to="." method="_OnItemPressed" binds= [ "Background7" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Skin1" to="." method="_OnItemPressed" binds= [ "Skin1" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Skin2" to="." method="_OnItemPressed" binds= [ "Skin2" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Skin3" to="." method="_OnItemPressed" binds= [ "Skin3" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Skin4" to="." method="_OnItemPressed" binds= [ "Skin4" ]]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Skin5" to="." method="_OnItemPressed" binds= [ "Skin5" ]]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_OnPopupConfirmed"]
+[connection signal="popup_hide" from="ConfirmationDialog" to="." method="_OnPopupHide"]

@@ -1,16 +1,17 @@
 using Godot;
-using System;
 
 public class Cob : KinematicBody2D {
 
     public bool isDraggable = false;
+    public bool isDragging  = false;
     public bool isReleased  = false;
+    public bool isFinale    = false; // External boolean to be set on final round
 
     public float speed = 500f;
 
-    public Vector2 dragSpeed;
-    public Vector2 velocity;
+    public Vector2 dragDirection;
     public Vector2 startPos;
+    public Vector2 initialTouchPos;
 
     public Game Game;
 
@@ -18,87 +19,123 @@ public class Cob : KinematicBody2D {
 
     public Node2D husks;
 
-    public Texture goodCob = (Texture) ResourceLoader.Load("res://Art/GoodCob.png");
-    public Texture badCob  = (Texture) ResourceLoader.Load("res://Art/BadCob.png");
+    public AnimatedSprite face;
+
+    public Texture goodCob;
+    public Texture badCob;
+
+    public SaveSystem SaveSystem;
 
     [Signal]
     public delegate void swiped(int point);
-
-    [Signal]
-    public delegate void missed();
-
-    [Signal]
-    public delegate void shucked();
 
     public override void _Ready() {
         // Randomize seed
         GD.Randomize();
 
+        // Get singletons
+        SaveSystem = (SaveSystem) GetParent().FindNode("SaveSystem");
+
+        // Get cob textures
+        this.goodCob = (Texture) ResourceLoader.Load($"res://Art/Unlockables/Good{SaveSystem.currentSkin}");
+        this.badCob  = (Texture) ResourceLoader.Load($"res://Art/Unlockables/Bad{SaveSystem.currentSkin}");
+
         this.Game     = (Game) this.GetParent();
         this.husks    = (Node2D) FindNode("Husks");
         this.sprite   = (Sprite) FindNode("Sprite");
+        this.face     = (AnimatedSprite) FindNode("Face");
         this.startPos = this.Position;
 
-        this.SetRandomTexture();
+        this.SetCobTexture();
     }
 
     public override void _PhysicsProcess(float delta) {
         // Cob has no Husks, can be dragged
         if (!this.isDraggable) {
-            int huskCount = this.husks.GetChildCount();
-            if (huskCount == 0 || (huskCount == 1 && ((Husk) this.husks.GetChild(0)).Mode == RigidBody2D.ModeEnum.Rigid)) {
-                this.isDraggable = true;
-                // TODO :: Refactor
-                if (this.Game.round >= (int) Game.Events.BAR) {
-                    EmitSignal(nameof(shucked));
-                }
+            int huskCount = GetTree().GetNodesInGroup("husk").Count;
+            if (huskCount == 0) {
+                this.isDraggable = !this.isFinale;
+                if (this.isFinale) this.HandleFinale();
             }
         }
 
         // Cob released from drag, can be flung
         if (this.isReleased) {
-            this.MoveAndSlide(new Vector2(this.dragSpeed.x * this.speed, 0), Vector2.Down);
+            this.MoveAndSlide(new Vector2(this.dragDirection.x * this.speed, 0), Vector2.Down);
             this.CheckSwipe();
         }
     }
 
     public override void _Input(InputEvent @event) {
-        // If "ui_touch" released and dragSpeed.x is not 0, then release
-        if (@event.IsActionReleased("ui_touch") && this.dragSpeed.x != 0) {
+        // If "ui_touch" released and dragDirection.x is not 0, then release
+        if (@event.IsActionReleased("ui_touch") && this.dragDirection.x != 0) {
             this.isReleased = true;
         }
     }
 
     public void _OnCobInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
         if (this.isDraggable) {
-            // If dragging, set Position and dragSpeed
-            if (@event is InputEventScreenDrag eventDrag) {
-                // Offset the sprite to where initially touched
-                if (this.sprite.Position == Vector2.Zero) {
-                    this.sprite.Position = new Vector2(
-                        this.sprite.GlobalPosition.x - eventDrag.Position.x,
-                        this.sprite.GlobalPosition.y - eventDrag.Position.y
-                    );
-                }
-                this.Position  = eventDrag.Position;
-                this.dragSpeed = eventDrag.Speed.x != 0
-                    ? eventDrag.Speed.Normalized()
-                    : (this.Position - this.Game.screenCenter).Normalized();
+            if (@event is InputEventScreenTouch eventTouch) {
+                this.initialTouchPos = eventTouch.Position;
             }
 
+            // If dragging, set Position and dragDirection
+            if (@event is InputEventScreenDrag eventDrag) {
+                // Make sure the user has dragged a little bit before moving the cob
+                // This prevents premature releasing
+                if (this.isDragging || eventDrag.Position.x < this.initialTouchPos.x - 10 || eventDrag.Position.x > this.initialTouchPos.x + 10) {
+                    // Set isDragging to true to indicate the intent of dragging the cob
+                    this.isDragging = true;
+
+                    // Offset the sprite to where initially touched
+                    if (this.sprite.Position == Vector2.Zero) {
+                        this.sprite.Position = new Vector2(
+                            this.sprite.GlobalPosition.x - eventDrag.Position.x,
+                            this.sprite.GlobalPosition.y - eventDrag.Position.y
+                        );
+                        this.face.Position = this.sprite.Position;
+                    }
+
+                    this.Position = eventDrag.Position;
+
+                    this.dragDirection = eventDrag.Speed.x != 0
+                        ? eventDrag.Speed.Normalized()
+                        : (this.Position - this.Game.screenCenter).Normalized();
+                    // Guarantee a consistent speed
+                    this.dragDirection.x = this.dragDirection.x < 0 ? -1 : 1;
+                    
+                    // Guarantee right direction if isFinale
+                    if (this.isFinale) {
+                        this.dragDirection.x = 1;
+                    }
+                }
+            }
         }
     }
 
     public void CheckSwipe() {
         // Swiped Right, it's a match
         if (this.Position.x > this.Game.screenSize.x * 2) {
-            int nextPoint = (this.sprite.Texture == badCob) ? -1 : 1;
+            int nextPoint;
+            if (this.isFinale) {
+                GetTree().ChangeScene("res://Scenes/Finale.tscn");
+                return;
+            } else if (this.face.Visible) {
+                nextPoint = this.face.Animation.Contains("bad_face") ? -1 : 1;
+            } else {
+                nextPoint = (this.sprite.Texture == badCob) ? -1 : 1;
+            }
             EmitSignal(nameof(swiped), nextPoint);
             this.ResetCob();
 
         // Swiped Left, not a match
         } else if (this.Position.x < -this.Game.screenSize.x) {
-            int nextPoint = (this.sprite.Texture == goodCob) ? -1 : 1;
+            int nextPoint;
+            if (this.face.Visible) {
+                nextPoint = this.face.Animation.Contains("good_face") ? -1 : 1;
+            } else {
+                nextPoint = (this.sprite.Texture == goodCob) ? -1 : 1;
+            }
             EmitSignal(nameof(swiped), nextPoint);
             this.ResetCob();
         }
@@ -106,15 +143,28 @@ public class Cob : KinematicBody2D {
 
     public void ResetCob() {
         this.sprite.Position = Vector2.Zero;
+        this.face.Position   = Vector2.Zero;
         this.Position        = this.startPos;
-        this.dragSpeed       = new Vector2();
+        this.dragDirection   = new Vector2();
+        this.initialTouchPos = new Vector2();
         this.isDraggable     = false;
+        this.isDragging      = false;
         this.isReleased      = false;
-        this.SetRandomTexture();
+        this.SetCobTexture();
     }
 
-    public void SetRandomTexture() {
+    public void SetCobTexture() {
         Texture[] textures = {goodCob, badCob};
-        this.sprite.Texture = textures[(int) GD.RandRange(0, 2)];
+        if (!this.face.Visible) {
+            this.sprite.Texture = textures[(int) GD.RandRange(0, 2)];
+        } else {
+            this.sprite.Texture = goodCob;
+        }
+    }
+
+    public async void HandleFinale() {
+        this.face.Play(); // final_face
+        await ToSignal(this.face, "animation_finished");
+        this.isDraggable = true;
     }
 }

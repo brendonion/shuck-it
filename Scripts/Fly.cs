@@ -6,17 +6,19 @@ public class Fly : Node2D {
 
     public int patrolIndex = 0;
 
-    public Game Game;
+    public bool dead = false;
 
     public Path2D patrolPath;
 
     public Vector2[] patrolPoints;
 
-    public Vector2 startPos;
-
     public KinematicBody2D body;
 
     public AnimatedSprite animatedSprite;
+
+    public AudioStreamPlayer2D audioPlayer;
+
+    public SceneTreeTimer timer;
 
     public override void _Ready() {
         // Randomize seed
@@ -26,15 +28,24 @@ public class Fly : Node2D {
             (Path2D) FindNode("FlyPath1"),
             (Path2D) FindNode("FlyPath2"),
             (Path2D) FindNode("FlyPath3"),
+            (Path2D) FindNode("FlyPath4"),
+            (Path2D) FindNode("FlyPath5"),
         };
 
-        this.patrolPath     = paths[(int) GD.RandRange(0, 3)];
-        this.patrolPoints   = this.patrolPath.Curve.GetBakedPoints();
-        this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
-        this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
-        this.startPos       = this.body.Position;
+        Vector2 screenSize = GetViewport().GetVisibleRect().Size;
+        Vector2[] startPositions = {
+            new Vector2(screenSize.x / 2 + 40, -30),
+            new Vector2(screenSize.x / 2 - 40, -30),
+            new Vector2(screenSize.x / 2 + 40, screenSize.y),
+            new Vector2(screenSize.x / 2 - 40, screenSize.y),
+        };
 
-        this.Game = (Game) GetTree().Root.GetChild(0);
+        this.body           = (KinematicBody2D) FindNode("KinematicBody2D");
+        this.body.Position  = startPositions[(int) GD.RandRange(0, 4)];
+        this.patrolPath     = paths[(int) GD.RandRange(0, 5)];
+        this.patrolPoints   = this.patrolPath.Curve.GetBakedPoints();
+        this.animatedSprite = (AnimatedSprite) this.body.FindNode("AnimatedSprite");
+        this.audioPlayer    = (AudioStreamPlayer2D) FindNode("AudioStreamPlayer2D");
     }
 
     public override void _PhysicsProcess(float delta) {
@@ -48,16 +59,24 @@ public class Fly : Node2D {
                 this.patrolIndex += 1;
             }
         }
+        // Fade out the Fly when squashed
+        if (this.dead) {
+            if (this.timer == null) {
+                this.timer = GetTree().CreateTimer(0.25f, false);
+            } else if (this.timer.TimeLeft <= 0f) {
+                this.timer = GetTree().CreateTimer(0.1f, false);
+                this.animatedSprite.Modulate = new Color(1, 1, 1, this.animatedSprite.Modulate.a - 0.1f);
+            }
+        }
     }
 
     public async void _OnBodyInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (@event.IsActionPressed("ui_touch")) {
-            // Emit signal if last fly
-            if (GetTree().GetNodesInGroup("fly").Count <= 1) {
-                this.Game.EmitSignal("fly_destroyed", 0); // TODO :: Remove point param
-            }
+        if ((@event is InputEventScreenTouch || @event is InputEventScreenDrag) && this.speed != 0) {
+            RemoveFromGroup("fly");
+            this.dead = true;
             this.speed = 0;
             this.animatedSprite.Play("squash");
+            this.audioPlayer.Play();
             await ToSignal(this.animatedSprite, "animation_finished");
             QueueFree();
         }

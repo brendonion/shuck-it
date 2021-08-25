@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Art/LeftHusk.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Husk.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/HuskParticles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/HuskSound.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -33,15 +34,15 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": false,
 "name": "peel",
-"speed": 10.0
+"speed": 15.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=8]
-radius = 19.8585
-height = 185.61
+radius = 33.9931
+height = 202.971
 
 [node name="LeftHusk" type="RigidBody2D" groups=[
-"Husk",
+"husk",
 ]]
 input_pickable = true
 collision_layer = 2
@@ -50,12 +51,14 @@ mode = 1
 gravity_scale = 3.0
 script = ExtResource( 2 )
 
+[node name="AudioStreamPlayer2D" parent="." instance=ExtResource( 4 )]
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "peel"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -16.8084, 13.5053 )
+position = Vector2( -16.8084, 36.5053 )
 shape = SubResource( 8 )
 
 [node name="Particles2D" parent="." instance=ExtResource( 3 )]

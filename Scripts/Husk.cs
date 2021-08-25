@@ -15,11 +15,13 @@ public class Husk : RigidBody2D {
 
     public Particles2D particles;
 
+    public AudioStreamPlayer2D audioPlayer;
+
     public Game Game;
 
     public Cob Cob;
 
-    public RhythmBar RhythmBar;
+    public TimerBar TimerBar;
 
     public override void _Ready() {
         // Randomize seed
@@ -28,28 +30,32 @@ public class Husk : RigidBody2D {
         this.collisionShape = (CollisionShape2D) FindNode("CollisionShape2D");
         this.sprite         = (AnimatedSprite) FindNode("AnimatedSprite");
         this.particles      = (Particles2D) FindNode("Particles2D");
+        this.audioPlayer    = (AudioStreamPlayer2D) FindNode("AudioStreamPlayer2D");
         this.Game           = (Game) GetTree().Root.GetChild(0);
         this.Cob            = (Cob) this.Game.FindNode("Cob");
-        this.RhythmBar      = (RhythmBar) this.Game.FindNode("RhythmBar");
+        this.TimerBar       = (TimerBar) this.Game.FindNode("TimerBar");
     }
 
     public override void _PhysicsProcess(float delta) {
         // Find parents rigid body children (husks)
-        // If this is the last husk, then it is on top
+        // If this is the last husk and there are no flies or pigs, then it is on top
         var siblings = this.GetParent().GetChildren();
-        if (siblings[siblings.Count - 1] == this) {
+        var flies    = GetTree().GetNodesInGroup("fly");
+        var pigs     = GetTree().GetNodesInGroup("pig");
+        if (siblings[siblings.Count - 1] == this && flies.Count == 0 && pigs.Count == 0) {
             this.isTopLayer = true;
             this.ModulateColor();
         }
 
         // If at the bottom of screen, destroy itself
         if (this.sprite.GlobalPosition.y >= this.Game.screenSize.y) {
-            this.QueueFree();
+            QueueFree();
         }
     }
 
     public override void _Input(InputEvent @event) {
         if (this.isTopLayer && this.startedPeeling && this.Mode != ModeEnum.Rigid) {
+
             if (this.sprite.Frame == 0) {
                 this.sprite.Stop();
                 this.startedPeeling = false;
@@ -59,18 +65,16 @@ public class Husk : RigidBody2D {
                 if (this.sprite.Frame < 5) {
                     this.sprite.Play("peel", true);
                 } else if (this.sprite.Frame == 5) {
-                    // Mark as a miss if not on beat
-                    if (!this.RhythmBar.onBeat) {
-                        this.Cob.EmitSignal(nameof(Cob.missed));
-                        this.particles.Modulate = new Color(1f, 0.25f, 0.25f, 1f);
-                    }
-
                     // Drop Husk
-                    this.Mode = ModeEnum.Rigid;
+                    RemoveFromGroup("husk");
+                    SetAsToplevel(true);
+                    GetParent().MoveChild(this, 0);
+                    this.audioPlayer.Play();
+                    this.collisionShape.QueueFree();
+                    this.InputPickable = false;
+                    this.Position = this.GlobalPosition;
                     this.AngularVelocity = (float) GD.RandRange(-2, 2);
-                    this.collisionShape.Disabled = true;
-                    this.ZIndex = 100;
-                    this.GetParent().MoveChild(this, 0);
+                    this.Mode = ModeEnum.Rigid;
                     
                     // Display particles
                     this.particles.SetAsToplevel(true);
@@ -83,7 +87,22 @@ public class Husk : RigidBody2D {
     }
 
     public void _OnHuskInputEvent(Node viewport, InputEvent @event, int shapeIdx) {
-        if (this.isTopLayer && @event is InputEventScreenDrag eventDrag && !this.sprite.Playing) {
+        var flies = GetTree().GetNodesInGroup("fly");
+        var pigs  = GetTree().GetNodesInGroup("pig");
+        
+        // Only shuck if:
+        // - is top layer
+        // - is drag event
+        // - no flies
+        // - no pigs
+        // - sprite isn't playing or the frame is 0
+        if (
+            this.isTopLayer &&
+            @event is InputEventScreenDrag eventDrag &&
+            flies.Count == 0 &&
+            pigs.Count == 0 &&
+            (!this.sprite.Playing || this.sprite.Frame == 0)
+        ) {
             int frame        = this.sprite.Frame;
             float spritePosY = this.sprite.GlobalPosition.y;
             float dragPosY   = eventDrag.Position.y;
@@ -104,7 +123,7 @@ public class Husk : RigidBody2D {
 
     public void ModulateColor() {
         if (this.modulateTimer == null) {
-            this.modulateTimer = GetTree().CreateTimer(0.1f);
+            this.modulateTimer = GetTree().CreateTimer(0.075f, false);
         }
 
         if (this.modulateTimer != null && this.modulateTimer.TimeLeft <= 0f) {

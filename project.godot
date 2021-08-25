@@ -8,15 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "AdMob",
+"language": "GDScript",
+"path": "res://admob-lib/admob.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Sliceable2D",
+"language": "GDScript",
+"path": "res://Sliceable2D.gd"
+}, {
+"base": "Node2D",
+"class": "Slicer2D",
+"language": "GDScript",
+"path": "res://Slicer2D.gd"
+} ]
 _global_script_class_icons={
-
+"AdMob": "res://admob-lib/icon.png",
+"Sliceable2D": "",
+"Slicer2D": ""
 }
 
 [application]
 
 config/name="Shuck It"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Scenes/Home.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -29,6 +46,10 @@ window/size/test_height=640
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[gui]
+
+theme/custom="res://Theme/theme.tres"
 
 [importer_defaults]
 
@@ -67,5 +88,6 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
+quality/filters/anisotropic_filter_level=2
 vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"

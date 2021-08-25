@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Art/CornField.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Background" type="Control"]
+margin_left = 89.9282
+margin_top = 229.107
+margin_right = 129.928
+margin_bottom = 269.107
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sky" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_left = -89.9282
+margin_top = -229.46
+margin_right = 90.0718
+margin_bottom = -37.461
+mouse_filter = 2
+color = Color( 0.956863, 0.921569, 0.8, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CornField" type="AnimatedSprite" parent="."]
+scale = Vector2( 1.40995, 1.41377 )
+frames = SubResource( 5 )
+playing = true

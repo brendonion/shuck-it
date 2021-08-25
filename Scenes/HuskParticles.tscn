@@ -14,7 +14,7 @@ angle_random = 1.0
 scale = 1.75
 
 [node name="Particles2D" type="Particles2D"]
-modulate = Color( 0.376471, 0.658824, 0.305882, 1 )
+modulate = Color( 0, 0.647059, 0.054902, 1 )
 z_as_relative = false
 emitting = false
 amount = 15

@@ -1,25 +1,81 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Cob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Score.cs" type="Script" id=3]
-[ext_resource path="res://Art/BrickWall.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/RhythmBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Art/Unlockables/Background1.png" type="Texture" id=4]
+[ext_resource path="res://Theme/theme.tres" type="Theme" id=5]
+[ext_resource path="res://Scenes/TimerBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Dialog.cs" type="Script" id=7]
+[ext_resource path="res://Scripts/DialogScreen.cs" type="Script" id=8]
+[ext_resource path="res://Sounds/VoiceSans.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sounds/Point.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/Miss.wav" type="AudioStream" id=11]
+[ext_resource path="res://Art/Play.png" type="Texture" id=12]
+[ext_resource path="res://Art/Pause.png" type="Texture" id=13]
+[ext_resource path="res://Art/Trophy.png" type="Texture" id=14]
+[ext_resource path="res://Sounds/GameOver.ogg" type="AudioStream" id=15]
+[ext_resource path="res://admob-lib/admob.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/SaveSystem.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Theme/font.tres" type="DynamicFont" id=18]
+[ext_resource path="res://Art/Tap.png" type="Texture" id=19]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+content_margin_left = 8.0
+content_margin_right = 8.0
+
+[sub_resource type="StyleBoxEmpty" id=2]
+content_margin_left = 8.0
+content_margin_right = 8.0
+
+[sub_resource type="StyleBoxEmpty" id=3]
+content_margin_left = 8.0
+content_margin_right = 8.0
+
+[sub_resource type="StyleBoxEmpty" id=4]
+content_margin_left = 8.0
+content_margin_right = 8.0
+
+[sub_resource type="StyleBoxEmpty" id=5]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=6]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=7]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="StyleBoxEmpty" id=8]
+content_margin_left = 12.0
+content_margin_right = 12.0
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 19 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.0
+} ]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Background" type="Control" parent="."]
-margin_right = 180.0
-margin_bottom = 321.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="SaveSystem" parent="." instance=ExtResource( 17 )]
 
-[node name="TextureRect" type="TextureRect" parent="Background"]
+[node name="Background" type="TextureRect" parent="."]
 margin_right = 180.0
-margin_bottom = 321.0
+margin_bottom = 320.0
 mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
@@ -29,6 +85,7 @@ __meta__ = {
 }
 
 [node name="Score" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 margin_right = 180.0
 margin_bottom = 321.0
@@ -38,11 +95,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PointSound" type="AudioStreamPlayer2D" parent="Score"]
+stream = ExtResource( 10 )
+volume_db = -5.0
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="Score"]
+stream = ExtResource( 11 )
+volume_db = -5.0
+
 [node name="Points" type="RichTextLabel" parent="Score"]
-margin_top = -8.0
-margin_right = 180.0
-margin_bottom = 29.0
+margin_left = -88.0
+margin_top = -23.0
+margin_right = 92.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=10 freq=2][center]0[/center][/wave]"
 text = "0"
@@ -51,34 +119,68 @@ __meta__ = {
 }
 
 [node name="Misses" type="RichTextLabel" parent="Score"]
-margin_left = 2.81293
-margin_top = -7.0
-margin_right = 45.8129
-margin_bottom = 33.0
+margin_left = 8.81293
+margin_top = -1.0
+margin_right = 51.8129
+margin_bottom = 39.0
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=10 freq=2][center][/center][/wave]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseButton" type="Button" parent="Score"]
+margin_left = 146.0
+margin_top = 8.0
+margin_right = 174.0
+margin_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_constants/hseparation = 0
+icon = ExtResource( 13 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Game Over" type="Control" parent="Score"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 0.241943
+margin_right = 0.241943
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="Score/Game Over"]
+stream = ExtResource( 15 )
+volume_db = -5.0
+
+[node name="Trophy" type="Sprite" parent="Score/Game Over"]
+position = Vector2( 87.1874, 115.884 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 14 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Score/Game Over"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -90.0
-margin_top = -62.2687
-margin_bottom = -20.2687
+margin_left = -89.0
+margin_top = -126.5
+margin_bottom = -84.5
 rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=20 freq=2][center]GAME OVER[/center][/wave]"
 text = "GAME OVER"
@@ -86,19 +188,258 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="Score/Game Over"]
-margin_left = 51.0
+[node name="FinalScore" type="RichTextLabel" parent="Score/Game Over"]
+margin_left = -25.0
+margin_top = 140.0
+margin_right = 129.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 80, 0 )
+rect_scale = Vector2( 1.5, 1.5 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+bbcode_enabled = true
+bbcode_text = "[center]Score: 0[/center]"
+text = "Score: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BestScore" type="RichTextLabel" parent="Score/Game Over"]
+margin_left = -25.0
+margin_top = 159.0
+margin_right = 129.0
+margin_bottom = 175.0
+rect_min_size = Vector2( 80, 0 )
+rect_scale = Vector2( 1.5, 1.5 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+bbcode_enabled = true
+bbcode_text = "[center]Best: 0[/center]"
+text = "Best: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayAgainButton" type="Button" parent="Score/Game Over"]
+visible = false
+margin_left = 38.0
 margin_top = 189.0
-margin_right = 128.0
-margin_bottom = 212.0
+margin_right = 140.0
+margin_bottom = 218.0
+theme = ExtResource( 5 )
 text = "Play Again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ExitButton" type="Button" parent="Score/Game Over"]
+visible = false
+margin_left = 38.0
+margin_top = 224.0
+margin_right = 140.0
+margin_bottom = 253.0
+theme = ExtResource( 5 )
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerBar" parent="." instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 90.2875, 48.875 )
+
 [node name="Cob" parent="." instance=ExtResource( 2 )]
 position = Vector2( 90, -100 )
 
-[node name="RhythmBar" parent="." instance=ExtResource( 5 )]
+[node name="DialogScreen" type="Control" parent="."]
 visible = false
-[connection signal="pressed" from="Score/Game Over/Button" to="Score" method="_OnPlayAgainPressed"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 180.0
+margin_bottom = 321.0
+theme = ExtResource( 5 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="DialogScreen"]
+stream = ExtResource( 9 )
+
+[node name="ColorRect" type="ColorRect" parent="DialogScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text1" type="RichTextLabel" parent="DialogScreen"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -84.0
+margin_top = -70.5
+margin_right = 85.0
+margin_bottom = 117.5
+bbcode_enabled = true
+text = "You realize something. You get to know these corn as people. You see the beauty in all corn. Each individually embodying their own story. Each equally worthy of love."
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text2" type="RichTextLabel" parent="DialogScreen"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -89.0
+margin_top = -70.5
+margin_right = 91.0
+margin_bottom = 117.5
+bbcode_enabled = true
+text = "..."
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text3" type="RichTextLabel" parent="DialogScreen"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -85.0
+margin_top = -70.5
+margin_right = 85.0
+margin_bottom = 117.5
+bbcode_enabled = true
+text = "\"It was me you were looking for this whole time\""
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseScreen" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 180.0
+margin_bottom = 320.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PauseScreen"]
+modulate = Color( 1, 1, 1, 0.490196 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1.52588e-05
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PauseScreen"]
+margin_left = 2.0
+margin_top = 87.0
+margin_right = 91.0
+margin_bottom = 131.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = ExtResource( 18 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=10 freq=2][center]Pause[/center][/wave]"
+text = "Pause"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton" type="Button" parent="PauseScreen"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 67.0
+margin_top = 143.0
+margin_right = 103.0
+margin_bottom = 172.0
+rect_scale = Vector2( 1.25, 1.25 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+icon = ExtResource( 12 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReadyScreen" type="Control" parent="."]
+margin_right = 180.0
+margin_bottom = 320.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ReadyScreen"]
+margin_left = 2.0
+margin_top = 87.0
+margin_right = 91.0
+margin_bottom = 131.0
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 18 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=10 freq=2][center]Ready?[/center][/wave]"
+text = "Ready?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="ReadyScreen"]
+position = Vector2( 90, 172.364 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 11 )
+frame = 1
+playing = true
+
+[node name="BonusScreen" type="Control" parent="."]
+pause_mode = 1
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 180.0
+margin_bottom = 320.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BonusScreen"]
+margin_top = 87.0
+margin_right = 90.0
+margin_bottom = 131.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/normal_font = ExtResource( 18 )
+bbcode_enabled = true
+bbcode_text = "[shake amp=10 freq=2][center]Bonus
+Round![/center][/shake]"
+text = "Bonus
+Round!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AdMob" type="Node" parent="."]
+script = ExtResource( 16 )
+is_real = true
+banner_on_top = false
+banner_id = "ca-app-pub-1794508493895269/3851480488"
+interstitial_id = "ca-app-pub-1794508493895269/5079983438"
+[connection signal="pressed" from="Score/PauseButton" to="Score" method="_OnPausePressed"]
+[connection signal="pressed" from="Score/Game Over/PlayAgainButton" to="Score" method="_OnPlayAgainPressed"]
+[connection signal="pressed" from="Score/Game Over/ExitButton" to="Score" method="_OnExitPressed"]
+[connection signal="pressed" from="PauseScreen/ResumeButton" to="Score" method="_OnResumePressed"]
+[connection signal="gui_input" from="ReadyScreen" to="." method="_OnReadyScreenGuiInput"]
